@@ -1,0 +1,134 @@
+<!-- <ion-view view-title="Favorites" class="favorites-page">
+  <ion-content>
+
+    <ion-list>
+      <ion-item class="item-avatar">
+        <img ng-src="/img/ionic.png">
+        <h2>I keep it realtime yo</h2>
+        <p>James Tamplin</p>
+      </ion-item>
+      <ion-item class="item-avatar">
+        <img ng-src="/img/ionic.png">
+        <h2>99 compiler errors</h2>
+        <p>Jake Hanford</p>
+      </ion-item>
+      <ion-item class="item-avatar">
+        <img ng-src="/img/ionic.png">
+        <h2>So many stacks they overflowin'</h2>
+        <p>Brian Gallagher</p>
+      </ion-item>
+    </ion-list>
+
+
+  </ion-content>
+</ion-view> -->
+<ion-view title="Type 2 Diabities Test">
+  <ion-content has-tabs="true">
+    <div class="list list-inset">
+        <div class="list">
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    Age
+                </div>
+                <select ng-model="diabCheck.age">
+                    <option ng-repeat="age in ageArr">{{age}}</option>
+                </select>
+            </label>
+        </div>
+        <div class="genderDiv">
+            <label class="item item-input item-radio">
+                <div class="input-label">
+                    Gender
+                </div>
+            </label>
+            <ion-list>
+                <ion-radio ng-model="diabCheck.gender" ng-value="'true'" name="diabCheck.gender">Male</ion-radio>
+                <ion-radio ng-model="diabCheck.gender" ng-value="'false'" name="diabCheck.gender">Female</ion-radio>
+            </ion-list>
+        </div>
+        <div ng-show="diabCheck.gender=='false'">
+            <label class="item item-input item-radio">
+                <div class="input-label">
+                    Are You Ges?
+                </div>
+            </label>
+            <ion-list>
+                <ion-radio ng-model="diabCheck.ges" ng-value="'true'" name="diabCheck.ges">YES</ion-radio>
+                <ion-radio ng-model="diabCheck.ges" ng-value="'false'" name="diabCheck.ges">NO</ion-radio>
+            </ion-list>
+        </div>
+        <div>
+            <label class="item item-input item-radio">
+                <div class="input-label">
+                    Is ther family history of diabetes?
+                </div>
+            </label>
+            <div layout="row">
+                    <ion-list>
+                        <ion-radio ng-model="diabCheck.fam" ng-value="'true'" name="diabCheck.fam">YES</ion-radio>
+                        <ion-radio ng-model="diabCheck.fam" ng-value="'false'" name="diabCheck.fam">NO</ion-radio>
+                    </ion-list>
+            </div>
+        </div>
+        <div>
+            <label class="item item-input item-radio">
+                <div class="input-label">
+                    Are you suffering from high blood Pressure?
+                </div>
+            </label>
+                <div layout="row">
+                    <ion-list>
+                        <ion-radio ng-model="diabCheck.bp" ng-value="'true'" name="diabCheck.bp">YES</ion-radio>
+                        <ion-radio ng-model="diabCheck.bp" ng-value="'false'" name="diabCheck.bp">NO</ion-radio>
+                    </ion-list>
+            </div>
+        </div>
+        <div>
+            <label class="item item-input item-radio">
+                <div class="input-label">
+                    Are you Physically fit?
+                </div>
+            </label>
+                <div layout="row">
+                    <ion-list>
+                        <ion-radio ng-model="diabCheck.fit" ng-value="'true'" name="diabCheck.fit">YES</ion-radio>
+                        <ion-radio ng-model="diabCheck.fit" ng-value="'false'" name="diabCheck.fit">NO</ion-radio>
+                    </ion-list>
+            </div>
+        </div>
+        <div class="list">
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    Height
+                </div>
+                <select ng-model="diabCheck.ht">
+                    <option ng-value="height.val1" ng-repeat="height in htArr">{{height.disp}}</option>
+                </select>
+            </label>
+        </div>
+        <div class="list">
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    Weight
+                </div>
+                <select ng-model="diabCheck.weight">
+                    <option ng-repeat="wt in wtArr">{{wt}}</option>
+                </select>
+            </label>
+        </div>
+        <div>
+            <h2 class="md-title">That's it!! Click on submit to view the results.</h2>
+                <div>
+                    <button class="button button-positive" ng-click="calculateDiabities(diabCheck.age, diabCheck.gender, diabCheck.ges, diabCheck.fam, diabCheck.bp, diabCheck.fit, diabCheck.ht, diabCheck.weight, $event)">
+                        Submit
+                    </button>
+             </div>
+         </div>
+         <div class="card" ng-if="scored=='true'">
+             <div class="item item-text-wrap">
+                 {{score}}
+             </div>
+         </div>
+    </div>
+  </ion-content>
+</ion-view>
