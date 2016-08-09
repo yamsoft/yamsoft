@@ -14,7 +14,7 @@ Controller for the discover page
 /*
 Controller for the favorites page
 */
-.controller('FavoritesCtrl', function($scope) {
+.controller('FavoritesCtrl', function($scope, $ionicPopup) {
     $scope.ageArr = [];
     $scope.displayProgress = false;
     $scope.scored = false;
@@ -276,9 +276,10 @@ Controller for the favorites page
             }
           }
         }
-        $scope.score = score;
-        $scope.scored="true";
-        console.log(score);
+        var alertPopup = $ionicPopup.alert({
+            title: 'AHOY!!!',
+            template: 'Your risk score is ' + score
+        });
     }
 
     $scope.htArr = [
