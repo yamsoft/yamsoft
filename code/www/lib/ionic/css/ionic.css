@@ -2853,7 +2853,7 @@ a.subdued {
     font-weight: 500;
     line-height: 44px; }
     .bar .title.title-left {
-      text-align: left; }
+      text-align: center; }
     .bar .title.title-right {
       text-align: right; }
   .bar .title a {
@@ -2901,7 +2901,8 @@ a.subdued {
   .bar .buttons, .bar .buttons.primary-buttons, .bar .buttons.secondary-buttons {
     display: inherit; }
   .bar .buttons span {
-    display: inline-block; }
+    display: inline-block;
+    color: #db001f; }
   .bar .buttons-left span {
     margin-right: 5px; }
   .bar .buttons-right span {
@@ -5955,7 +5956,8 @@ progress {
     content: ' '; }
   .button .icon {
     vertical-align: top;
-    pointer-events: none; }
+    pointer-events: none;
+    color: #db001f; }
   .button .icon:before, .button.icon:before, .button.icon-left:before, .button.icon-right:before {
     display: inline-block;
     padding: 0 0 1px 0;
