@@ -118,7 +118,7 @@ a.button{
 }
 
 a.button:hover{
-	color:#db001f;;
+	color:#db001f;
 	background-color:#db001f;;
 	background-position: -100% 100%;
 }
