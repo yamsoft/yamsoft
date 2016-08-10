@@ -14,10 +14,89 @@ Controller for the discover page
         $location.path('bmi');
     };
 })
-.controller('BmiCtrl', function($scope, $location) {
+.controller('BmiCtrl', function($scope, $ionicPopup) {
     $scope.wtArr = [];
+    var heightInMeters = 0;
+    var msg = "";
     for(var i=54; i<=149; i++) {
       $scope.wtArr.push(i);
+  };
+  $scope.calculateBMI = function(height, weight) {
+      if(height == 0) {
+          heightInMeters = 1.473;
+      }
+      else if(height == 1) {
+          heightInMeters = 1.499;
+      }
+      else if(height == 2) {
+          heightInMeters = 1.524;
+      }
+      else if(height == 3) {
+          heightInMeters = 1.549;
+      }
+      else if(height == 4) {
+          heightInMeters = 1.575;
+      }
+      else if(height == 5) {
+          heightInMeters = 1.600;
+      }
+      else if(height == 6) {
+          heightInMeters = 1.626;
+      }
+      else if(height == 7) {
+          heightInMeters = 1.651;
+      }
+      else if(height == 8) {
+          heightInMeters = 1.676;
+      }
+      else if(height == 9) {
+          heightInMeters = 1.702;
+      }
+      else if(height == 10) {
+          heightInMeters = 1.727;
+      }
+      else if(height == 11) {
+          heightInMeters = 1.753;
+      }
+      else if(height == 12) {
+          heightInMeters = 1.778;
+      }
+      else if(height == 13) {
+          heightInMeters = 1.803;
+      }
+      else if(height == 14) {
+          heightInMeters = 1.829;
+      }
+      else if(height == 15) {
+          heightInMeters = 1.854;
+      }
+      else if(height == 16) {
+          heightInMeters = 1.880;
+      }
+      else if(height == 17) {
+          heightInMeters = 1.905;
+      }
+      else if(height == 18) {
+          heightInMeters = 1.930;
+      }
+      var bmiValue = weight / (heightInMeters * heightInMeters);
+      if(bmiValue < 18.5) {
+          msg = "You are underweight.";
+      }
+      else if(bmiValue>=18.5 && bmiValue <24.9) {
+          msg = "You are normal.";
+      }
+      else if(bmiValue>=24.9 && bmiValue <29.9) {
+          msg = "You are overweight.";
+      }
+      else if(bmiValue>=29.9) {
+          msg = "You are obese.";
+      }
+      bmiValue = Math.round(bmiValue*100)/100;
+      var alertPopup = $ionicPopup.alert({
+          title: 'Your BMI is: ' + bmiValue,
+          template: msg
+      });
   };
   $scope.htArr = [
     {
@@ -97,6 +176,10 @@ Controller for the discover page
       val1: 18
     }
   ];
+  $scope.bmiCal = {
+    ht: 0,
+    weight: 54
+  }
 })
 
 
