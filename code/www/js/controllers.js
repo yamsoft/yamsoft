@@ -14,13 +14,17 @@ Controller for the discover page
         $location.path('bmi');
     };
 })
-.controller('BmiCtrl', function($scope, $ionicPopup) {
+.controller('BmiCtrl', function($scope, $ionicPopup, $location) {
     $scope.wtArr = [];
+    $scope.bmiCalDone = false;
     var heightInMeters = 0;
     var msg = "";
     for(var i=54; i<=149; i++) {
       $scope.wtArr.push(i);
   };
+  $scope.diabRedirect = function() {
+      $location.path('favorites');
+  }
   $scope.calculateBMI = function(height, weight) {
       if(height == 0) {
           heightInMeters = 1.473;
@@ -93,6 +97,7 @@ Controller for the discover page
           msg = "You are obese.";
       }
       bmiValue = Math.round(bmiValue*100)/100;
+      $scope.bmiCalDone = true;
       var alertPopup = $ionicPopup.alert({
           title: 'Your BMI is: ' + bmiValue,
           template: msg
