@@ -206,6 +206,7 @@ Controller for the favorites page
     $scope.calculateDiabities = function(age, gender, ges, fam, bp, fit, ht, weight, ev) {
       $scope.displayProgress = true;
         var score = 0;
+        var displayMessage = "";
         var myWt = weight/0.454;
         if(age) {
           if(age<40) {
@@ -243,7 +244,7 @@ Controller for the favorites page
         }
         if(ht && myWt) {
           //case1 top
-          if(ht === 0) {
+          if(ht == 0) {
             if(myWt>=119 && myWt<=142) {
               score = score+1;
             }
@@ -254,7 +255,7 @@ Controller for the favorites page
               score = score+3;
             }
           }
-          if(ht === 1) {
+          if(ht == 1) {
             if(myWt>=124 && myWt<=147) {
               score = score+1;
             }
@@ -265,7 +266,7 @@ Controller for the favorites page
               score = score+3;
             }
           }
-          if(ht === 2) {
+          if(ht == 2) {
             if(myWt>=128 && myWt<=152) {
               score = score+1;
             }
@@ -276,7 +277,7 @@ Controller for the favorites page
               score = score+3;
             }
           }
-          if(ht === 3) {
+          if(ht == 3) {
             if(myWt>=132 && myWt<=157) {
               score = score+1;
             }
@@ -287,7 +288,7 @@ Controller for the favorites page
               score = score+3;
             }
           }
-          if(ht === 4) {
+          if(ht == 4) {
             if(myWt>=136 && myWt<=163) {
               score = score+1;
             }
@@ -298,7 +299,7 @@ Controller for the favorites page
               score = score+3;
             }
           }
-          if(ht === 5) {
+          if(ht == 5) {
             if(myWt>=141 && myWt<=168) {
               score = score+1;
             }
@@ -309,7 +310,7 @@ Controller for the favorites page
               score = score+3;
             }
           }
-          if(ht === 6) {
+          if(ht == 6) {
             if(myWt>=145 && myWt<=173) {
               score = score+1;
             }
@@ -320,7 +321,7 @@ Controller for the favorites page
               score = score+3;
             }
           }
-          if(ht === 7) {
+          if(ht == 7) {
             if(myWt>=150 && myWt<=179) {
               score = score+1;
             }
@@ -331,7 +332,7 @@ Controller for the favorites page
               score = score+3;
             }
           }
-          if(ht === 8) {
+          if(ht == 8) {
             if(myWt>=155 && myWt<=185) {
               score = score+1;
             }
@@ -342,7 +343,7 @@ Controller for the favorites page
               score = score+3;
             }
           }
-          if(ht === 9) {
+          if(ht == 9) {
             if(myWt>=159 && myWt<=190) {
               score = score+1;
             }
@@ -353,7 +354,7 @@ Controller for the favorites page
               score = score+3;
             }
           }
-          if(ht === 10) {
+          if(ht == 10) {
             if(myWt>=164 && myWt<=196) {
               score = score+1;
             }
@@ -364,7 +365,7 @@ Controller for the favorites page
               score = score+3;
             }
           }
-          if(ht === 11) {
+          if(ht == 11) {
             if(myWt>=169 && myWt<=202) {
               score = score+1;
             }
@@ -375,7 +376,7 @@ Controller for the favorites page
               score = score+3;
             }
           }
-          if(ht === 12) {
+          if(ht == 12) {
             if(myWt>=174 && myWt<=208) {
               score = score+1;
             }
@@ -386,7 +387,7 @@ Controller for the favorites page
               score = score+3;
             }
           }
-          if(ht === 13) {
+          if(ht == 13) {
             if(myWt>=179 && myWt<=214) {
               score = score+1;
             }
@@ -397,7 +398,7 @@ Controller for the favorites page
               score = score+3;
             }
           }
-          if(ht === 14) {
+          if(ht == 14) {
             if(myWt>=184 && myWt<=220) {
               score = score+1;
             }
@@ -408,7 +409,7 @@ Controller for the favorites page
               score = score+3;
             }
           }
-          if(ht === 15) {
+          if(ht == 15) {
             if(myWt>=189 && myWt<=226) {
               score = score+1;
             }
@@ -419,7 +420,7 @@ Controller for the favorites page
               score = score+3;
             }
           }
-          if(ht === 16) {
+          if(ht == 16) {
             if(myWt>=194 && myWt<=232) {
               score = score+1;
             }
@@ -430,7 +431,7 @@ Controller for the favorites page
               score = score+3;
             }
           }
-          if(ht === 17) {
+          if(ht == 17) {
             if(myWt>=200 && myWt<=239) {
               score = score+1;
             }
@@ -441,7 +442,7 @@ Controller for the favorites page
               score = score+3;
             }
           }
-          if(ht === 18) {
+          if(ht == 18) {
             if(myWt>=205 && myWt<=245) {
               score = score+1;
             }
@@ -453,9 +454,15 @@ Controller for the favorites page
             }
           }
         }
+        if(score > 5) {
+            displayMessage = "Your Diabetec score is " + score + ". You are diagnosed with Type 2 diabetes. Please consult a doctor.";
+        }
+        if(score <=5) {
+            displayMessage = "Your Diabetec score is " + score + ". You are extremely fit & fine. Please maintain a good health.";
+        }
         var alertPopup = $ionicPopup.alert({
             title: 'AHOY!!!',
-            template: 'Your risk score is ' + score
+            template: displayMessage
         });
     }
 
