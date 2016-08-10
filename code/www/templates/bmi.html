@@ -21,15 +21,14 @@
                     </select>
                 </label>
             </div>
-            <div>
-                <h4 class="md-title">That's it!! Click on submit to view the results.</h4>
+            <div class="centerMe">
                     <div>
                         <button class="button button-assertive" ng-click="calculateBMI(bmiCal.ht, bmiCal.weight, $event)">
                             Calculate BMI
                         </button>
                  </div>
              </div>
-             <div ng-if="bmiCalDone">
+             <div ng-if="bmiCalDone"  class="centerMe">
                  <h4 class="md-title">Wanna Try our new Diabetes Risk Calculator?</h4>
                      <div>
                          <button class="button button-assertive" ng-click="diabRedirect()">
