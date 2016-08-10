@@ -5,7 +5,8 @@ angular.module('songhop.controllers', ['ionic', 'songhop.services'])
 Controller for the discover page
 */
 .controller('DiscoverCtrl', function($scope, $location) {
-    $scope.nextPage = function() {
+    $scope.nextPage = function(event) {
+        event.preventDefault();
         $location.path('tab/favorites');
     };
 })
