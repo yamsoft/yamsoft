@@ -7,7 +7,7 @@ Controller for the discover page
 .controller('DiscoverCtrl', function($scope, $location) {
     $scope.nextPage = function(event) {
         event.preventDefault();
-        $location.path('tab/favorites');
+        $location.path('favorites');
     };
 })
 
