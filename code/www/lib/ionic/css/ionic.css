@@ -4296,7 +4296,7 @@ ion-tabs.tabs-color-active-dark .tab-item {
 .item {
   border-color: #ddd;
   background-color: #fff;
-  color: #444;
+  color: #db001f;
   position: relative;
   z-index: 2;
   display: block;
@@ -5263,8 +5263,10 @@ input, button, select, textarea {
   padding: 7px 10px 7px 0px;
   max-width: 200px;
   width: 35%;
-  color: #444;
-  font-size: 16px; }
+  color: #675f5f;
+  font-size: 16px;
+  margin-left: 2%;
+  font-weight: 600 }
 
 .placeholder-icon {
   color: #aaa; }
@@ -5837,7 +5839,7 @@ input[type="range"] {
     max-width: 65%;
     border: none;
     background: #fff;
-    color: #333;
+    color: #db001f;
     text-indent: 0.01px;
     text-overflow: '';
     white-space: nowrap;
