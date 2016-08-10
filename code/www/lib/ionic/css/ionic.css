@@ -6031,15 +6031,15 @@ progress {
         box-shadow: none;
         color: #fff; }
   .button.button-positive {
-    border-color: #0c63ee;
-    background-color: #387ef5;
+      border-color: #e42012;
+      background-color: #db001f;
     color: #fff; }
     .button.button-positive:hover {
       color: #fff;
       text-decoration: none; }
     .button.button-positive.active, .button.button-positive.activated {
-      border-color: #0c63ee;
-      background-color: #0c63ee;
+        border-color: #e42012;
+        background-color: #e42012;
       box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.1); }
     .button.button-positive.button-clear {
       border-color: transparent;
@@ -6086,7 +6086,7 @@ progress {
         color: #fff; }
   .button.button-assertive {
     border-color: #e42012;
-    background-color: #ef473a;
+    background-color: #db001f;
     color: #fff; }
     .button.button-assertive:hover {
       color: #fff;
