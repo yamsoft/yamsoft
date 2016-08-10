@@ -9,6 +9,94 @@ Controller for the discover page
         event.preventDefault();
         $location.path('favorites');
     };
+    $scope.nextPageBmi = function(event) {
+        event.preventDefault();
+        $location.path('bmi');
+    };
+})
+.controller('BmiCtrl', function($scope, $location) {
+    $scope.wtArr = [];
+    for(var i=54; i<=149; i++) {
+      $scope.wtArr.push(i);
+  };
+  $scope.htArr = [
+    {
+      disp: "4.10",
+      val1: 0
+    },
+    {
+      disp: "4.11",
+      val1: 1
+    },
+    {
+      disp: "5.0",
+      val1: 2
+    },
+    {
+      disp: "5.1",
+      val1: 3
+    },
+    {
+      disp: "5.2",
+      val1: 4
+    },
+    {
+      disp: "5.3",
+      val1: 5
+    },
+    {
+      disp: "5.4",
+      val1: 6
+    },
+    {
+      disp: "5.5",
+      val1: 7
+    },
+    {
+      disp: "5.6",
+      val1: 8
+    },
+    {
+      disp: "5.7",
+      val1: 9
+    },
+    {
+      disp: "5.8",
+      val1: 10
+    },
+    {
+      disp: "5.9",
+      val1: 11
+    },
+    {
+      disp: "5.10",
+      val1: 12
+    },
+    {
+      disp: "5.11",
+      val1: 13
+    },
+    {
+      disp: "6.0",
+      val1: 14
+    },
+    {
+      disp: "6.1",
+      val1: 15
+    },
+    {
+      disp: "6.2",
+      val1: 16
+    },
+    {
+      disp: "6.3",
+      val1: 17
+    },
+    {
+      disp: "6.4",
+      val1: 18
+    }
+  ];
 })
 
 

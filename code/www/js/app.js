@@ -31,12 +31,6 @@ angular.module('songhop', ['ionic', 'songhop.controllers'])
 
 
   // Set up an abstract state for the tabs directive:
-  .state('tab', {
-    url: '/tab',
-    abstract: true,
-    templateUrl: 'templates/tabs.html',
-    controller: 'TabsCtrl'
-  })
 
   // Each tab has its own nav history stack:
 
@@ -51,6 +45,11 @@ angular.module('songhop', ['ionic', 'songhop.controllers'])
           templateUrl: 'templates/favorites.html',
           controller: 'FavoritesCtrl'
     })
+    .state('bmi', {
+        url: '/bmi',
+            templateUrl: 'templates/bmi.html',
+            controller: 'BmiCtrl'
+      })
   // If none of the above states are matched, use this as the fallback:
   $urlRouterProvider.otherwise('/discover');
 
