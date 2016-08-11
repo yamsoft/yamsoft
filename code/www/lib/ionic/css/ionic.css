@@ -2846,7 +2846,7 @@ a.subdued {
     margin: 0 10px;
     min-width: 30px;
     height: 43px;
-    text-align: center;
+    text-align: start;
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 17px;
@@ -2911,7 +2911,9 @@ a.subdued {
     position: absolute;
     top: 5px;
     right: 5px;
-    bottom: 5px; }
+    bottom: 5px;
+    text-decoration: none;
+}
 
 .bar-light .button {
   border-color: #ddd;
@@ -2998,11 +3000,13 @@ a.subdued {
     background: none; }
 
 .bar-assertive .button {
-  border-color: #e42012;
-  background-color: #ef473a;
-  color: #fff; }
+    background-color: white;
+    color: #e42012;
+    font-weight: 600;
+}
   .bar-assertive .button:hover {
-    color: #fff;
+      color: #e42012;
+      font-weight: 600;
     text-decoration: none; }
   .bar-assertive .button.active, .bar-assertive .button.activated {
     border-color: #e42012;
@@ -4185,11 +4189,14 @@ ion-tabs.tabs-color-active-dark .tab-item {
     flex-direction: column; }
 
 .popup-head {
+    background: #db001f;
   padding: 15px 10px;
   border-bottom: 1px solid #eee;
   text-align: center; }
 
 .popup-title {
+    color: white;
+    font-weight: 600;
   margin: 0;
   padding: 0;
   font-size: 15px; }
@@ -4201,6 +4208,8 @@ ion-tabs.tabs-color-active-dark .tab-item {
   font-size: 11px; }
 
 .popup-body {
+    color: #db001f;
+    font-weight: 600;
   padding: 10px;
   overflow: scroll; }
 
@@ -6968,7 +6977,7 @@ a.button {
 [nav-bar-transition="ios"] [nav-bar="active"], [nav-bar-transition="ios"] [nav-bar="entering"] {
   z-index: 10; }
   [nav-bar-transition="ios"] [nav-bar="active"] .bar, [nav-bar-transition="ios"] [nav-bar="entering"] .bar {
-    background: white; }
+    background: #db001f; }
 [nav-bar-transition="ios"] [nav-bar="cached"] {
   display: block; }
   [nav-bar-transition="ios"] [nav-bar="cached"] .header-item {

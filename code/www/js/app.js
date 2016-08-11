@@ -40,7 +40,16 @@ angular.module('songhop', ['ionic', 'songhop.controllers'])
         templateUrl: 'templates/discover.html',
         controller: 'DiscoverCtrl'
     })
-
+    .state('terms', {
+        url: '/terms',
+        templateUrl: 'templates/terms.html',
+        controller: 'termsCtrl'
+    })
+    .state('privacy', {
+        url: '/privacy',
+        templateUrl: 'templates/privacy.html',
+        controller: 'privacyCtrl'
+    })
     .state('favorites', {
         url: '/favorites',
         templateUrl: 'templates/favorites.html',
