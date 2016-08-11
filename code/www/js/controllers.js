@@ -117,23 +117,29 @@ Controller for the discover page
             heightInMeters = 1.930;
         }
         var bmiValue = weight / (heightInMeters * heightInMeters);
+        console.log(bmiValue);
         if(bmiValue < 18.5) {
             msg = "You are underweight.";
+            templateMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/under.jpg"></div><div class="inner2"><p class="alertText">' + msg + '</p></div></div>';
         }
         else if(bmiValue>=18.5 && bmiValue <24.9) {
             msg = "You are normal.";
+            templateMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/fit.png"></div><div class="inner2"><p class="alertText">' + msg + '</p></div></div>';
         }
         else if(bmiValue>=24.9 && bmiValue <29.9) {
+            console.log("in");
             msg = "You are overweight.";
+            templateMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/obese.jpg"></div><div class="inner2"><p class="alertText">' + msg + '</p></div></div>';
         }
         else if(bmiValue>=29.9) {
             msg = "You are obese.";
+            templateMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/obese.jpg"></div><div class="inner2"><p class="alertText">' + msg + '</p></div></div>';
         }
         bmiValue = Math.round(bmiValue*100)/100;
         $scope.bmiCalDone = true;
         var alertPopup = $ionicPopup.alert({
             title: 'Your BMI is: ' + bmiValue,
-            template: '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/smile.png"></div><div class="inner2"><p class="alertText">' + msg + '</p></div></div>'
+            template: templateMessage
         });
     };
     $scope.htArr = [
