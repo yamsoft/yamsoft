@@ -13,6 +13,23 @@ Controller for the discover page
         event.preventDefault();
         $location.path('bmi');
     };
+    $scope.nextPageSleepWell = function(event) {
+        event.preventDefault();
+        $location.path('sleepWell');
+    };
+})
+.controller('sleepWellCtrl', function($scope, $q) {
+    var song = 'http://www.stephaniequinn.com/Music/Commercial%20DEMO%20-%2013.mp3';
+    media = new Audio(song);
+    console.log(media);
+    $scope.play = function() {
+        var defer = $q.defer();
+        media.addEventListener("loadeddata", function() {
+            defer.resolve();
+        });
+        media.play();
+        return defer.promise;
+    };
 })
 .controller('BmiCtrl', function($scope, $ionicPopup, $location) {
     $scope.wtArr = [];
