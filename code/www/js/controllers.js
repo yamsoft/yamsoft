@@ -32,11 +32,11 @@ Controller for the discover page
     }
 
     function onOffline() {
-       alert('You are now offline!');
+      // alert('You are now offline!');
     }
 
     function onOnline() {
-       alert('You are now online!');
+      // alert('You are now online!');
     }
     $rootScope.media.pause();
     $scope.nextPage = function(event) {
@@ -274,6 +274,7 @@ Controller for the discover page
 Controller for the favorites page
 */
 .controller('FavoritesCtrl', function($scope, $ionicPopup, $rootScope) {
+    var titleDisplay = "";
     $rootScope.media.pause();
     $scope.ageArr = [];
     $scope.displayProgress = false;
@@ -538,13 +539,15 @@ Controller for the favorites page
             }
         }
         if(score > 5) {
-            displayMessage = "Your Diabetec score is " + score + ". You are diagnosed with Type 2 diabetes. Please consult a doctor.";
+            titleDisplay = "OOPS!!!"
+            displayMessage = "Your Diabetic score is " + score + ". You are diagnosed with Type 2 diabetes. Please consult a doctor.";
         }
         if(score <=5) {
-            displayMessage = "Your Diabetec score is " + score + ". You are extremely fit & fine. Please maintain a good health.";
+            titleDisplay = "AHOY!!!"
+            displayMessage = "Your Diabetic score is " + score + ". You are extremely fit & fine. Please maintain a good health.";
         }
         var alertPopup = $ionicPopup.alert({
-            title: 'AHOY!!!',
+            title: titleDisplay,
             template: displayMessage
         });
     }
