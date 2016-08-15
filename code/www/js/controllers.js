@@ -8,6 +8,36 @@ Controller for the discover page
     var song = 'http://songs.mp3newsong.com/file/24767632/weightless-marconi-union.mp3';
     $rootScope.media = new Audio(song);
     console.log($rootScope.media);
+    document.addEventListener("offline", onOffline, false);
+    document.addEventListener("online", onOnline, false);
+    function networkInfo() {
+       var networkState = navigator.connection.type || navigator.mozConnection.type || navigator.webkitConnection.type;
+       console.log(networkState);
+       var states = {};
+
+       states[Connection.UNKNOWN]  = 'Unknown connection';
+       states[Connection.ETHERNET] = 'Ethernet connection';
+       states[Connection.WIFI]     = 'WiFi connection';
+       states[Connection.CELL_2G]  = 'Cell 2G connection';
+       states[Connection.CELL_3G]  = 'Cell 3G connection';
+       states[Connection.CELL_4G]  = 'Cell 4G connection';
+       states[Connection.CELL]     = 'Cell generic connection';
+       states[Connection.NONE]     = 'No network connection';
+       if(states[networkState] == 'No network connection') {
+           alert('It seems you do not yave internet connection. Please swith on internet to access this feature.');
+       }
+       else {
+           $location.path('sleepWell');
+       }
+    }
+
+    function onOffline() {
+       alert('You are now offline!');
+    }
+
+    function onOnline() {
+       alert('You are now online!');
+    }
     $rootScope.media.pause();
     $scope.nextPage = function(event) {
         event.preventDefault();
@@ -19,10 +49,11 @@ Controller for the discover page
     };
     $scope.nextPageSleepWell = function(event) {
         event.preventDefault();
-        $location.path('sleepWell');
+        networkInfo();
     };
 })
 .controller('sleepWellCtrl', function($scope, $q, $rootScope) {
+
     $scope.play = function() {
         var defer = $q.defer();
         // media.addEventListener("loadeddata", function() {
