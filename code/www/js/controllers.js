@@ -11,24 +11,24 @@ Controller for the discover page
     document.addEventListener("offline", onOffline, false);
     document.addEventListener("online", onOnline, false);
     function networkInfo() {
-       var networkState = navigator.connection.type || navigator.mozConnection.type || navigator.webkitConnection.type;
-       console.log(networkState);
-       var states = {};
-
-       states[Connection.UNKNOWN]  = 'Unknown connection';
-       states[Connection.ETHERNET] = 'Ethernet connection';
-       states[Connection.WIFI]     = 'WiFi connection';
-       states[Connection.CELL_2G]  = 'Cell 2G connection';
-       states[Connection.CELL_3G]  = 'Cell 3G connection';
-       states[Connection.CELL_4G]  = 'Cell 4G connection';
-       states[Connection.CELL]     = 'Cell generic connection';
-       states[Connection.NONE]     = 'No network connection';
-       if(states[networkState] == 'No network connection') {
-           alert('It seems you do not yave internet connection. Please swith on internet to access this feature.');
-       }
-       else {
+    //    var networkState = navigator.connection.type || navigator.mozConnection.type || navigator.webkitConnection.type;
+    //    console.log(networkState);
+    //    var states = {};
+       //
+    //    states[Connection.UNKNOWN]  = 'Unknown connection';
+    //    states[Connection.ETHERNET] = 'Ethernet connection';
+    //    states[Connection.WIFI]     = 'WiFi connection';
+    //    states[Connection.CELL_2G]  = 'Cell 2G connection';
+    //    states[Connection.CELL_3G]  = 'Cell 3G connection';
+    //    states[Connection.CELL_4G]  = 'Cell 4G connection';
+    //    states[Connection.CELL]     = 'Cell generic connection';
+    //    states[Connection.NONE]     = 'No network connection';
+    //    if(states[networkState] == 'No network connection') {
+    //        alert('It seems you do not yave internet connection. Please swith on internet to access this feature.');
+    //    }
+    //    else {
            $location.path('sleepWell');
-       }
+    //    }
     }
 
     function onOffline() {
@@ -89,15 +89,22 @@ Controller for the discover page
         $location.path('discover');
     }
 })
-.controller('BmiCtrl', function($scope, $ionicPopup, $location, $rootScope) {
+.controller('BmiCtrl', function($scope, $ionicPopup, $location, $rootScope, $cordovaSocialSharing) {
     $rootScope.media.pause();
     $scope.wtArr = [];
     $scope.bmiCalDone = false;
     var heightInMeters = 0;
+    var bmiValue = 0;
     var msg = "";
     for(var i=54; i<=149; i++) {
         $scope.wtArr.push(i);
     };
+    $scope.shareAnywhere = function() {
+        var myBMI = "Just calculated my BMI using this super awesome app!! My BMI is " + bmiValue;
+        console.log(myBMI);
+        var myMsg = msg;
+        $cordovaSocialSharing.share(myBMI, myMsg, "www/img/fit.png", "http://yamsoft.github.io/");
+    }
     $scope.diabRedirect = function() {
         $location.path('favorites');
     }
@@ -159,7 +166,7 @@ Controller for the discover page
         else if(height == 18) {
             heightInMeters = 1.930;
         }
-        var bmiValue = weight / (heightInMeters * heightInMeters);
+        bmiValue = weight / (heightInMeters * heightInMeters);
         console.log(bmiValue);
         if(bmiValue < 18.5) {
             msg = "You are underweight.";
