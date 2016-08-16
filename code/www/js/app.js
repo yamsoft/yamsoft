@@ -20,6 +20,18 @@ angular.module('songhop', ['ionic', 'songhop.controllers', 'ngCordova'])
 
     });
 })
+.run( function($rootScope, $location) {
+   $rootScope.$watch(function() {
+      return $location.path();
+    },
+    function(a){
+      console.log('url has changed: ' + a);
+      // show loading div, etc...
+      if($rootScope.adishVar) {
+          $rootScope.adishVar.pause();
+      }
+    });
+})
 
 
 .config(function($stateProvider, $urlRouterProvider) {

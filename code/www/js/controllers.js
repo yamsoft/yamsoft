@@ -4,10 +4,7 @@ angular.module('songhop.controllers', ['ionic', 'songhop.services'])
 /*
 Controller for the discover page
 */
-.controller('DiscoverCtrl', function($rootScope, $scope, $location) {
-    var song = 'http://songs.mp3newsong.com/file/24767632/weightless-marconi-union.mp3';
-    $rootScope.media = new Audio(song);
-    console.log($rootScope.media);
+.controller('DiscoverCtrl', function($scope, $location) {
     document.addEventListener("offline", onOffline, false);
     document.addEventListener("online", onOnline, false);
     function networkInfo() {
@@ -38,7 +35,6 @@ Controller for the discover page
     function onOnline() {
       // alert('You are now online!');
     }
-    $rootScope.media.pause();
     $scope.nextPage = function(event) {
         event.preventDefault();
         $location.path('favorites');
@@ -52,34 +48,26 @@ Controller for the discover page
         networkInfo();
     };
 })
-.controller('sleepWellCtrl', function($scope, $q, $rootScope) {
-
+.controller('sleepWellCtrl', function($scope, $q, MediaSrv, $rootScope) {
+    $rootScope.adishVar;
     $scope.play = function() {
-        var defer = $q.defer();
-        // media.addEventListener("loadeddata", function() {
-        //     defer.resolve();
-        // });
-        $rootScope.media.play();
-        return defer.promise;
+        MediaSrv.loadMedia('sound/song.mp3').then(function(media){
+            $rootScope.adishVar = media;
+            $rootScope.adishVar.play();
+        });
     };
     $scope.pause = function() {
-        var defer = $q.defer();
-        // media.addEventListener("loadeddata", function() {
-        //     defer.resolve();
-        // });
-        $rootScope.media.pause();
-        return defer.promise;
+        console.log("pause");
+            $rootScope.adishVar.pause();
     };
 })
-.controller('termsCtrl', function($scope, $location, $rootScope) {
-    $rootScope.media.pause();
+.controller('termsCtrl', function($scope, $location) {
     $scope.goBack = function(event) {
         event.preventDefault();
         $location.path('discover');
     }
 })
-.controller('privacyCtrl', function($scope, $location, $rootScope) {
-    $rootScope.media.pause();
+.controller('privacyCtrl', function($scope, $location) {
     $scope.goBack = function(event) {
         event.preventDefault();
         $location.path('terms');
@@ -89,8 +77,7 @@ Controller for the discover page
         $location.path('discover');
     }
 })
-.controller('BmiCtrl', function($scope, $ionicPopup, $location, $rootScope, $cordovaSocialSharing) {
-    $rootScope.media.pause();
+.controller('BmiCtrl', function($scope, $ionicPopup, $location, $cordovaSocialSharing) {
     $scope.wtArr = [];
     $scope.bmi= {
         gender: "true"
@@ -317,9 +304,8 @@ Controller for the discover page
 /*
 Controller for the favorites page
 */
-.controller('FavoritesCtrl', function($scope, $ionicPopup, $rootScope, $cordovaSocialSharing) {
+.controller('FavoritesCtrl', function($scope, $ionicPopup, $cordovaSocialSharing) {
     var titleDisplay = "";
-    $rootScope.media.pause();
     $scope.ageArr = [];
     $scope.displayProgress = false;
     $scope.scored = false;
