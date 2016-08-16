@@ -33,7 +33,6 @@ angular.module('songhop', ['ionic', 'songhop.controllers', 'ngCordova'])
           document.getElementById("tcID").style.display = "block";
       }
       else {
-          console.log("false");
           document.getElementById("tcID").style.display = "none";
       }
     });

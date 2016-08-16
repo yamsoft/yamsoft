@@ -4,9 +4,10 @@ angular.module('songhop.controllers', ['ionic', 'songhop.services'])
 /*
 Controller for the discover page
 */
-.controller('DiscoverCtrl', function($scope, $location) {
+.controller('DiscoverCtrl', function($scope, $location, $rootScope, $ionicPopup) {
     document.addEventListener("offline", onOffline, false);
     document.addEventListener("online", onOnline, false);
+    var alertPopup;
     function networkInfo() {
     //    var networkState = navigator.connection.type || navigator.mozConnection.type || navigator.webkitConnection.type;
     //    console.log(networkState);
@@ -47,6 +48,22 @@ Controller for the discover page
         event.preventDefault();
         networkInfo();
     };
+    $rootScope.tryOut = function() {
+        event.preventDefault();
+        alertPopup = $ionicPopup.alert({
+            title: 'LEGAL',
+            template: '<h3 ng-click="tcFunction()" style="padding-top:10px;">Terms of Service</h3><hr /><h3 ng-click="privacyFunction()">Privacy Policy</h3>',
+            buttons: []
+        });
+    }
+    $rootScope.tcFunction = function() {
+        alertPopup.close();
+        $location.path("terms");
+    }
+    $rootScope.privacyFunction = function() {
+        alertPopup.close();
+        $location.path("privacy");
+    }
 })
 .controller('sleepWellCtrl', function($scope, $q, MediaSrv, $rootScope) {
     $rootScope.adishVar;
