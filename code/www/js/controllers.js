@@ -103,7 +103,7 @@ Controller for the discover page
         var myBMI = "Just calculated my BMI using this super awesome app!! My BMI is " + bmiValue;
         console.log(myBMI);
         var myMsg = msg;
-        $cordovaSocialSharing.share(myBMI, myMsg, "www/img/fit.png", "http://yamsoft.github.io/");
+        $cordovaSocialSharing.share(myBMI, myMsg, "www/img/icon.png", "http://yamsoft.github.io/");
     }
     $scope.diabRedirect = function() {
         $location.path('favorites');
@@ -189,7 +189,20 @@ Controller for the discover page
         $scope.bmiCalDone = true;
         var alertPopup = $ionicPopup.alert({
             title: 'Your BMI is: ' + bmiValue,
-            template: templateMessage
+            template: templateMessage,
+            scope: $scope,
+            buttons: [
+              { text: 'OK',
+                type: 'button-positive',
+              },
+              {
+                text: '<b>Share</b>',
+                type: 'button-positive',
+                onTap: function(e) {
+                  $scope.shareAnywhere();
+                }
+              }
+            ]
         });
     };
     $scope.htArr = [
