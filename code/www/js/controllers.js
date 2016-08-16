@@ -52,7 +52,7 @@ Controller for the discover page
         event.preventDefault();
         alertPopup = $ionicPopup.alert({
             title: 'LEGAL',
-            template: '<h3 ng-click="tcFunction()" style="padding-top:10px;">Terms of Service</h3><hr /><h3 ng-click="privacyFunction()">Privacy Policy</h3>',
+            template: '<h4 ng-click="privacyFunction()">Privacy Policy</h4><hr /><h4 ng-click="tcFunction()" style="padding-top:10px;">Terms of Service</h4>',
             buttons: []
         });
     }
@@ -333,6 +333,12 @@ Controller for the favorites page
     $scope.wtArr = [];
     for(var i=54; i<=149; i++) {
         $scope.wtArr.push(i);
+    }
+    $scope.gesMeaning = function() {
+        var alertPopup1 = $ionicPopup.alert({
+            title: 'Gestational Diabetes meaning',
+            template: '<span  style="font-weight:500;">Pregnant women who have never had diabetes before but who have high blood glucose (sugar) levels during pregnancy are said to have gestational diabetes.</span>'
+        });
     }
 
     $scope.shareAnywhere = function() {
