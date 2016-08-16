@@ -52,7 +52,7 @@ Controller for the discover page
         event.preventDefault();
         alertPopup = $ionicPopup.alert({
             title: 'LEGAL',
-            template: '<h3 ng-click="tcFunction()" style="padding-top:10px;">Terms of Service</h3><hr /><h3 ng-click="privacyFunction()">Privacy Policy</h3>',
+            template: '<h4 ng-click="privacyFunction()">Privacy Policy</h4><hr /><h4 ng-click="tcFunction()" style="padding-top:10px;">Terms of Service</h4>',
             buttons: []
         });
     }
