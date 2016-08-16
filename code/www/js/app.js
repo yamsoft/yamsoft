@@ -25,10 +25,16 @@ angular.module('songhop', ['ionic', 'songhop.controllers', 'ngCordova'])
       return $location.path();
     },
     function(a){
-      console.log('url has changed: ' + a);
       // show loading div, etc...
       if($rootScope.adishVar) {
           $rootScope.adishVar.pause();
+      }
+      if(a.indexOf("discover")!=-1) {
+          document.getElementById("tcID").style.display = "block";
+      }
+      else {
+          console.log("false");
+          document.getElementById("tcID").style.display = "none";
       }
     });
 })
