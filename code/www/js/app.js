@@ -20,6 +20,23 @@ angular.module('songhop', ['ionic', 'songhop.controllers', 'ngCordova'])
 
     });
 })
+.run( function($rootScope, $location) {
+   $rootScope.$watch(function() {
+      return $location.path();
+    },
+    function(a){
+      // show loading div, etc...
+      if($rootScope.adishVar) {
+          $rootScope.adishVar.pause();
+      }
+      if(a.indexOf("discover")!=-1) {
+          document.getElementById("tcID").style.display = "block";
+      }
+      else {
+          document.getElementById("tcID").style.display = "none";
+      }
+    });
+})
 
 
 .config(function($stateProvider, $urlRouterProvider) {
