@@ -100,7 +100,7 @@ Controller for the discover page
         $scope.wtArr.push(i);
     };
     $scope.shareAnywhere = function() {
-        var myBMI = "Just calculated my BMI using this super awesome app!! My BMI is " + bmiValue;
+        var myBMI = "Just calculated my BMI using this super awesome app!! My BMI is " + bmiValue +  "Try it now!!";
         console.log(myBMI);
         var myMsg = msg;
         $cordovaSocialSharing.share(myBMI, myMsg, "www/img/icon.png", "http://yamsoft.github.io/");
@@ -293,12 +293,13 @@ Controller for the discover page
 /*
 Controller for the favorites page
 */
-.controller('FavoritesCtrl', function($scope, $ionicPopup, $rootScope) {
+.controller('FavoritesCtrl', function($scope, $ionicPopup, $rootScope, $cordovaSocialSharing) {
     var titleDisplay = "";
     $rootScope.media.pause();
     $scope.ageArr = [];
     $scope.displayProgress = false;
     $scope.scored = false;
+    var score = 0;
     for(var i=0; i<=70; i++) {
         $scope.ageArr.push(i+20);
     }
@@ -307,9 +308,16 @@ Controller for the favorites page
         $scope.wtArr.push(i);
     }
 
+    $scope.shareAnywhere = function() {
+        var myBMI = "Just calculated my Diabetic risk score using this super awesome app!! Try it now!!"
+        console.log(myBMI);
+        var myMsg = "Diabetes risk test.";
+        $cordovaSocialSharing.share(myBMI, myMsg, "www/img/icon.png", "http://yamsoft.github.io/");
+    }
+
     $scope.calculateDiabities = function(age, gender, ges, fam, bp, fit, ht, weight, ev) {
         $scope.displayProgress = true;
-        var score = 0;
+        score = 0;
         var displayMessage = "";
         var myWt = weight/0.454;
         if(age) {
@@ -560,15 +568,28 @@ Controller for the favorites page
         }
         if(score > 5) {
             titleDisplay = "OOPS!!!"
-            displayMessage = "Your Diabetic score is " + score + ". You are diagnosed with Type 2 diabetes. Please consult a doctor.";
+            displayMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/meter.jpg"></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' +  "Your Diabetic score is " + score + ". You are diagnosed with Type 2 diabetes. Please consult a doctor." + '</p></div></div>';
         }
         if(score <=5) {
             titleDisplay = "AHOY!!!"
-            displayMessage = "Your Diabetic score is " + score + ". You are extremely fit & fine. Please maintain a good health.";
+            displayMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/meter.jpg"></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' +  "Your Diabetic score is " + score + ". You are extremely fit & fine. Please maintain a good health." + '</p></div></div>';
         }
         var alertPopup = $ionicPopup.alert({
             title: titleDisplay,
-            template: displayMessage
+            template: displayMessage,
+            scope: $scope,
+            buttons: [
+              { text: 'OK',
+                type: 'button-positive',
+              },
+              {
+                text: '<b>Share</b>',
+                type: 'button-positive',
+                onTap: function(e) {
+                  $scope.shareAnywhere();
+                }
+              }
+            ]
         });
     }
 
