@@ -1,6 +1,17 @@
 <ion-view title="BMI CALCULATOR">
     <ion-content has-tabs="true">
         <div class="list list-inset">
+            <div class="genderDiv">
+                <label class="item item-input item-radio">
+                    <div class="input-label">
+                        Gender
+                    </div>
+                </label>
+                <ion-list>
+                    <ion-radio ng-model="bmi.gender" ng-value="'true'" name="bmi.gender">Male</ion-radio>
+                    <ion-radio ng-model="bmi.gender" ng-value="'false'" name="bmi.gender">Female</ion-radio>
+                </ion-list>
+            </div>
             <div class="list">
                 <label class="item item-input item-select">
                     <div class="input-label">
