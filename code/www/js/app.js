@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // angular.module('songhop', ['ionic', 'ngCordova', 'songhop.controllers'])
-angular.module('songhop', ['ionic', 'songhop.controllers'])
+angular.module('songhop', ['ionic', 'songhop.controllers', 'ngCordova'])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {

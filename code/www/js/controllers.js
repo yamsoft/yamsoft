@@ -11,24 +11,24 @@ Controller for the discover page
     document.addEventListener("offline", onOffline, false);
     document.addEventListener("online", onOnline, false);
     function networkInfo() {
-       var networkState = navigator.connection.type || navigator.mozConnection.type || navigator.webkitConnection.type;
-       console.log(networkState);
-       var states = {};
-
-       states[Connection.UNKNOWN]  = 'Unknown connection';
-       states[Connection.ETHERNET] = 'Ethernet connection';
-       states[Connection.WIFI]     = 'WiFi connection';
-       states[Connection.CELL_2G]  = 'Cell 2G connection';
-       states[Connection.CELL_3G]  = 'Cell 3G connection';
-       states[Connection.CELL_4G]  = 'Cell 4G connection';
-       states[Connection.CELL]     = 'Cell generic connection';
-       states[Connection.NONE]     = 'No network connection';
-       if(states[networkState] == 'No network connection') {
-           alert('It seems you do not yave internet connection. Please swith on internet to access this feature.');
-       }
-       else {
+    //    var networkState = navigator.connection.type || navigator.mozConnection.type || navigator.webkitConnection.type;
+    //    console.log(networkState);
+    //    var states = {};
+       //
+    //    states[Connection.UNKNOWN]  = 'Unknown connection';
+    //    states[Connection.ETHERNET] = 'Ethernet connection';
+    //    states[Connection.WIFI]     = 'WiFi connection';
+    //    states[Connection.CELL_2G]  = 'Cell 2G connection';
+    //    states[Connection.CELL_3G]  = 'Cell 3G connection';
+    //    states[Connection.CELL_4G]  = 'Cell 4G connection';
+    //    states[Connection.CELL]     = 'Cell generic connection';
+    //    states[Connection.NONE]     = 'No network connection';
+    //    if(states[networkState] == 'No network connection') {
+    //        alert('It seems you do not yave internet connection. Please swith on internet to access this feature.');
+    //    }
+    //    else {
            $location.path('sleepWell');
-       }
+    //    }
     }
 
     function onOffline() {
@@ -89,15 +89,25 @@ Controller for the discover page
         $location.path('discover');
     }
 })
-.controller('BmiCtrl', function($scope, $ionicPopup, $location, $rootScope) {
+.controller('BmiCtrl', function($scope, $ionicPopup, $location, $rootScope, $cordovaSocialSharing) {
     $rootScope.media.pause();
     $scope.wtArr = [];
+    $scope.bmi= {
+        gender: "true"
+    }
     $scope.bmiCalDone = false;
     var heightInMeters = 0;
+    var bmiValue = 0;
     var msg = "";
     for(var i=54; i<=149; i++) {
         $scope.wtArr.push(i);
     };
+    $scope.shareAnywhere = function() {
+        var myBMI = "Just calculated my BMI using this super awesome app!! My BMI is " + bmiValue +  "Try it now!!";
+        console.log(myBMI);
+        var myMsg = msg;
+        $cordovaSocialSharing.share(myBMI, myMsg, "www/img/icon.png", "http://yamsoft.github.io/");
+    }
     $scope.diabRedirect = function() {
         $location.path('favorites');
     }
@@ -159,8 +169,9 @@ Controller for the discover page
         else if(height == 18) {
             heightInMeters = 1.930;
         }
-        var bmiValue = weight / (heightInMeters * heightInMeters);
+        bmiValue = weight / (heightInMeters * heightInMeters);
         console.log(bmiValue);
+        if($scope.bmi.gender == "true") {
         if(bmiValue < 18.5) {
             msg = "You are underweight.";
             templateMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/under.jpg"></div><div class="inner2"><p class="alertText">' + msg + '</p></div></div>';
@@ -178,11 +189,44 @@ Controller for the discover page
             msg = "You are obese.";
             templateMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/obese.jpg"></div><div class="inner2"><p class="alertText">' + msg + '</p></div></div>';
         }
+    }
+    else if($scope.bmi.gender == "false") {
+    if(bmiValue < 18.5) {
+        msg = "You are underweight.";
+        templateMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/under.jpg"></div><div class="inner2"><p class="alertText">' + msg + '</p></div></div>';
+    }
+    else if(bmiValue>=18.5 && bmiValue <26.9) {
+        msg = "You are normal.";
+        templateMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/fit.png"></div><div class="inner2"><p class="alertText">' + msg + '</p></div></div>';
+    }
+    else if(bmiValue>=26.9 && bmiValue <31.9) {
+        console.log("in");
+        msg = "You are overweight.";
+        templateMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/obese.jpg"></div><div class="inner2"><p class="alertText">' + msg + '</p></div></div>';
+    }
+    else if(bmiValue>=31.9) {
+        msg = "You are obese.";
+        templateMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/obese.jpg"></div><div class="inner2"><p class="alertText">' + msg + '</p></div></div>';
+    }
+}
         bmiValue = Math.round(bmiValue*100)/100;
         $scope.bmiCalDone = true;
         var alertPopup = $ionicPopup.alert({
             title: 'Your BMI is: ' + bmiValue,
-            template: templateMessage
+            template: templateMessage,
+            scope: $scope,
+            buttons: [
+              { text: 'OK',
+                type: 'button-positive',
+              },
+              {
+                text: '<b>Share</b>',
+                type: 'button-positive',
+                onTap: function(e) {
+                  $scope.shareAnywhere();
+                }
+              }
+            ]
         });
     };
     $scope.htArr = [
@@ -273,12 +317,13 @@ Controller for the discover page
 /*
 Controller for the favorites page
 */
-.controller('FavoritesCtrl', function($scope, $ionicPopup, $rootScope) {
+.controller('FavoritesCtrl', function($scope, $ionicPopup, $rootScope, $cordovaSocialSharing) {
     var titleDisplay = "";
     $rootScope.media.pause();
     $scope.ageArr = [];
     $scope.displayProgress = false;
     $scope.scored = false;
+    var score = 0;
     for(var i=0; i<=70; i++) {
         $scope.ageArr.push(i+20);
     }
@@ -287,9 +332,16 @@ Controller for the favorites page
         $scope.wtArr.push(i);
     }
 
+    $scope.shareAnywhere = function() {
+        var myBMI = "Just calculated my Diabetic risk score using this super awesome app!! Try it now!!"
+        console.log(myBMI);
+        var myMsg = "Diabetes risk test.";
+        $cordovaSocialSharing.share(myBMI, myMsg, "www/img/icon.png", "http://yamsoft.github.io/");
+    }
+
     $scope.calculateDiabities = function(age, gender, ges, fam, bp, fit, ht, weight, ev) {
         $scope.displayProgress = true;
-        var score = 0;
+        score = 0;
         var displayMessage = "";
         var myWt = weight/0.454;
         if(age) {
@@ -540,15 +592,28 @@ Controller for the favorites page
         }
         if(score > 5) {
             titleDisplay = "OOPS!!!"
-            displayMessage = "Your Diabetic score is " + score + ". You are diagnosed with Type 2 diabetes. Please consult a doctor.";
+            displayMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/meter.jpg"></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' +  "Your Diabetic score is " + score + ". You are diagnosed with Type 2 diabetes. Please consult a doctor." + '</p></div></div>';
         }
         if(score <=5) {
             titleDisplay = "AHOY!!!"
-            displayMessage = "Your Diabetic score is " + score + ". You are extremely fit & fine. Please maintain a good health.";
+            displayMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/meter.jpg"></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' +  "Your Diabetic score is " + score + ". You are extremely fit & fine. Please maintain a good health." + '</p></div></div>';
         }
         var alertPopup = $ionicPopup.alert({
             title: titleDisplay,
-            template: displayMessage
+            template: displayMessage,
+            scope: $scope,
+            buttons: [
+              { text: 'OK',
+                type: 'button-positive',
+              },
+              {
+                text: '<b>Share</b>',
+                type: 'button-positive',
+                onTap: function(e) {
+                  $scope.shareAnywhere();
+                }
+              }
+            ]
         });
     }
 
