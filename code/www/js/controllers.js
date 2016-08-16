@@ -334,6 +334,12 @@ Controller for the favorites page
     for(var i=54; i<=149; i++) {
         $scope.wtArr.push(i);
     }
+    $scope.gesMeaning = function() {
+        var alertPopup1 = $ionicPopup.alert({
+            title: 'Gestational Diabetes meaning',
+            template: '<span  style="font-weight:500;">Pregnant women who have never had diabetes before but who have high blood glucose (sugar) levels during pregnancy are said to have gestational diabetes.</span>'
+        });
+    }
 
     $scope.shareAnywhere = function() {
         var myBMI = "Just calculated my Diabetic risk score using this super awesome app!! Try it now!!"
