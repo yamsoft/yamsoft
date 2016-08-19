@@ -75,13 +75,14 @@ Controller for the discover page
 }
     //$rootScope.adishVar;
     $scope.play = function() {
+        document.getElementById("gnButton").disabled=true;
         MediaSrv.loadMedia('sound/song.mp3').then(function(media){
             $rootScope.adishVar = media;
             $rootScope.adishVar.play();
         });
     };
     $scope.pause = function() {
-        console.log("pause");
+        document.getElementById("gnButton").disabled=false;
             $rootScope.adishVar.pause();
     };
 })
