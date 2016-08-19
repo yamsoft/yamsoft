@@ -4,7 +4,7 @@ angular.module('songhop.controllers', ['ionic', 'songhop.services'])
 /*
 Controller for the discover page
 */
-.controller('DiscoverCtrl', function($scope, $location, $rootScope, $ionicPopup) {
+.controller('DiscoverCtrl', function($scope, $location, $rootScope, $ionicPopup, $cordovaSocialSharing) {
     document.addEventListener("offline", onOffline, false);
     document.addEventListener("online", onOnline, false);
     var alertPopup;
@@ -56,6 +56,11 @@ Controller for the discover page
             buttons: []
         });
     }
+    $rootScope.sendFeedback = function () {
+    $cordovaSocialSharing
+            .shareViaEmail('', 'sugarT application feedback', 'akin.park@gmail.com');
+};
+
     $rootScope.tcFunction = function() {
         alertPopup.close();
         $location.path("terms");

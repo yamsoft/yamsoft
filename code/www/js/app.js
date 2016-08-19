@@ -32,9 +32,11 @@ angular.module('songhop', ['ionic', 'songhop.controllers', 'ngCordova'])
       }
       if(a.indexOf("discover")!=-1) {
           document.getElementById("tcID").style.display = "block";
+          document.getElementById("feebackID").style.display = "block";
       }
       else {
           document.getElementById("tcID").style.display = "none";
+          document.getElementById("feebackID").style.display = "none";
       }
     });
 })
