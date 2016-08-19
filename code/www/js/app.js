@@ -21,6 +21,7 @@ angular.module('songhop', ['ionic', 'songhop.controllers', 'ngCordova'])
     });
 })
 .run( function($rootScope, $location) {
+    $rootScope.alertOnce = 0;
    $rootScope.$watch(function() {
       return $location.path();
     },
