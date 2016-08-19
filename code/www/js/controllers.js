@@ -73,7 +73,7 @@ Controller for the discover page
         template: '<span  style="font-weight:500;">Sleep Well provides a scientifically proven soothing music to help you sleep better. Press "Good Night" button to use this feature.</span>'
     });
 }
-    $rootScope.adishVar;
+    //$rootScope.adishVar;
     $scope.play = function() {
         MediaSrv.loadMedia('sound/song.mp3').then(function(media){
             $rootScope.adishVar = media;
