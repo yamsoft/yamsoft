@@ -58,7 +58,7 @@ Controller for the discover page
     }
     $rootScope.sendFeedback = function () {
     $cordovaSocialSharing
-            .shareViaEmail('', 'sugarT application feedback', 'akin.park@gmail.com');
+            .shareViaEmail('', 'sugarT application feedback', 'yamsoftcore@gmail.com');
 };
 
     $rootScope.tcFunction = function() {
@@ -123,7 +123,7 @@ Controller for the discover page
         var myBMI = "Just calculated my BMI using this super awesome app!! My BMI is " + bmiValue +  "Try it now!!";
         console.log(myBMI);
         var myMsg = msg;
-        $cordovaSocialSharing.share(myBMI, myMsg, "www/img/icon.png", "http://yamsoft.github.io/");
+        $cordovaSocialSharing.share(myBMI, myMsg, "www/img/icon.png", "http://play.google.com/store/apps/details?id=com.ionicframework.sugart07");
     }
     $scope.diabRedirect = function() {
         $location.path('favorites');
@@ -358,7 +358,7 @@ Controller for the favorites page
         var myBMI = "Just calculated my Diabetic risk score using this super awesome app!! Try it now!!"
         console.log(myBMI);
         var myMsg = "Diabetes risk test.";
-        $cordovaSocialSharing.share(myBMI, myMsg, "www/img/icon.png", "http://yamsoft.github.io/");
+        $cordovaSocialSharing.share(myBMI, myMsg, "www/img/icon.png", "http://play.google.com/store/apps/details?id=com.ionicframework.sugart07");
     }
 
     $scope.calculateDiabities = function(age, gender, ges, fam, bp, fit, ht, weight, ev) {
