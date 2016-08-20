@@ -74,8 +74,8 @@ Controller for the discover page
     if($rootScope.alertOnce==0) {
         $rootScope.alertOnce = 1;
     $scope.alertPopup1 = $ionicPopup.alert({
-        title: 'Whats this?',
-        template: '<span  style="font-weight:500;">Sleep Well provides a scientifically proven soothing music to help you sleep better. Press "Good Night" button to use this feature.</span>'
+        title: 'Tip',
+        template: '<span  style="font-weight:500;">Sleep Well provides a scientifically proven soothing music to help you sleep better. Press "Good Night" button to use this feature. Please make sure that there is no noise in the background to get the best out of this feature. You may use earphones.</span>'
     });
 }
     //$rootScope.adishVar;
@@ -614,11 +614,11 @@ Controller for the favorites page
         }
         if(score > 5) {
             titleDisplay = "OOPS!!!"
-            displayMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/meter.jpg"></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' +  "Your Diabetic score is " + score + ". You are diagnosed with Type 2 diabetes. Please consult a doctor." + '</p></div></div><div>Caution: This is just the risk calculator. It does not gives 100% accurate results. Actual results may vary.</div>';
+            displayMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/meter.jpg"></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' +  "Your Diabetic score is " + score + ". You are diagnosed with Type 2 diabetes. Please consult a doctor." + '</p></div></div><div>Please note that this is a risk assessment tool. It only provides probability of getting diabetic in near future.</div>';
         }
         if(score <=5) {
             titleDisplay = "AHOY!!!"
-            displayMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/meter.jpg"></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' +  "Your Diabetic score is " + score + ". You are extremely fit & fine. Please maintain a good health." + '</p></div></div><div>Caution: This is just the risk calculator. It does not gives 100% accurate results. Actual results may vary.</div>';
+            displayMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/meter.jpg"></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' +  "Your Diabetic score is " + score + ". You are extremely fit & fine. Please maintain a good health." + '</p></div></div><div>Please note that this is a risk assessment tool. It only provides probability of getting diabetic in near future.</div>';
         }
         var alertPopup = $ionicPopup.alert({
             title: titleDisplay,
