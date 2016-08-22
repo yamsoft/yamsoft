@@ -116,7 +116,7 @@ Controller for the discover page
     var heightInMeters = 0;
     var bmiValue = 0;
     var msg = "";
-    for(var i=54; i<=149; i++) {
+    for(var i=40; i<=149; i++) {
         $scope.wtArr.push(i);
     };
     $scope.shareAnywhere = function() {
@@ -129,7 +129,7 @@ Controller for the discover page
         $location.path('favorites');
     }
     $scope.calculateBMI = function(height, weight) {
-        if(height == 0) {
+        if(height == 0 || height =="4.10") {
             heightInMeters = 1.473;
         }
         else if(height == 1) {
@@ -325,8 +325,8 @@ Controller for the discover page
         }
     ];
     $scope.bmiCal = {
-        ht: 0,
-        weight: 54
+        ht: "4.10",
+        weight: 40
     }
 })
 
@@ -344,7 +344,7 @@ Controller for the favorites page
         $scope.ageArr.push(i+20);
     }
     $scope.wtArr = [];
-    for(var i=54; i<=149; i++) {
+    for(var i=40; i<=149; i++) {
         $scope.wtArr.push(i);
     }
     $scope.gesMeaning = function() {
@@ -402,7 +402,7 @@ Controller for the favorites page
         }
         if(ht && myWt) {
             //case1 top
-            if(ht == 0) {
+            if(ht == 0 || ht =="4.10") {
                 if(myWt>=119 && myWt<=142) {
                     score = score+1;
                 }
@@ -761,8 +761,8 @@ Controller for the favorites page
         fam: "false",
         bp: "false",
         fit: "true",
-        ht: 0,
-        weight: 54
+        ht: "4.10",
+        weight: 40
     }
 })
 
