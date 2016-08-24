@@ -5,36 +5,9 @@ angular.module('songhop.controllers', ['ionic', 'songhop.services'])
 Controller for the discover page
 */
 .controller('DiscoverCtrl', function($scope, $location, $rootScope, $ionicPopup, $cordovaSocialSharing) {
-    document.addEventListener("offline", onOffline, false);
-    document.addEventListener("online", onOnline, false);
     var alertPopup;
     function networkInfo() {
-    //    var networkState = navigator.connection.type || navigator.mozConnection.type || navigator.webkitConnection.type;
-    //    console.log(networkState);
-    //    var states = {};
-       //
-    //    states[Connection.UNKNOWN]  = 'Unknown connection';
-    //    states[Connection.ETHERNET] = 'Ethernet connection';
-    //    states[Connection.WIFI]     = 'WiFi connection';
-    //    states[Connection.CELL_2G]  = 'Cell 2G connection';
-    //    states[Connection.CELL_3G]  = 'Cell 3G connection';
-    //    states[Connection.CELL_4G]  = 'Cell 4G connection';
-    //    states[Connection.CELL]     = 'Cell generic connection';
-    //    states[Connection.NONE]     = 'No network connection';
-    //    if(states[networkState] == 'No network connection') {
-    //        alert('It seems you do not yave internet connection. Please swith on internet to access this feature.');
-    //    }
-    //    else {
-           $location.path('sleepWell');
-    //    }
-    }
-
-    function onOffline() {
-      // alert('You are now offline!');
-    }
-
-    function onOnline() {
-      // alert('You are now online!');
+        $location.path('sleepWell');
     }
     $scope.nextPage = function(event) {
         event.preventDefault();
@@ -43,6 +16,10 @@ Controller for the discover page
     $scope.nextPageBmi = function(event) {
         event.preventDefault();
         $location.path('bmi');
+    };
+    $scope.nextHistory = function(event) {
+        event.preventDefault();
+        $location.path('history');
     };
     $scope.nextPageSleepWell = function(event) {
         event.preventDefault();
@@ -90,6 +67,39 @@ Controller for the discover page
         document.getElementById("gnButton").disabled=false;
             $rootScope.adishVar.pause();
     };
+})
+.controller('HistoryCtrl', function($scope) {
+    $scope.bmiHistory = [];
+    $scope.diabetesHistory = [];
+    db.transaction(function (tx) {
+        tx.executeSql('SELECT * FROM BMI_HISTORY', [], function (tx, results) {
+            var len = results.rows.length, i;
+            for(var i=0; i< len; i++) {
+                var a = {
+                    "time": undefined,
+                    "bmi": undefined
+                }
+                $scope.bmiHistory.push(a);
+                $scope.bmiHistory[i].time = results.rows[i].dateValue;
+                $scope.bmiHistory[i].bmi = results.rows[i].result;
+            }
+            console.log(results);
+        }, null);
+    });
+    db.transaction(function (tx) {
+        tx.executeSql('SELECT * FROM DIABETES_HISTORY', [], function (tx, results) {
+            var len = results.rows.length, i;
+            for(var i=0; i< len; i++) {
+                var a = {
+                    "time": undefined,
+                    "bmi": undefined
+                }
+                $scope.diabetesHistory.push(a);
+                $scope.diabetesHistory[i].time = results.rows[i].dateValue;
+                $scope.diabetesHistory[i].bmi = results.rows[i].result;
+            }
+        }, null);
+    });
 })
 .controller('termsCtrl', function($scope, $location) {
     $scope.goBack = function(event) {
@@ -228,6 +238,19 @@ Controller for the discover page
 }
         bmiValue = Math.round(bmiValue*100)/100;
         $scope.bmiCalDone = true;
+        db = window.openDatabase("my.db", '1', 'my', 1024 * 1024 * 100); // browser
+        db.transaction(function (tx) {
+            tx.executeSql('SELECT * FROM BMI_HISTORY', [], function (tx, results) {
+                var len = results.rows.length, i;
+                if(len == 5) {
+                    tx.executeSql("DELETE FROM BMI_HISTORY WHERE id=?", [1]);
+                    tx.executeSql('INSERT INTO BMI_HISTORY (id, result, dateValue) VALUES (?, ?, ?)', [len+1, bmiValue, new Date().getDate() + "/" +  (new Date().getMonth() + 1) + "/" +  new Date().getFullYear().toString().substr(2,2)]);
+                }
+                else {
+                    tx.executeSql('INSERT INTO BMI_HISTORY (id, result, dateValue) VALUES (?, ?, ?)', [len+1, bmiValue, new Date().getDate() + "/" +  (new Date().getMonth() + 1) + "/" +  new Date().getFullYear().toString().substr(2,2) ]);
+                }
+            }, null);
+        });
         var alertPopup = $ionicPopup.alert({
             title: 'Your BMI is: ' + bmiValue,
             template: templateMessage,
@@ -656,6 +679,19 @@ Controller for the favorites page
                 displayMessage = '<div class="outerAlert"><div id="el" data-value="5"><span style="transform:rotate(90deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' +  'On a scale of 10, your Diabetic risk score is ' + score + '. Maintain a good health.' + '</p></div></div><div>Please note that this is a risk assessment tool. It only provides probability of getting diabetic in near future.</div>';
             }
         }
+        db = window.openDatabase("my.db", '1', 'my', 1024 * 1024 * 100); // browser
+        db.transaction(function (tx) {
+            tx.executeSql('SELECT * FROM DIABETES_HISTORY', [], function (tx, results) {
+                var len = results.rows.length, i;
+                if(len == 5) {
+                    tx.executeSql("DELETE FROM DIABETES_HISTORY WHERE id=?", [1]);
+                    tx.executeSql('INSERT INTO DIABETES_HISTORY (id, result, dateValue) VALUES (?, ?, ?)', [len+1, score, new Date().getDate() + "/" +  (new Date().getMonth() + 1) + "/" +  new Date().getFullYear().toString().substr(2,2)]);
+                }
+                else {
+                    tx.executeSql('INSERT INTO DIABETES_HISTORY (id, result, dateValue) VALUES (?, ?, ?)', [len+1, score, new Date().getDate() + "/" +  (new Date().getMonth() + 1) + "/" +  new Date().getFullYear().toString().substr(2,2) ]);
+                }
+            }, null);
+        });
         var alertPopup = $ionicPopup.alert({
             title: titleDisplay,
             template: displayMessage,
