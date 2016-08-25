@@ -638,45 +638,45 @@ Controller for the favorites page
         if(score > 5) {
             if(score == 6){
                 titleDisplay = "OOPS!!!"
-                displayMessage = '<div class="outerAlert"><div id="el" data-value="6"><span style="transform:rotate(108deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' + 'On a scale of 10, your Diabetic risk score is ' + score + '. This is higher than the usual standards. Consult a doctor.' + '</p></div></div><div>Please note that this is a risk assessment tool. It only provides probability of getting diabetic in near future.</div>';
+                displayMessage = '<div class="outerAlert"><div id="el" data-value="6"><span style="transform:rotate(108deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' + 'Your Diabetes risk score is ' + score + '. You are at risk of being diagnosed with Diabetes.' + '</p></div></div>';
             }
             else if(score == 7){
                 titleDisplay = "OOPS!!!"
-                displayMessage = '<div class="outerAlert"><div id="el" data-value="7"><span style="transform:rotate(126deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' + 'On a scale of 10, your Diabetic risk score is ' + score + '. This is higher than the usual standards. Consult a doctor.' + '</p></div></div><div>Please note that this is a risk assessment tool. It only provides probability of getting diabetic in near future.</div>';
+                displayMessage = '<div class="outerAlert"><div id="el" data-value="7"><span style="transform:rotate(126deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' + 'Your Diabetes risk score is ' + score + '. You are at risk of being diagnosed with Diabetes.' + '</p></div></div>';
             }
             else if(score == 8){
                 titleDisplay = "OOPS!!!"
-                displayMessage = '<div class="outerAlert"><div id="el" data-value="8"><span style="transform:rotate(144deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' + 'On a scale of 10, your Diabetic risk score is ' + score + '. This is higher than the usual standards. Consult a doctor.' + '</p></div></div><div>Please note that this is a risk assessment tool. It only provides probability of getting diabetic in near future.</div>';
+                displayMessage = '<div class="outerAlert"><div id="el" data-value="8"><span style="transform:rotate(144deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' + 'Your Diabetes risk score is ' + score + '. You are at risk of being diagnosed with Diabetes.' + '</p></div></div>';
             }
             else if(score == 9){
                 titleDisplay = "OOPS!!!"
-                displayMessage = '<div class="outerAlert"><div id="el" data-value="9"><span style="transform:rotate(162deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' + 'On a scale of 10, your Diabetic risk score is ' + score + '. This is higher than the usual standards. Consult a doctor.' + '</p></div></div><div>Please note that this is a risk assessment tool. It only provides probability of getting diabetic in near future.</div>';
+                displayMessage = '<div class="outerAlert"><div id="el" data-value="9"><span style="transform:rotate(162deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' + 'Your Diabetes risk score is ' + score + '. You are at risk of being diagnosed with Diabetes.' + '</p></div></div>';
             }
             else if(score == 10){
                 titleDisplay = "OOPS!!!"
-                displayMessage = '<div class="outerAlert"><div id="el" data-value="10"><span style="transform:rotate(180deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' + 'On a scale of 10, your Diabetic risk score is ' + score + '. This is higher than the usual standards. Consult a doctor.' + '</p></div></div><div>Please note that this is a risk assessment tool. It only provides probability of getting diabetic in near future.</div>';
+                displayMessage = '<div class="outerAlert"><div id="el" data-value="10"><span style="transform:rotate(180deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' + 'Your Diabetes risk score is ' + score + '. You are at risk of being diagnosed with Diabetes.' + '</p></div></div>';
             }
         }
         if(score <=5) {
             if(score == 1) {
                 titleDisplay = "AHOY!!!"
-                displayMessage = '<div class="outerAlert"><div id="el" data-value="1"><span style="transform:rotate(18deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' +  'On a scale of 10, your Diabetic risk score is ' + score + '. Maintain a good health.' + '</p></div></div><div>Please note that this is a risk assessment tool. It only provides probability of getting diabetic in near future.</div>';
+                displayMessage = '<div class="outerAlert"><div id="el" data-value="1"><span style="transform:rotate(18deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' +  'Your Diabetes risk score is ' + score + '. You are not at risk of being diagnosed with Diabetes.' + '</p></div></div>';
             }
             else if(score == 2) {
                 titleDisplay = "AHOY!!!"
-                displayMessage = '<div class="outerAlert"><div id="el" data-value="2"><span style="transform:rotate(36deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' +  'On a scale of 10, your Diabetic risk score is ' + score + '. Maintain a good health.' + '</p></div></div><div>Please note that this is a risk assessment tool. It only provides probability of getting diabetic in near future.</div>';
+                displayMessage = '<div class="outerAlert"><div id="el" data-value="2"><span style="transform:rotate(36deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' +  'Your Diabetes risk score is ' + score + '. You are not at risk of being diagnosed with Diabetes.' + '</p></div></div>';
             }
             else if(score == 3) {
                 titleDisplay = "AHOY!!!"
-                displayMessage = '<div class="outerAlert"><div id="el" data-value="3"><span style="transform:rotate(54deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' +  'On a scale of 10, your Diabetic risk score is ' + score + '. Maintain a good health.' + '</p></div></div><div>Please note that this is a risk assessment tool. It only provides probability of getting diabetic in near future.</div>';
+                displayMessage = '<div class="outerAlert"><div id="el" data-value="3"><span style="transform:rotate(54deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' +  'Your Diabetes risk score is ' + score + '. You are not at risk of being diagnosed with Diabetes.' + '</p></div></div>';
             }
             else if(score == 4) {
                 titleDisplay = "AHOY!!!"
-                displayMessage = '<div class="outerAlert"><div id="el" data-value="4"><span style="transform:rotate(72deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' +  'On a scale of 10, your Diabetic risk score is ' + score + '. Maintain a good health.' + '</p></div></div><div>Please note that this is a risk assessment tool. It only provides probability of getting diabetic in near future.</div>';
+                displayMessage = '<div class="outerAlert"><div id="el" data-value="4"><span style="transform:rotate(72deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' +  'Your Diabetes risk score is ' + score + '. You are not at risk of being diagnosed with Diabetes.' + '</p></div></div>';
             }
             else if(score == 5) {
                 titleDisplay = "AHOY!!!"
-                displayMessage = '<div class="outerAlert"><div id="el" data-value="5"><span style="transform:rotate(90deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' +  'On a scale of 10, your Diabetic risk score is ' + score + '. Maintain a good health.' + '</p></div></div><div>Please note that this is a risk assessment tool. It only provides probability of getting diabetic in near future.</div>';
+                displayMessage = '<div class="outerAlert"><div id="el" data-value="5"><span style="transform:rotate(90deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' +  'Your Diabetes risk score is ' + score + '. You are not at risk of being diagnosed with Diabetes.' + '</p></div></div>';
             }
         }
         db = window.openDatabase("my.db", '1', 'my', 1024 * 1024 * 100); // browser
