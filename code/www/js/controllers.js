@@ -82,6 +82,7 @@ Controller for the discover page
                 $scope.bmiHistory.push(a);
                 $scope.bmiHistory[i].time = results.rows[i].dateValue;
                 $scope.bmiHistory[i].bmi = results.rows[i].result;
+                $scope.bmiHistory[i].uName = results.rows[i].uName;
             }
             console.log(results);
         }, null);
@@ -97,6 +98,7 @@ Controller for the discover page
                 $scope.diabetesHistory.push(a);
                 $scope.diabetesHistory[i].time = results.rows[i].dateValue;
                 $scope.diabetesHistory[i].bmi = results.rows[i].result;
+                $scope.diabetesHistory[i].uName = results.rows[i].uName;
             }
         }, null);
     });
@@ -119,6 +121,9 @@ Controller for the discover page
 })
 .controller('BmiCtrl', function($scope, $ionicPopup, $location, $cordovaSocialSharing) {
     $scope.wtArr = [];
+    $scope.uName = {
+        val:''
+    };
     $scope.bmi= {
         gender: "true"
     }
@@ -139,6 +144,14 @@ Controller for the discover page
         $location.path('favorites');
     }
     $scope.calculateBMI = function(height, weight) {
+        console.log($scope.uName)
+        if($scope.uName.val == '' || $scope.uName.val==undefined) {
+            var alertPopup23 = $ionicPopup.alert({
+                title: 'ERROR',
+                template: 'Please enter your name'
+            });
+        }
+        else {
         if(height == 0 || height =="4.10") {
             heightInMeters = 1.473;
         }
@@ -244,10 +257,11 @@ Controller for the discover page
                 var len = results.rows.length, i;
                 if(len == 5) {
                     tx.executeSql("DELETE FROM BMI_HISTORY WHERE id=?", [1]);
-                    tx.executeSql('INSERT INTO BMI_HISTORY (id, result, dateValue) VALUES (?, ?, ?)', [len+1, bmiValue, new Date().getDate() + "/" +  (new Date().getMonth() + 1) + "/" +  new Date().getFullYear().toString().substr(2,2)]);
+                    tx.executeSql('INSERT INTO BMI_HISTORY (id, result, dateValue, uName) VALUES (?, ?, ?, ?)', [len+1, bmiValue, new Date().getDate() + "/" +  (new Date().getMonth() + 1) + "/" +  new Date().getFullYear().toString().substr(2,2), $scope.uName.val]);
                 }
                 else {
-                    tx.executeSql('INSERT INTO BMI_HISTORY (id, result, dateValue) VALUES (?, ?, ?)', [len+1, bmiValue, new Date().getDate() + "/" +  (new Date().getMonth() + 1) + "/" +  new Date().getFullYear().toString().substr(2,2) ]);
+                    console.log($scope.uName);
+                    tx.executeSql('INSERT INTO BMI_HISTORY (id, result, dateValue, uName) VALUES (?, ?, ?, ?)', [len+1, bmiValue, new Date().getDate() + "/" +  (new Date().getMonth() + 1) + "/" +  new Date().getFullYear().toString().substr(2,2), $scope.uName.val]);
                 }
             }, null);
         });
@@ -268,6 +282,7 @@ Controller for the discover page
               }
             ]
         });
+    }
     };
     $scope.htArr = [
         {
@@ -360,6 +375,9 @@ Controller for the favorites page
 .controller('FavoritesCtrl', function($scope, $ionicPopup, $cordovaSocialSharing) {
     var titleDisplay = "";
     $scope.ageArr = [];
+    $scope.uName = {
+        "val":''
+    }
     $scope.displayProgress = false;
     $scope.scored = false;
     var score = 0;
@@ -385,6 +403,13 @@ Controller for the favorites page
     }
 
     $scope.calculateDiabities = function(age, gender, ges, fam, bp, fit, ht, weight, ev) {
+        if($scope.uName.val=='' || $scope.uName.val == undefined) {
+            var alertPopup = $ionicPopup.alert({
+                title: 'ERROR',
+                template: 'Please enter your name.'
+            });
+        }
+        else {
         $scope.displayProgress = true;
         score = 0;
         var displayMessage = "";
@@ -685,10 +710,10 @@ Controller for the favorites page
                 var len = results.rows.length, i;
                 if(len == 5) {
                     tx.executeSql("DELETE FROM DIABETES_HISTORY WHERE id=?", [1]);
-                    tx.executeSql('INSERT INTO DIABETES_HISTORY (id, result, dateValue) VALUES (?, ?, ?)', [len+1, score, new Date().getDate() + "/" +  (new Date().getMonth() + 1) + "/" +  new Date().getFullYear().toString().substr(2,2)]);
+                    tx.executeSql('INSERT INTO DIABETES_HISTORY (id, result, dateValue, uName) VALUES (?, ?, ?, ?)', [len+1, score, new Date().getDate() + "/" +  (new Date().getMonth() + 1) + "/" +  new Date().getFullYear().toString().substr(2,2), $scope.uName.val]);
                 }
                 else {
-                    tx.executeSql('INSERT INTO DIABETES_HISTORY (id, result, dateValue) VALUES (?, ?, ?)', [len+1, score, new Date().getDate() + "/" +  (new Date().getMonth() + 1) + "/" +  new Date().getFullYear().toString().substr(2,2) ]);
+                    tx.executeSql('INSERT INTO DIABETES_HISTORY (id, result, dateValue, uName) VALUES (?, ?, ?, ?)', [len+1, score, new Date().getDate() + "/" +  (new Date().getMonth() + 1) + "/" +  new Date().getFullYear().toString().substr(2,2), $scope.uName.val]);
                 }
             }, null);
         });
@@ -709,6 +734,7 @@ Controller for the favorites page
               }
             ]
         });
+    }
         // document.getElementById("needle").style.transform = "rotate(180deg)";
     }
 

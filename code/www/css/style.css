@@ -249,3 +249,15 @@ strong {
 .applyBold {
     font-weight: 600;
 }
+.nameClass {
+    text-align: right;
+    color: #db001f;
+    font-weight: 400;
+    font-size: 150%;
+}
+.setMargin {
+    margin-left: 6%;
+}
+.setMarginLess {
+    margin-left: -2%;
+}

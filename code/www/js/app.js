@@ -38,8 +38,8 @@ angular.module('songhop', ['ionic', 'songhop.controllers', 'ngCordova'])
     });
         db = window.openDatabase("my.db", '1', 'my', 1024 * 1024 * 100); // browser
         db.transaction(function (tx) {
-            tx.executeSql('CREATE TABLE IF NOT EXISTS BMI_HISTORY (id unique, dateValue, result)');
-            tx.executeSql('CREATE TABLE IF NOT EXISTS DIABETES_HISTORY (id unique, dateValue, result)');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS BMI_HISTORY (id unique, dateValue, uName, result)');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS DIABETES_HISTORY (id unique, dateValue, uName, result)');
             // tx.executeSql('INSERT INTO BMI_HISTORY (id, result) VALUES (1, "foobar")');
             // tx.executeSql('INSERT INTO BMI_HISTORY (id, result) VALUES (2, "logmsg")');
             // tx.executeSql('INSERT INTO DIABETES_HISTORY (id, result) VALUES (1, "foobar2")');

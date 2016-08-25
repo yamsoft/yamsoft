@@ -25,9 +25,13 @@
 <ion-view title="Diabetes Risk Calculator">
   <ion-content has-tabs="true">
     <div class="list list-inset">
+        <label class="item item-input">
+            <span class="input-label setMarginLess">Name</span>
+            <input type="text" ng-model="uName.val" placeholder="Enter your name" class="nameClass" style="color: #db001f; font-weight: 400; font-size: 100%;">
+        </label>
         <div class="list">
             <label class="item item-input item-select">
-                <div class="input-label">
+                <div class="input-label setMarginLess">
                     Age
                 </div>
                 <select ng-model="diabCheck.age">
