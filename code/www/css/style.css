@@ -239,3 +239,13 @@ strong {
   color: #efefef;
   font-size: 2.5em;
 }
+.darkBorder {
+    border: 2px solid #b2b2b2;
+    font-weight: 600;
+}
+.applyBorder {
+    border: 1px solid #b2b2b2;
+}
+.applyBold {
+    font-weight: 600;
+}
