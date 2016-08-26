@@ -4,6 +4,12 @@ angular.module('songhop.controllers', ['ionic', 'songhop.services'])
 /*
 Controller for the discover page
 */
+.controller('AppCtrl', function($scope, $location) {
+    $scope.nextDiabetes = function(event) {
+        event.preventDefault();
+        $location.path('app/favorites');
+    };
+})
 .controller('DiscoverCtrl', function($scope, $location, $rootScope, $ionicPopup, $cordovaSocialSharing) {
     var alertPopup;
     function networkInfo() {
@@ -11,7 +17,7 @@ Controller for the discover page
     }
     $scope.nextPage = function(event) {
         event.preventDefault();
-        $location.path('favorites');
+        $location.path('app/favorites');
     };
     $scope.nextPageBmi = function(event) {
         event.preventDefault();
