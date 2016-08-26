@@ -4,16 +4,45 @@ angular.module('songhop.controllers', ['ionic', 'songhop.services'])
 /*
 Controller for the discover page
 */
-.controller('AppCtrl', function($scope, $location) {
+.controller('AppCtrl', function($scope, $location, $ionicPopup) {
     $scope.nextDiabetes = function(event) {
         event.preventDefault();
         $location.path('app/favorites');
     };
+    $scope.nextBMI = function(event) {
+        event.preventDefault();
+        $location.path('app/bmi');
+    };
+    $scope.nextSleepWell = function(event) {
+        event.preventDefault();
+        $location.path('app/sleepWell');
+    };
+    $scope.nextHistory = function(event) {
+        event.preventDefault();
+        $location.path('app/history');
+    };
+    $scope.tryOut = function() {
+        event.preventDefault();
+        alertPopup = $ionicPopup.alert({
+            title: 'LEGAL',
+            scope: $scope,
+            template: '<h4 ng-click="privacyFunction()">Privacy Policy</h4><hr /><h4 ng-click="tcFunction()" style="padding-top:10px;">Terms of Service</h4>',
+            buttons: []
+        });
+    }
+    $scope.tcFunction = function() {
+        alertPopup.close();
+        $location.path("app/terms");
+    }
+    $scope.privacyFunction = function() {
+        alertPopup.close();
+        $location.path("app/privacy");
+    }
 })
 .controller('DiscoverCtrl', function($scope, $location, $rootScope, $ionicPopup, $cordovaSocialSharing) {
     var alertPopup;
     function networkInfo() {
-        $location.path('sleepWell');
+        $location.path('app/sleepWell');
     }
     $scope.nextPage = function(event) {
         event.preventDefault();
@@ -21,37 +50,21 @@ Controller for the discover page
     };
     $scope.nextPageBmi = function(event) {
         event.preventDefault();
-        $location.path('bmi');
+        $location.path('app/bmi');
     };
     $scope.nextHistory = function(event) {
         event.preventDefault();
-        $location.path('history');
+        $location.path('app/history');
     };
     $scope.nextPageSleepWell = function(event) {
         event.preventDefault();
         networkInfo();
     };
-    $rootScope.tryOut = function() {
-        event.preventDefault();
-        alertPopup = $ionicPopup.alert({
-            title: 'LEGAL',
-            template: '<h4 ng-click="privacyFunction()">Privacy Policy</h4><hr /><h4 ng-click="tcFunction()" style="padding-top:10px;">Terms of Service</h4>',
-            buttons: []
-        });
-    }
+
     $rootScope.sendFeedback = function () {
     $cordovaSocialSharing
             .shareViaEmail('', 'sugarT application feedback', 'yamsoftcore@gmail.com');
 };
-
-    $rootScope.tcFunction = function() {
-        alertPopup.close();
-        $location.path("terms");
-    }
-    $rootScope.privacyFunction = function() {
-        alertPopup.close();
-        $location.path("privacy");
-    }
 })
 .controller('sleepWellCtrl', function($scope, $q, MediaSrv, $rootScope, $ionicPopup) {
     if($rootScope.alertOnce==0) {

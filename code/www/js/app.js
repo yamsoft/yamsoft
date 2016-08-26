@@ -1,15 +1,7 @@
-// Ionic Starter App
-
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// angular.module('songhop', ['ionic', 'ngCordova', 'songhop.controllers'])
 angular.module('songhop', ['ionic', 'songhop.controllers', 'ngCordova'])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
-        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-        // for form inputs)
         if(window.cordova && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         }
@@ -47,6 +39,56 @@ angular.module('songhop', ['ionic', 'songhop.controllers', 'ngCordova'])
       }
     })
 
+    .state('app.bmi', {
+      url: "/bmi",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/bmi.html",
+          controller: 'BmiCtrl'
+        }
+      }
+    })
+
+    .state('app.sleepWell', {
+      url: "/sleepWell",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/sleepWell.html",
+          controller: 'sleepWellCtrl'
+        }
+      }
+    })
+
+    .state('app.history', {
+      url: "/history",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/history.html",
+          controller: 'HistoryCtrl'
+        }
+      }
+    })
+
+    .state('app.terms', {
+      url: "/terms",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/terms.html",
+          controller: 'termsCtrl'
+        }
+      }
+    })
+
+    .state('app.privacy', {
+      url: "/privacy",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/privacy.html",
+          controller: 'privacyCtrl'
+        }
+      }
+    })
+
     .state('app.favorites', {
       url: "/favorites",
       views: {
@@ -55,15 +97,10 @@ angular.module('songhop', ['ionic', 'songhop.controllers', 'ngCordova'])
           controller: 'FavoritesCtrl'
         }
       }
-    });
-  // if none of the above states are matched, use this as the fallback
+  });
   $urlRouterProvider.otherwise('/app/discover');
 })
 
 .constant('SERVER', {
-    // Local server
-    //url: 'http://localhost:3000'
-
-    // Public Heroku server
     url: 'https://ionic-songhop.herokuapp.com'
 });
