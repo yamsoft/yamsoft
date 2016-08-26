@@ -5,36 +5,9 @@ angular.module('songhop.controllers', ['ionic', 'songhop.services'])
 Controller for the discover page
 */
 .controller('DiscoverCtrl', function($scope, $location, $rootScope, $ionicPopup, $cordovaSocialSharing) {
-    document.addEventListener("offline", onOffline, false);
-    document.addEventListener("online", onOnline, false);
     var alertPopup;
     function networkInfo() {
-    //    var networkState = navigator.connection.type || navigator.mozConnection.type || navigator.webkitConnection.type;
-    //    console.log(networkState);
-    //    var states = {};
-       //
-    //    states[Connection.UNKNOWN]  = 'Unknown connection';
-    //    states[Connection.ETHERNET] = 'Ethernet connection';
-    //    states[Connection.WIFI]     = 'WiFi connection';
-    //    states[Connection.CELL_2G]  = 'Cell 2G connection';
-    //    states[Connection.CELL_3G]  = 'Cell 3G connection';
-    //    states[Connection.CELL_4G]  = 'Cell 4G connection';
-    //    states[Connection.CELL]     = 'Cell generic connection';
-    //    states[Connection.NONE]     = 'No network connection';
-    //    if(states[networkState] == 'No network connection') {
-    //        alert('It seems you do not yave internet connection. Please swith on internet to access this feature.');
-    //    }
-    //    else {
-           $location.path('sleepWell');
-    //    }
-    }
-
-    function onOffline() {
-      // alert('You are now offline!');
-    }
-
-    function onOnline() {
-      // alert('You are now online!');
+        $location.path('sleepWell');
     }
     $scope.nextPage = function(event) {
         event.preventDefault();
@@ -43,6 +16,10 @@ Controller for the discover page
     $scope.nextPageBmi = function(event) {
         event.preventDefault();
         $location.path('bmi');
+    };
+    $scope.nextHistory = function(event) {
+        event.preventDefault();
+        $location.path('history');
     };
     $scope.nextPageSleepWell = function(event) {
         event.preventDefault();
@@ -91,6 +68,41 @@ Controller for the discover page
             $rootScope.adishVar.pause();
     };
 })
+.controller('HistoryCtrl', function($scope) {
+    $scope.bmiHistory = [];
+    $scope.diabetesHistory = [];
+    db.transaction(function (tx) {
+        tx.executeSql('SELECT * FROM BMI_HISTORY', [], function (tx, results) {
+            var len = results.rows.length, i;
+            for(var i=0; i< len; i++) {
+                var a = {
+                    "time": undefined,
+                    "bmi": undefined
+                }
+                $scope.bmiHistory.push(a);
+                $scope.bmiHistory[i].time = results.rows[i].dateValue;
+                $scope.bmiHistory[i].bmi = results.rows[i].result;
+                $scope.bmiHistory[i].uName = results.rows[i].uName;
+            }
+            console.log(results);
+        }, null);
+    });
+    db.transaction(function (tx) {
+        tx.executeSql('SELECT * FROM DIABETES_HISTORY', [], function (tx, results) {
+            var len = results.rows.length, i;
+            for(var i=0; i< len; i++) {
+                var a = {
+                    "time": undefined,
+                    "bmi": undefined
+                }
+                $scope.diabetesHistory.push(a);
+                $scope.diabetesHistory[i].time = results.rows[i].dateValue;
+                $scope.diabetesHistory[i].bmi = results.rows[i].result;
+                $scope.diabetesHistory[i].uName = results.rows[i].uName;
+            }
+        }, null);
+    });
+})
 .controller('termsCtrl', function($scope, $location) {
     $scope.goBack = function(event) {
         event.preventDefault();
@@ -109,6 +121,9 @@ Controller for the discover page
 })
 .controller('BmiCtrl', function($scope, $ionicPopup, $location, $cordovaSocialSharing) {
     $scope.wtArr = [];
+    $scope.uName = {
+        val:''
+    };
     $scope.bmi= {
         gender: "true"
     }
@@ -116,7 +131,7 @@ Controller for the discover page
     var heightInMeters = 0;
     var bmiValue = 0;
     var msg = "";
-    for(var i=54; i<=149; i++) {
+    for(var i=40; i<=149; i++) {
         $scope.wtArr.push(i);
     };
     $scope.shareAnywhere = function() {
@@ -129,7 +144,15 @@ Controller for the discover page
         $location.path('favorites');
     }
     $scope.calculateBMI = function(height, weight) {
-        if(height == 0) {
+        console.log($scope.uName)
+        if($scope.uName.val == '' || $scope.uName.val==undefined) {
+            var alertPopup23 = $ionicPopup.alert({
+                title: 'ERROR',
+                template: 'Please enter your name'
+            });
+        }
+        else {
+        if(height == 0 || height =="4.10") {
             heightInMeters = 1.473;
         }
         else if(height == 1) {
@@ -191,43 +214,57 @@ Controller for the discover page
         if($scope.bmi.gender == "true") {
         if(bmiValue < 18.5) {
             msg = "You are underweight.";
-            templateMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/under.jpg"></div><div class="inner2"><p class="alertText">' + msg + '</p></div></div>';
+            templateMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/under.jpg"></div><div class="inner2" style="width:55%; height: 97px;"><p class="alertText">' + msg + '</p></div></div>';
         }
         else if(bmiValue>=18.5 && bmiValue <24.9) {
             msg = "You are normal.";
-            templateMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/fit.png"></div><div class="inner2"><p class="alertText">' + msg + '</p></div></div>';
+            templateMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/fit.png"></div><div class="inner2" style="width:55%; height: 97px;"><p class="alertText">' + msg + '</p></div></div>';
         }
         else if(bmiValue>=24.9 && bmiValue <29.9) {
             console.log("in");
             msg = "You are overweight.";
-            templateMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/obese.jpg"></div><div class="inner2"><p class="alertText">' + msg + '</p></div></div>';
+            templateMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/obese.jpg"></div><div class="inner2" style="width:55%; height: 97px;"><p class="alertText">' + msg + '</p></div></div>';
         }
         else if(bmiValue>=29.9) {
             msg = "You are obese.";
-            templateMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/obese.jpg"></div><div class="inner2"><p class="alertText">' + msg + '</p></div></div>';
+            templateMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/obese.jpg"></div><div class="inner2" style="width:55%; height: 97px;"><p class="alertText">' + msg + '</p></div></div>';
         }
     }
     else if($scope.bmi.gender == "false") {
     if(bmiValue < 18.5) {
         msg = "You are underweight.";
-        templateMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/under.jpg"></div><div class="inner2"><p class="alertText">' + msg + '</p></div></div>';
+        templateMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/under.jpg"></div><div class="inner2" style="width:55%; height: 97px;"><p class="alertText">' + msg + '</p></div></div>';
     }
     else if(bmiValue>=18.5 && bmiValue <26.9) {
         msg = "You are normal.";
-        templateMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/fit.png"></div><div class="inner2"><p class="alertText">' + msg + '</p></div></div>';
+        templateMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/fit.png"></div><div class="inner2" style="width:55%; height: 97px;"><p class="alertText">' + msg + '</p></div></div>';
     }
     else if(bmiValue>=26.9 && bmiValue <31.9) {
         console.log("in");
         msg = "You are overweight.";
-        templateMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/obese.jpg"></div><div class="inner2"><p class="alertText">' + msg + '</p></div></div>';
+        templateMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/obese.jpg"></div><div class="inner2" style="width:55%; height: 97px;"><p class="alertText">' + msg + '</p></div></div>';
     }
     else if(bmiValue>=31.9) {
         msg = "You are obese.";
-        templateMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/obese.jpg"></div><div class="inner2"><p class="alertText">' + msg + '</p></div></div>';
+        templateMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/obese.jpg"></div><div class="inner2" style="width:55%; height: 97px;"><p class="alertText">' + msg + '</p></div></div>';
     }
 }
         bmiValue = Math.round(bmiValue*100)/100;
         $scope.bmiCalDone = true;
+        db = window.openDatabase("my.db", '1', 'my', 1024 * 1024 * 100); // browser
+        db.transaction(function (tx) {
+            tx.executeSql('SELECT * FROM BMI_HISTORY', [], function (tx, results) {
+                var len = results.rows.length, i;
+                if(len == 5) {
+                    tx.executeSql("DELETE FROM BMI_HISTORY WHERE id=?", [1]);
+                    tx.executeSql('INSERT INTO BMI_HISTORY (id, result, dateValue, uName) VALUES (?, ?, ?, ?)', [len+1, bmiValue, new Date().getDate() + "/" +  (new Date().getMonth() + 1) + "/" +  new Date().getFullYear().toString().substr(2,2), $scope.uName.val]);
+                }
+                else {
+                    console.log($scope.uName);
+                    tx.executeSql('INSERT INTO BMI_HISTORY (id, result, dateValue, uName) VALUES (?, ?, ?, ?)', [len+1, bmiValue, new Date().getDate() + "/" +  (new Date().getMonth() + 1) + "/" +  new Date().getFullYear().toString().substr(2,2), $scope.uName.val]);
+                }
+            }, null);
+        });
         var alertPopup = $ionicPopup.alert({
             title: 'Your BMI is: ' + bmiValue,
             template: templateMessage,
@@ -245,6 +282,7 @@ Controller for the discover page
               }
             ]
         });
+    }
     };
     $scope.htArr = [
         {
@@ -325,8 +363,8 @@ Controller for the discover page
         }
     ];
     $scope.bmiCal = {
-        ht: 0,
-        weight: 54
+        ht: "4.10",
+        weight: 40
     }
 })
 
@@ -337,6 +375,9 @@ Controller for the favorites page
 .controller('FavoritesCtrl', function($scope, $ionicPopup, $cordovaSocialSharing) {
     var titleDisplay = "";
     $scope.ageArr = [];
+    $scope.uName = {
+        "val":''
+    }
     $scope.displayProgress = false;
     $scope.scored = false;
     var score = 0;
@@ -344,7 +385,7 @@ Controller for the favorites page
         $scope.ageArr.push(i+20);
     }
     $scope.wtArr = [];
-    for(var i=54; i<=149; i++) {
+    for(var i=40; i<=149; i++) {
         $scope.wtArr.push(i);
     }
     $scope.gesMeaning = function() {
@@ -362,6 +403,13 @@ Controller for the favorites page
     }
 
     $scope.calculateDiabities = function(age, gender, ges, fam, bp, fit, ht, weight, ev) {
+        if($scope.uName.val=='' || $scope.uName.val == undefined) {
+            var alertPopup = $ionicPopup.alert({
+                title: 'ERROR',
+                template: 'Please enter your name.'
+            });
+        }
+        else {
         $scope.displayProgress = true;
         score = 0;
         var displayMessage = "";
@@ -402,7 +450,7 @@ Controller for the favorites page
         }
         if(ht && myWt) {
             //case1 top
-            if(ht == 0) {
+            if(ht == 0 || ht =="4.10") {
                 if(myWt>=119 && myWt<=142) {
                     score = score+1;
                 }
@@ -613,13 +661,62 @@ Controller for the favorites page
             }
         }
         if(score > 5) {
-            titleDisplay = "OOPS!!!"
-            displayMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/meter.jpg"></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' + 'On a scale of 10, your Diabetic risk score is ' + score + '. This is higher than the usual standards. Consult a doctor.' + '</p></div></div><br /><div>Please note that this is a risk assessment tool. It only provides probability of getting diabetic in near future.</div>';
+            if(score == 6){
+                titleDisplay = "OOPS!!!"
+                displayMessage = '<div class="outerAlert"><div id="el" data-value="6"><span style="transform:rotate(108deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' + 'Your Diabetes risk score is ' + score + '. You are at risk of being diagnosed with Diabetes.' + '</p></div></div>';
+            }
+            else if(score == 7){
+                titleDisplay = "OOPS!!!"
+                displayMessage = '<div class="outerAlert"><div id="el" data-value="7"><span style="transform:rotate(126deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' + 'Your Diabetes risk score is ' + score + '. You are at risk of being diagnosed with Diabetes.' + '</p></div></div>';
+            }
+            else if(score == 8){
+                titleDisplay = "OOPS!!!"
+                displayMessage = '<div class="outerAlert"><div id="el" data-value="8"><span style="transform:rotate(144deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' + 'Your Diabetes risk score is ' + score + '. You are at risk of being diagnosed with Diabetes.' + '</p></div></div>';
+            }
+            else if(score == 9){
+                titleDisplay = "OOPS!!!"
+                displayMessage = '<div class="outerAlert"><div id="el" data-value="9"><span style="transform:rotate(162deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' + 'Your Diabetes risk score is ' + score + '. You are at risk of being diagnosed with Diabetes.' + '</p></div></div>';
+            }
+            else if(score == 10){
+                titleDisplay = "OOPS!!!"
+                displayMessage = '<div class="outerAlert"><div id="el" data-value="10"><span style="transform:rotate(180deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' + 'Your Diabetes risk score is ' + score + '. You are at risk of being diagnosed with Diabetes.' + '</p></div></div>';
+            }
         }
         if(score <=5) {
-            titleDisplay = "AHOY!!!"
-            displayMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/meter.jpg"></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' +  'On a scale of 10, your Diabetic risk score is ' + score + '. Maintain a good health.' + '</p></div></div><br /><div>Please note that this is a risk assessment tool. It only provides probability of getting diabetic in near future.</div>';
+            if(score == 1) {
+                titleDisplay = "AHOY!!!"
+                displayMessage = '<div class="outerAlert"><div id="el" data-value="1"><span style="transform:rotate(18deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' +  'Your Diabetes risk score is ' + score + '. You are not at risk of being diagnosed with Diabetes.' + '</p></div></div>';
+            }
+            else if(score == 2) {
+                titleDisplay = "AHOY!!!"
+                displayMessage = '<div class="outerAlert"><div id="el" data-value="2"><span style="transform:rotate(36deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' +  'Your Diabetes risk score is ' + score + '. You are not at risk of being diagnosed with Diabetes.' + '</p></div></div>';
+            }
+            else if(score == 3) {
+                titleDisplay = "AHOY!!!"
+                displayMessage = '<div class="outerAlert"><div id="el" data-value="3"><span style="transform:rotate(54deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' +  'Your Diabetes risk score is ' + score + '. You are not at risk of being diagnosed with Diabetes.' + '</p></div></div>';
+            }
+            else if(score == 4) {
+                titleDisplay = "AHOY!!!"
+                displayMessage = '<div class="outerAlert"><div id="el" data-value="4"><span style="transform:rotate(72deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' +  'Your Diabetes risk score is ' + score + '. You are not at risk of being diagnosed with Diabetes.' + '</p></div></div>';
+            }
+            else if(score == 5) {
+                titleDisplay = "AHOY!!!"
+                displayMessage = '<div class="outerAlert"><div id="el" data-value="5"><span style="transform:rotate(90deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' +  'Your Diabetes risk score is ' + score + '. You are not at risk of being diagnosed with Diabetes.' + '</p></div></div>';
+            }
         }
+        db = window.openDatabase("my.db", '1', 'my', 1024 * 1024 * 100); // browser
+        db.transaction(function (tx) {
+            tx.executeSql('SELECT * FROM DIABETES_HISTORY', [], function (tx, results) {
+                var len = results.rows.length, i;
+                if(len == 5) {
+                    tx.executeSql("DELETE FROM DIABETES_HISTORY WHERE id=?", [1]);
+                    tx.executeSql('INSERT INTO DIABETES_HISTORY (id, result, dateValue, uName) VALUES (?, ?, ?, ?)', [len+1, score, new Date().getDate() + "/" +  (new Date().getMonth() + 1) + "/" +  new Date().getFullYear().toString().substr(2,2), $scope.uName.val]);
+                }
+                else {
+                    tx.executeSql('INSERT INTO DIABETES_HISTORY (id, result, dateValue, uName) VALUES (?, ?, ?, ?)', [len+1, score, new Date().getDate() + "/" +  (new Date().getMonth() + 1) + "/" +  new Date().getFullYear().toString().substr(2,2), $scope.uName.val]);
+                }
+            }, null);
+        });
         var alertPopup = $ionicPopup.alert({
             title: titleDisplay,
             template: displayMessage,
@@ -637,6 +734,8 @@ Controller for the favorites page
               }
             ]
         });
+    }
+        // document.getElementById("needle").style.transform = "rotate(180deg)";
     }
 
     $scope.htArr = [
@@ -724,8 +823,8 @@ Controller for the favorites page
         fam: "false",
         bp: "false",
         fit: "true",
-        ht: 0,
-        weight: 54
+        ht: "4.10",
+        weight: 40
     }
 })
 

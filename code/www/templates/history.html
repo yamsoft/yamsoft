@@ -1,0 +1,44 @@
+<ion-view title="HISTORY">
+    <ion-content has-tabs="true">
+        <div class="card">
+  <div class="item item-divider applyBold">
+    Latest BMI Results
+  </div>
+  <div class="item item-text-wrap">
+      <div class="row">
+          <div class="col col-33 darkBorder">NAME</div>
+    <div class="col col-33 darkBorder">DATE</div>
+    <div class="col col-33 darkBorder">RESULT</div>
+  </div>
+  <div class="row" ng-repeat="historyBMI in bmiHistory">
+<div class="col col-33 applyBorder">{{historyBMI.uName}}</div>
+<div class="col col-33 applyBorder">{{historyBMI.time}}</div>
+<div class="col col-33 applyBorder">{{historyBMI.bmi}}</div>
+</div>
+<div class="row" ng-if="bmiHistory.length==0">
+<div class="col col-100">Nothing to display</div>
+</div>
+  </div>
+</div>
+<div class="card">
+<div class="item item-divider applyBold">
+Latest Diabetes Results
+</div>
+<div class="item item-text-wrap">
+<div class="row">
+    <div class="col col-33 darkBorder">NAME</div>
+<div class="col col-33 darkBorder">DATE</div>
+<div class="col col-33 darkBorder">RESULT</div>
+</div>
+<div class="row" ng-repeat="historyDiabetes in diabetesHistory">
+    <div class="col col-33 applyBorder">{{historyDiabetes.uName}}</div>
+<div class="col col-33 applyBorder">{{historyDiabetes.time}}</div>
+<div class="col col-33 applyBorder">{{historyDiabetes.bmi}}</div>
+</div>
+<div class="row" ng-if="diabetesHistory.length==0">
+<div class="col col-100">Nothing to display</div>
+</div>
+</div>
+</div>
+    </ion-content>
+</ion-view>

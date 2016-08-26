@@ -16,29 +16,35 @@ angular.module('songhop', ['ionic', 'songhop.controllers', 'ngCordova'])
         if(window.StatusBar) {
             StatusBar.styleDefault();
         }
-
-
     });
 })
-.run( function($rootScope, $location) {
+.run( function($rootScope, $location, $ionicPlatform, $cordovaSQLite) {
     $rootScope.alertOnce = 0;
-   $rootScope.$watch(function() {
-      return $location.path();
+    $rootScope.$watch(function() {
+        return $location.path();
     },
     function(a){
-      // show loading div, etc...
-      if($rootScope.adishVar) {
-          $rootScope.adishVar.pause();
-      }
-      if(a.indexOf("discover")!=-1) {
-          document.getElementById("tcID").style.display = "block";
-          document.getElementById("feebackID").style.display = "block";
-      }
-      else {
-          document.getElementById("tcID").style.display = "none";
-          document.getElementById("feebackID").style.display = "none";
-      }
+        if($rootScope.adishVar) {
+            $rootScope.adishVar.pause();
+        }
+        if(a.indexOf("discover")!=-1) {
+            document.getElementById("tcID").style.display = "block";
+            document.getElementById("feebackID").style.display = "block";
+        }
+        else {
+            document.getElementById("tcID").style.display = "none";
+            document.getElementById("feebackID").style.display = "none";
+        }
     });
+        db = window.openDatabase("my.db", '1', 'my', 1024 * 1024 * 100); // browser
+        db.transaction(function (tx) {
+            tx.executeSql('CREATE TABLE IF NOT EXISTS BMI_HISTORY (id unique, dateValue, uName, result)');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS DIABETES_HISTORY (id unique, dateValue, uName, result)');
+            // tx.executeSql('INSERT INTO BMI_HISTORY (id, result) VALUES (1, "foobar")');
+            // tx.executeSql('INSERT INTO BMI_HISTORY (id, result) VALUES (2, "logmsg")');
+            // tx.executeSql('INSERT INTO DIABETES_HISTORY (id, result) VALUES (1, "foobar2")');
+            // tx.executeSql('INSERT INTO DIABETES_HISTORY (id, result) VALUES (2, "logmsg2")');
+        });
 })
 
 
@@ -79,6 +85,11 @@ angular.module('songhop', ['ionic', 'songhop.controllers', 'ngCordova'])
         url: '/bmi',
         templateUrl: 'templates/bmi.html',
         controller: 'BmiCtrl'
+    })
+    .state('history', {
+        url: '/history',
+        templateUrl: 'templates/history.html',
+        controller: 'HistoryCtrl'
     })
     .state('sleepWell', {
         url: '/sleepWell',
