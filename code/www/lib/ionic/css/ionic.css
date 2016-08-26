@@ -2940,7 +2940,7 @@ a.subdued {
 .bar-stable .button {
   border-color: #b2b2b2;
   background-color: #f8f8f8;
-  color: #444; }
+  color: white; }
   .bar-stable .button:hover {
     color: #444;
     text-decoration: none; }
@@ -2952,7 +2952,7 @@ a.subdued {
     border-color: transparent;
     background: none;
     box-shadow: none;
-    color: #444;
+    color: #db001f;
     font-size: 17px; }
   .bar-stable .button.button-icon {
     border-color: transparent;
