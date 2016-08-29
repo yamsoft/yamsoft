@@ -4,7 +4,7 @@ angular.module('songhop.controllers', ['ionic', 'songhop.services'])
 /*
 Controller for the discover page
 */
-.controller('AppCtrl', function($scope, $location, $ionicPopup) {
+.controller('AppCtrl', function($scope, $location, $ionicPopup, $cordovaSocialSharing) {
     $scope.nextDiabetes = function(event) {
         event.preventDefault();
         $location.path('app/favorites');
@@ -27,7 +27,11 @@ Controller for the discover page
             title: 'LEGAL',
             scope: $scope,
             template: '<h4 ng-click="privacyFunction()">Privacy Policy</h4><hr /><h4 ng-click="tcFunction()" style="padding-top:10px;">Terms of Service</h4>',
-            buttons: []
+            buttons: [
+                { text: 'CANCEL',
+                  type: 'button-positive',
+                }
+            ]
         });
     }
     $scope.tcFunction = function() {
@@ -38,6 +42,10 @@ Controller for the discover page
         alertPopup.close();
         $location.path("app/privacy");
     }
+    $scope.sendFeedback = function () {
+    $cordovaSocialSharing
+            .shareViaEmail('', 'sugarT application feedback', 'yamsoftcore@gmail.com');
+};
 })
 .controller('DiscoverCtrl', function($scope, $location, $rootScope, $ionicPopup, $cordovaSocialSharing) {
     var alertPopup;
@@ -60,11 +68,6 @@ Controller for the discover page
         event.preventDefault();
         networkInfo();
     };
-
-    $rootScope.sendFeedback = function () {
-    $cordovaSocialSharing
-            .shareViaEmail('', 'sugarT application feedback', 'yamsoftcore@gmail.com');
-};
 })
 .controller('sleepWellCtrl', function($scope, $q, MediaSrv, $rootScope, $ionicPopup) {
     if($rootScope.alertOnce==0) {

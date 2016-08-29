@@ -2942,7 +2942,7 @@ a.subdued {
   background-color: #f8f8f8;
   color: white; }
   .bar-stable .button:hover {
-    color: #444;
+    color: white;
     text-decoration: none; }
   .bar-stable .button.active, .bar-stable .button.activated {
     border-color: #a2a2a2;
