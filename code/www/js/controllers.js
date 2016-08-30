@@ -163,7 +163,7 @@ Controller for the discover page
         $cordovaSocialSharing.share(myBMI, myMsg, "www/img/icon.png", "http://play.google.com/store/apps/details?id=com.ionicframework.sugart07");
     }
     $scope.diabRedirect = function() {
-        $location.path('favorites');
+        $location.path('app/favorites');
     }
     $scope.calculateBMI = function(height, weight) {
         console.log($scope.uName)
