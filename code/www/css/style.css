@@ -261,3 +261,116 @@ strong {
 .setMarginLess {
     margin-left: -2%;
 }
+
+.wrap1 {
+  background: #ebebeb;
+  margin: auto;
+  width: 400px; height: 48px;
+  position: absolute;
+  top: 350px; left: 0; bottom: 0; right: 0;
+}
+
+a {
+  text-decoration: none;
+}
+.audio {
+  display:inline-block;
+  //min-width: 200px;
+}
+.play {
+  display:inline-block;
+  background: #bccae5;
+  color: #fff;
+  font-size: 16px;
+  line-height: 0;
+  padding: 24px 16px;
+}
+.audio:hover .play {
+  background: #6d8ac4;
+}
+
+.audio:hover .duration,
+.playlist:hover, .download:hover {
+  color: #bccae5;
+}
+.action {
+  margin-left: 10px;
+}
+.action, .duration, .playlist, .download {
+  color: #6d8ac4;
+  display:inline-block;
+  font-family: Arial;
+  font-weight: bold;
+}
+
+.duration { color:#ebebeb; font-weight: normal; }
+.audio:hover .duration {
+  display: inline-block;
+}
+
+/*
+
+Controls
+
+*/
+
+.controls {
+  display: inline-block;
+  float: right;
+  overflow: hidden;
+}
+
+/* 1.Add delay before both mouseOver/Out events */
+
+.controls .playlist, .controls .download
+{
+  -moz-transition: all .25s;
+  -webkit-transition: all .25s;
+  transition: all .25s;
+
+  -moz-transition-delay: 1s;
+  -webkit-transition-delay: 1s;
+  transition-delay: 1s;
+}
+.controls:hover .playlist, .controls:hover .download{}
+
+
+/* 3.Add delay just before mouseOver event */
+
+.audio .play, .audio .duration
+{
+  -moz-transition: all .25s;
+  -webkit-transition: all .25s;
+  transition: all .25s;
+}
+.audio .play:hover, .audio .duration:hover
+{
+  //-moz-transition-delay: 0.75s;
+  //-webkit-transition-delay: 0.75s;
+  //transition-delay: 0.75s;
+}
+
+
+/*=========================*/
+.controls .playlist, .controls .download
+{
+  /* properties */
+  width:48px;
+  height:48px;
+
+  color:#ebebeb;
+  overflow: hidden;
+  display:inline-block;
+}
+.controls:hover .playlist
+{
+  /* New Properties */
+  color: #6d8ac4;
+  width:110px;
+}
+.controls:hover .download
+{
+  /* New Properties */
+  color: #6d8ac4;
+  width:130px;
+}

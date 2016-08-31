@@ -94,18 +94,22 @@ $scope.sendFeedback = function () {
             template: '<span  style="font-weight:500;">Sleep Well provides a scientifically proven soothing music to help you sleep better. Press "Good Night" button to use this feature. Please make sure that there is no noise in the background to get the best out of this feature. You may use earphones. Also have some patience while listening to the music.</span>'
         });
     }
-    //$rootScope.adishVar;
     $scope.play = function() {
-        document.getElementById("gnButton").disabled=true;
+        console.log(document.getElementById("gnButton").innerHTML);
+        if(document.getElementById("gnButton").innerHTML == "►") {
         MediaSrv.loadMedia('sound/song.mp3').then(function(media){
             $rootScope.adishVar = media;
             $rootScope.adishVar.play();
         });
+        document.getElementById("gnButton").innerHTML = "&#9612;&#9612;";
+        }
+        else {
+                $rootScope.adishVar.pause();
+                document.getElementById("gnButton").innerHTML = "►";
+        }
     };
-    $scope.pause = function() {
-        document.getElementById("gnButton").disabled=false;
-        $rootScope.adishVar.pause();
-    };
+
+
 })
 .controller('HistoryCtrl', function($scope) {
     $scope.bmiHistory = [];
