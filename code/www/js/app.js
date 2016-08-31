@@ -12,6 +12,14 @@ angular.module('songhop', ['ionic', 'songhop.controllers', 'ngCordova'])
 })
 .run( function($rootScope, $location, $ionicPlatform, $cordovaSQLite) {
     $rootScope.alertOnce = 0;
+    $rootScope.$watch(function() {
+        return $location.path();
+    },
+    function(a){
+        if($rootScope.adishVar) {
+            $rootScope.adishVar.pause();
+        }
+    });
         db = window.openDatabase("my.db", '1', 'my', 1024 * 1024 * 100); // browser
         db.transaction(function (tx) {
             tx.executeSql('CREATE TABLE IF NOT EXISTS BMI_HISTORY (id unique, dateValue, uName, result)');
