@@ -1,0 +1,14 @@
+<ion-view title="ARTICLES">
+    <ion-content has-tabs="true">
+        <div class="card" id="{{singleResponse.Id}}" ng-click="viewArticle(singleResponse.Id)" ng-repeat="singleResponse in responseComplete">
+            <div class="item item-avatar">
+                <h2>{{singleResponse.Title}}</h2>
+            </div>
+
+            <div class="item item-body">
+                <img class="full-image" ng-src="{{singleResponse.ImageUrl}}">
+
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
