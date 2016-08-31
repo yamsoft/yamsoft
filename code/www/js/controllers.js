@@ -51,9 +51,8 @@ $scope.sendFeedback = function () {
     .shareViaEmail('', 'sugarT application feedback', 'yamsoftcore@gmail.com');
 };
 })
-.controller('articlesCtrl', function($scope, $http) {
+.controller('articlesCtrl', function($scope, $http, $location) {
     $scope.fetchArticles = function() {
-        console.log("CHALL JAA");
         var url = "https://healthfinder.gov/developer/MyHFSearch.json?api_key=dlsuoidgstljdgmb&who=someone&age=35&gender=female&pregnant=0";
         $http.get(url).success( function(response) {
             $scope.responseComplete = response.Result.Topics;
@@ -61,8 +60,22 @@ $scope.sendFeedback = function () {
     }
     $scope.fetchArticles();
     $scope.viewArticle = function(event) {
-        console.log("CLICKED", event)
+        console.log("CLICKED", event);
+        $location.path('app/articles:' + event);
     }
+})
+.controller('articlesIndividualCtrl', function($scope, $http, $location) {
+    var aa = $location.$$url.split(":")[1]
+    var url = "https://healthfinder.gov/developer/MyHFSearch.json?api_key=dlsuoidgstljdgmb&who=someone&age=35&gender=female&pregnant=0";
+    $http.get(url).success( function(response) {
+        console.log(response);
+        for(var i=0; i<response.Result.Topics.length; i++) {
+            if(response.Result.Topics[i].Id==aa) {
+                $scope.responseIndividual = response.Result.Topics[i];
+                break;
+            }
+        }
+    });
 })
 .controller('DiscoverCtrl', function($scope, $location) {
     var alertPopup;

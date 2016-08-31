@@ -106,6 +106,15 @@ angular.module('songhop', ['ionic', 'songhop.controllers', 'ngCordova'])
         }
       }
     })
+    .state('app.articles:id', {
+      url: "/articles:id",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/articlesIndividual.html",
+          controller: 'articlesIndividualCtrl'
+        }
+      }
+    })
 
     .state('app.favorites', {
       url: "/favorites",
