@@ -74,9 +74,23 @@ Controller for the discover page
         for(var i=0; i<response.Result.Topics.length; i++) {
             if(response.Result.Topics[i].Id==aa) {
                 $scope.responseIndividual = response.Result.Topics[i];
+                console.log(response.Result.Topics[i]);
                 break;
             }
         }
+        setTimeout(function() {
+            for(var j=0; j< $scope.responseIndividual.Sections.length; j++) {
+            var div = document.createElement('div');
+
+            div.className = 'ainveyi';
+
+            div.innerHTML = $scope.responseIndividual.Sections[i].Content;
+            var idValue = 'yes'+j;
+            console.log(idValue);
+
+            document.getElementById(idValue).appendChild(div);
+        }
+    },0);
     });
 })
 .controller('DiscoverCtrl', function($scope, $location) {
