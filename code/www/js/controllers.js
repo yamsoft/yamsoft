@@ -52,7 +52,7 @@ Controller for the discover page
 .controller('articlesCtrl', function($scope, $http, $location) {
     $scope.fetchArticles = function() {
         $scope.waiting = true;
-        setTimeout(function(){ $scope.waiting = false; }, 8000);
+        setTimeout(function(){ document.getElementById("gifDiv").style.display = "none"; },11000);
         var url = "https://healthfinder.gov/developer/MyHFSearch.json?api_key=dlsuoidgstljdgmb&who=someone&age=35&gender=female&pregnant=0";
         $http.get(url).success( function(response) {
             $scope.waiting = false;
@@ -61,17 +61,15 @@ Controller for the discover page
     }
     $scope.fetchArticles();
     $scope.viewArticle = function(event) {
-        console.log("CLICKED", event);
         $location.path('app/articles:' + event);
     }
 })
 .controller('articlesIndividualCtrl', function($scope, $http, $location) {
     $scope.waiting = true;
     var aa = $location.$$url.split(":")[1];
-    setTimeout(function(){ $scope.waiting = false; }, 8000);
+    setTimeout(function(){ document.getElementById("gifDiv").style.display = "none"; },11000);
     var url = "https://healthfinder.gov/developer/MyHFSearch.json?api_key=dlsuoidgstljdgmb&who=someone&age=35&gender=female&pregnant=0";
     $http.get(url).success( function(response) {
-        console.log(response);
         $scope.waiting = false;
         for(var i=0; i<response.Result.Topics.length; i++) {
             if(response.Result.Topics[i].Id==aa) {
@@ -209,7 +207,6 @@ Controller for the discover page
                 $scope.bmiHistory[i].bmi = results.rows[i].result;
                 $scope.bmiHistory[i].uName = results.rows[i].uName;
             }
-            console.log(results);
         }, null);
     });
     db.transaction(function (tx) {
@@ -279,7 +276,6 @@ Controller for the discover page
     };
     $scope.shareAnywhere = function() {
         var myBMI = "Just calculated my BMI using this super awesome app!! My BMI is " + bmiValue +  "Try it now!!";
-        console.log(myBMI);
         var myMsg = msg;
         $cordovaSocialSharing.share(myBMI, myMsg, "www/img/icon.png", "http://play.google.com/store/apps/details?id=com.ionicframework.sugart07");
     }
@@ -287,7 +283,6 @@ Controller for the discover page
         $location.path('app/favorites');
     }
     $scope.calculateBMI = function(height, weight) {
-        console.log($scope.uName)
         if($scope.uName.val == '' || $scope.uName.val==undefined) {
             var alertPopup23 = $ionicPopup.alert({
                 title: 'ERROR',
@@ -353,7 +348,6 @@ Controller for the discover page
                 heightInMeters = 1.930;
             }
             bmiValue = weight / (heightInMeters * heightInMeters);
-            console.log(bmiValue);
             if($scope.bmi.gender == "true") {
                 if(bmiValue < 18.5) {
                     msg = "You are underweight.";
@@ -364,7 +358,6 @@ Controller for the discover page
                     templateMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/fit.png"></div><div class="inner2" style="width:55%; height: 97px;"><p class="alertText">' + msg + '</p></div></div>';
                 }
                 else if(bmiValue>=24.9 && bmiValue <29.9) {
-                    console.log("in");
                     msg = "You are overweight.";
                     templateMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/obese.jpg"></div><div class="inner2" style="width:55%; height: 97px;"><p class="alertText">' + msg + '</p></div></div>';
                 }
@@ -383,7 +376,6 @@ Controller for the discover page
                     templateMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/fit.png"></div><div class="inner2" style="width:55%; height: 97px;"><p class="alertText">' + msg + '</p></div></div>';
                 }
                 else if(bmiValue>=26.9 && bmiValue <31.9) {
-                    console.log("in");
                     msg = "You are overweight.";
                     templateMessage = '<div class="outerAlert"><div class="inner1"><img width="100%" height="100%" src="img/obese.jpg"></div><div class="inner2" style="width:55%; height: 97px;"><p class="alertText">' + msg + '</p></div></div>';
                 }
@@ -403,7 +395,6 @@ Controller for the discover page
                         tx.executeSql('INSERT INTO BMI_HISTORY (id, result, dateValue, uName) VALUES (?, ?, ?, ?)', [len+1, bmiValue, new Date().getDate() + "/" +  (new Date().getMonth() + 1) + "/" +  new Date().getFullYear().toString().substr(2,2), $scope.uName.val]);
                     }
                     else {
-                        console.log($scope.uName);
                         tx.executeSql('INSERT INTO BMI_HISTORY (id, result, dateValue, uName) VALUES (?, ?, ?, ?)', [len+1, bmiValue, new Date().getDate() + "/" +  (new Date().getMonth() + 1) + "/" +  new Date().getFullYear().toString().substr(2,2), $scope.uName.val]);
                     }
                 }, null);
@@ -540,7 +531,6 @@ Controller for the favorites page
 
     $scope.shareAnywhere = function() {
         var myBMI = "Just calculated my Diabetic risk score using this super awesome app!! Try it now!!"
-        console.log(myBMI);
         var myMsg = "Diabetes risk test.";
         $cordovaSocialSharing.share(myBMI, myMsg, "www/img/icon.png", "http://play.google.com/store/apps/details?id=com.ionicframework.sugart07");
     }

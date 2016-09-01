@@ -1,6 +1,6 @@
 <ion-view title="ARTICLES">
     <ion-content has-tabs="true">
-        <div class="gifClass" ng-if="waiting">
+        <div class="gifClass" ng-show="waiting" id="gifDiv">
         </div>
         <div class="card" id="{{singleResponse.Id}}" ng-click="viewArticle(singleResponse.Id)" ng-repeat="singleResponse in responseComplete">
             <div class="item item-avatar">

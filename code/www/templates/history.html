@@ -13,12 +13,14 @@
     <div class="col col-33 darkBorder">DATE</div>
     <div class="col col-33 darkBorder">RESULT</div>
   </div>
-  <div class="row" id="bmiHistoryDiv" ng-repeat="historyBMI in bmiHistory">
+  <div id="bmiHistoryDiv">
+  <div class="row" ng-repeat="historyBMI in bmiHistory">
 <div class="col col-33 applyBorder">{{historyBMI.uName}}</div>
 <div class="col col-33 applyBorder">{{historyBMI.time}}</div>
 <div class="col col-33 applyBorder">{{historyBMI.bmi}}</div>
 </div>
-<div class="row" ng-if="bmiHistory.length==0">
+</div>
+<div class="row" ng-show="bmiHistory.length==0">
 <div class="col col-100">Nothing to display</div>
 </div>
   </div>
@@ -36,12 +38,14 @@
 <div class="col col-33 darkBorder">DATE</div>
 <div class="col col-33 darkBorder">RESULT</div>
 </div>
-<div class="row" id="diabHistoryDiv" ng-repeat="historyDiabetes in diabetesHistory">
+<div id="diabHistoryDiv">
+<div class="row" ng-repeat="historyDiabetes in diabetesHistory">
     <div class="col col-33 applyBorder">{{historyDiabetes.uName}}</div>
 <div class="col col-33 applyBorder">{{historyDiabetes.time}}</div>
 <div class="col col-33 applyBorder">{{historyDiabetes.bmi}}</div>
 </div>
-<div class="row" ng-if="diabetesHistory.length==0">
+</div>
+<div class="row" ng-show="diabetesHistory.length==0">
 <div class="col col-100">Nothing to display</div>
 </div>
 </div>
