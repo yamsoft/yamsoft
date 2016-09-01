@@ -32,22 +32,22 @@ Controller for the discover page
             scope: $scope,
             template: '<h4 ng-click="privacyFunction()">Privacy Policy</h4><hr /><h4 ng-click="tcFunction()" style="padding-top:10px;">Terms of Service</h4>',
             buttons: [
-        ]
-    });
-    IonicClosePopupService.register(alertPopup);
-}
-$scope.tcFunction = function() {
-    alertPopup.close();
-    $location.path("app/terms");
-}
-$scope.privacyFunction = function() {
-    alertPopup.close();
-    $location.path("app/privacy");
-}
-$scope.sendFeedback = function () {
-    $cordovaSocialSharing
-    .shareViaEmail('', 'sugarT application feedback', 'yamsoftcore@gmail.com');
-};
+            ]
+        });
+        IonicClosePopupService.register(alertPopup);
+    }
+    $scope.tcFunction = function() {
+        alertPopup.close();
+        $location.path("app/terms");
+    }
+    $scope.privacyFunction = function() {
+        alertPopup.close();
+        $location.path("app/privacy");
+    }
+    $scope.sendFeedback = function () {
+        $cordovaSocialSharing
+        .shareViaEmail('', 'sugarT application feedback', 'yamsoftcore@gmail.com');
+    };
 })
 .controller('articlesCtrl', function($scope, $http, $location) {
     $scope.fetchArticles = function() {
@@ -104,6 +104,54 @@ $scope.sendFeedback = function () {
     };
 })
 .controller('sleepWellCtrl', function($scope, $q, MediaSrv, $rootScope, $ionicPopup) {
+    $(document).ready(function() {
+        $('#range-val').on("change mousemove", function() {
+            //Lets change it in time mode
+            var original_time = $(this).val();
+            var new_time = formatSeconds(original_time);
+            $("#time p").text(new_time);
+        });
+        /*
+        ANOTHER GREAT WORK BY SOMEONE...
+        http://jsfiddle.net/CYSeY/4/
+        i just modify it
+        */
+        var r = document.getElementById('range-val');
+        var max = r.getAttribute('max');
+        var min = r.getAttribute('min');
+        var w = r.clientWidth;
+        //w += r.offsetLeft;
+        var isDragging = false;
+
+        var moveTip = (function(e) {
+            if (isDragging) {
+                var posPerc = (r.value / max) * 100;
+                var pixPos = (posPerc / 100) * w - 40;
+                /* pixPos += r.offsetLeft;*/
+
+                document.getElementById('tip').style.display = 'block';
+                document.getElementById('tip').style.left = pixPos + 'px';
+            }
+        });
+
+        $("#range-val").mousemove(function() {
+            isDragging = true;
+            var range_val = document.getElementById("range-val").value;
+            document.getElementById('tip').innerHTML = formatSeconds(range_val);
+            r.addEventListener('mousemove', moveTip, false);
+        });
+
+        $("body").mouseup(function(e) {
+            isDragging = false;
+            r.removeEventListener('mousemove', moveTip);
+            document.getElementById('tip').style.display = 'none';
+        });
+    });
+    function formatSeconds(seconds) {
+        var date = new Date(1970, 0, 1);
+        date.setSeconds(seconds);
+        return date.toTimeString().replace(/.*(\d{2}:\d{2}).*/, "$1");
+    }
     if($rootScope.alertOnce==0) {
         $rootScope.alertOnce = 1;
         $scope.alertPopup1 = $ionicPopup.alert({
@@ -112,21 +160,11 @@ $scope.sendFeedback = function () {
         });
     }
     $scope.play = function() {
-        console.log(document.getElementById("gnButton").innerHTML);
-        if(document.getElementById("gnButton").innerHTML == "►") {
         MediaSrv.loadMedia('sound/song.mp3').then(function(media){
             $rootScope.adishVar = media;
             $rootScope.adishVar.play();
         });
-        document.getElementById("gnButton").innerHTML = "&#9612;&#9612;";
-        }
-        else {
-                $rootScope.adishVar.pause();
-                document.getElementById("gnButton").innerHTML = "►";
-        }
     };
-
-
 })
 .controller('HistoryCtrl', function($scope) {
     $scope.bmiHistory = [];
@@ -166,20 +204,20 @@ $scope.sendFeedback = function () {
         if(val==0) {
             db.transaction(function (tx) {
                 tx.executeSql('DELETE FROM BMI_HISTORY', [], function (tx, results) {
-                        $scope.bmiHistory = [];
-                        document.getElementById("bmiHistoryDiv").style.display= "none";
-                    });
-                }, null);
-            }
-            else {
-                db.transaction(function (tx) {
-                    tx.executeSql('DELETE FROM DIABETES_HISTORY', [], function (tx, results) {
-                            $scope.diabetesHistory = [];
-                            document.getElementById("diabHistoryDiv").style.display= "none";
-                        });
-                    }, null);
-            }
+                    $scope.bmiHistory = [];
+                    document.getElementById("bmiHistoryDiv").style.display= "none";
+                });
+            }, null);
         }
+        else {
+            db.transaction(function (tx) {
+                tx.executeSql('DELETE FROM DIABETES_HISTORY', [], function (tx, results) {
+                    $scope.diabetesHistory = [];
+                    document.getElementById("diabHistoryDiv").style.display= "none";
+                });
+            }, null);
+        }
+    }
 })
 .controller('termsCtrl', function($scope, $location) {
     $scope.goBack = function(event) {

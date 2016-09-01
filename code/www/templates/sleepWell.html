@@ -1,13 +1,23 @@
 <ion-view title="SLEEP WELL">
     <ion-content has-tabs="true">
-        <div class="wrap1">
-<div href="" class="controls">
-</div>
+        <div id="overlay"></div>
+        <div id="content">
+            <div id="range">
+                <input type="range" id="range-val" value="0" min="0" max="1000">
+                <div id='tip'>Some tip</div>
+            </div>
+            <div id="time">
+                <p>0:00</p>
+            </div>
+            <div id="buttons">
+                <!-- <i class="fa fa-step-backward fa-3x"></i> -->
+                <i id="gnButton" class="ion-play" ng-click="play()"></i>
+                <!-- <i class="fa fa-step-forward fa-3x"></i> -->
+            </div>
+            <div id="total-time">
+                <p>2:23</p>
+            </div>
+        </div>
 
-  <a href="" class="audio">
-  <span id="gnButton" class="play" ng-click="play()">&#9658;</span>
-  <span class="action">listen</span>
-</a>
-</div>
     </ion-content>
 </ion-view>
