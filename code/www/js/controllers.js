@@ -79,16 +79,13 @@ Controller for the discover page
         }
         setTimeout(function() {
             for(var j=0; j< $scope.responseIndividual.Sections.length; j++) {
-            var div = document.createElement('div');
-
-            div.className = 'ainveyi';
-
-            div.innerHTML = $scope.responseIndividual.Sections[i].Content;
-            var idValue = 'yes'+j;
-
-            document.getElementById(idValue).appendChild(div);
-        }
-    },0);
+                var div = document.createElement('div');
+                div.className = 'ainveyi';
+                div.innerHTML = $scope.responseIndividual.Sections[j].Content;
+                var idValue = 'yes'+j;
+                document.getElementById(idValue).appendChild(div);
+            }
+        },500);
     });
 })
 .controller('DiscoverCtrl', function($scope, $location) {
@@ -175,32 +172,32 @@ Controller for the discover page
     $scope.play = function() {
         if(document.getElementById("gnButton").innerHTML == "►") {
             if(!$rootScope.adishVar) {
-        MediaSrv.loadMedia('sound/song.mp3').then(function(media){
-            $rootScope.adishVar = media;
-            $rootScope.adishVar.play();
-            document.getElementById("gnButton").innerHTML = "&#9612;&#9612;"
-            $rootScope.intervalValue = setInterval(function() {
-                document.getElementById("range-val").value = parseInt(document.getElementById("range-val").value)+1;
-                var currentValue= document.getElementById("range-val").value;
-                document.getElementById("runningTime").innerHTML = Math.floor(parseInt(currentValue)/60) + ":" + parseInt(currentValue)%60;
-            },1000)
-        });
-    }
-    else {
-        $rootScope.adishVar.play();
-        document.getElementById("gnButton").innerHTML = "&#9612;&#9612;"
-        $rootScope.intervalValue = setInterval(function() {
-            document.getElementById("range-val").value = parseInt(document.getElementById("range-val").value)+1;
-            var currentValue= document.getElementById("range-val").value;
-            document.getElementById("runningTime").innerHTML = Math.floor(parseInt(currentValue)/60) + ":" + parseInt(currentValue)%60;
-        },1000);
-    }
-    }
-    else {
-        $rootScope.adishVar.pause();
-        document.getElementById("gnButton").innerHTML = "►";
-        clearInterval($rootScope.intervalValue);
-    }
+                MediaSrv.loadMedia('sound/song.mp3').then(function(media){
+                    $rootScope.adishVar = media;
+                    $rootScope.adishVar.play();
+                    document.getElementById("gnButton").innerHTML = "&#9612;&#9612;"
+                    $rootScope.intervalValue = setInterval(function() {
+                        document.getElementById("range-val").value = parseInt(document.getElementById("range-val").value)+1;
+                        var currentValue= document.getElementById("range-val").value;
+                        document.getElementById("runningTime").innerHTML = Math.floor(parseInt(currentValue)/60) + ":" + parseInt(currentValue)%60;
+                    },1000)
+                });
+            }
+            else {
+                $rootScope.adishVar.play();
+                document.getElementById("gnButton").innerHTML = "&#9612;&#9612;"
+                $rootScope.intervalValue = setInterval(function() {
+                    document.getElementById("range-val").value = parseInt(document.getElementById("range-val").value)+1;
+                    var currentValue= document.getElementById("range-val").value;
+                    document.getElementById("runningTime").innerHTML = Math.floor(parseInt(currentValue)/60) + ":" + parseInt(currentValue)%60;
+                },1000);
+            }
+        }
+        else {
+            $rootScope.adishVar.pause();
+            document.getElementById("gnButton").innerHTML = "►";
+            clearInterval($rootScope.intervalValue);
+        }
     };
 })
 .controller('HistoryCtrl', function($scope) {
