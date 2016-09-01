@@ -409,7 +409,7 @@ Controller for the discover page
                 }, null);
             });
             var alertPopup = $ionicPopup.alert({
-                title: 'Your BMI is: ' + bmiValue,
+                title: 'Hi ' + $scope.uName.val + ', your BMI is: ' + bmiValue,
                 template: templateMessage,
                 scope: $scope,
                 buttons: [
@@ -805,45 +805,49 @@ Controller for the favorites page
             }
             if(score > 5) {
                 if(score == 6){
-                    titleDisplay = "OOPS!!!"
+                    titleDisplay = "Hi " + $scope.uName.val + "!!"
                     displayMessage = '<div class="outerAlert"><div id="el" data-value="6"><span style="transform:rotate(108deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' + 'Your Diabetes risk score is ' + score + '. You are at risk of being diagnosed with Diabetes.' + '</p></div></div>';
                 }
                 else if(score == 7){
-                    titleDisplay = "OOPS!!!"
+                    titleDisplay =  "Hi " + $scope.uName.val + "!!"
                     displayMessage = '<div class="outerAlert"><div id="el" data-value="7"><span style="transform:rotate(126deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' + 'Your Diabetes risk score is ' + score + '. You are at risk of being diagnosed with Diabetes.' + '</p></div></div>';
                 }
                 else if(score == 8){
-                    titleDisplay = "OOPS!!!"
+                    titleDisplay =  "Hi " + $scope.uName.val + "!!"
                     displayMessage = '<div class="outerAlert"><div id="el" data-value="8"><span style="transform:rotate(144deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' + 'Your Diabetes risk score is ' + score + '. You are at risk of being diagnosed with Diabetes.' + '</p></div></div>';
                 }
                 else if(score == 9){
-                    titleDisplay = "OOPS!!!"
+                    titleDisplay =  "Hi " + $scope.uName.val + "!!"
                     displayMessage = '<div class="outerAlert"><div id="el" data-value="9"><span style="transform:rotate(162deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' + 'Your Diabetes risk score is ' + score + '. You are at risk of being diagnosed with Diabetes.' + '</p></div></div>';
                 }
                 else if(score == 10){
-                    titleDisplay = "OOPS!!!"
+                    titleDisplay =  "Hi " + $scope.uName.val + "!!"
                     displayMessage = '<div class="outerAlert"><div id="el" data-value="10"><span style="transform:rotate(180deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' + 'Your Diabetes risk score is ' + score + '. You are at risk of being diagnosed with Diabetes.' + '</p></div></div>';
                 }
             }
             if(score <=5) {
-                if(score == 1) {
-                    titleDisplay = "AHOY!!!"
+                if(score == 0) {
+                    titleDisplay =  "Hi " + $scope.uName.val + "!!"
+                    displayMessage = '<div class="outerAlert"><div id="el" data-value="0"><span style="transform:rotate(0deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' +  'Your Diabetes risk score is ' + score + '. You are not at risk of being diagnosed with Diabetes.' + '</p></div></div>';
+                }
+                else if(score == 1) {
+                    titleDisplay =  "Hi " + $scope.uName.val + "!!"
                     displayMessage = '<div class="outerAlert"><div id="el" data-value="1"><span style="transform:rotate(18deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' +  'Your Diabetes risk score is ' + score + '. You are not at risk of being diagnosed with Diabetes.' + '</p></div></div>';
                 }
                 else if(score == 2) {
-                    titleDisplay = "AHOY!!!"
+                    titleDisplay =  "Hi " + $scope.uName.val + "!!"
                     displayMessage = '<div class="outerAlert"><div id="el" data-value="2"><span style="transform:rotate(36deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' +  'Your Diabetes risk score is ' + score + '. You are not at risk of being diagnosed with Diabetes.' + '</p></div></div>';
                 }
                 else if(score == 3) {
-                    titleDisplay = "AHOY!!!"
+                    titleDisplay =  "Hi " + $scope.uName.val + "!!"
                     displayMessage = '<div class="outerAlert"><div id="el" data-value="3"><span style="transform:rotate(54deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' +  'Your Diabetes risk score is ' + score + '. You are not at risk of being diagnosed with Diabetes.' + '</p></div></div>';
                 }
                 else if(score == 4) {
-                    titleDisplay = "AHOY!!!"
+                    titleDisplay =  "Hi " + $scope.uName.val + "!!"
                     displayMessage = '<div class="outerAlert"><div id="el" data-value="4"><span style="transform:rotate(72deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' +  'Your Diabetes risk score is ' + score + '. You are not at risk of being diagnosed with Diabetes.' + '</p></div></div>';
                 }
                 else if(score == 5) {
-                    titleDisplay = "AHOY!!!"
+                    titleDisplay =  "Hi " + $scope.uName.val + "!!"
                     displayMessage = '<div class="outerAlert"><div id="el" data-value="5"><span style="transform:rotate(90deg)" id="needle"></span></div><div class="inner2" style="vertical-align: top;"><p class="alertText">' +  'Your Diabetes risk score is ' + score + '. You are not at risk of being diagnosed with Diabetes.' + '</p></div></div>';
                 }
             }
