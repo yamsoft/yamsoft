@@ -374,3 +374,10 @@ Controls
   color: #6d8ac4;
   width:130px;
 }
+.gifClass {
+    background: url("../img/loading-dribbble.gif");
+width: 100%;
+background-position-x: 369px;
+background-position-y: 216px;
+height: 127px;
+}

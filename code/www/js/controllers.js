@@ -51,8 +51,11 @@ $scope.sendFeedback = function () {
 })
 .controller('articlesCtrl', function($scope, $http, $location) {
     $scope.fetchArticles = function() {
+        $scope.waiting = true;
+        setTimeout(function(){ $scope.waiting = false; }, 8000);
         var url = "https://healthfinder.gov/developer/MyHFSearch.json?api_key=dlsuoidgstljdgmb&who=someone&age=35&gender=female&pregnant=0";
         $http.get(url).success( function(response) {
+            $scope.waiting = false;
             $scope.responseComplete = response.Result.Topics;
         });
     }
@@ -63,10 +66,13 @@ $scope.sendFeedback = function () {
     }
 })
 .controller('articlesIndividualCtrl', function($scope, $http, $location) {
-    var aa = $location.$$url.split(":")[1]
+    $scope.waiting = true;
+    var aa = $location.$$url.split(":")[1];
+    setTimeout(function(){ $scope.waiting = false; }, 8000);
     var url = "https://healthfinder.gov/developer/MyHFSearch.json?api_key=dlsuoidgstljdgmb&who=someone&age=35&gender=female&pregnant=0";
     $http.get(url).success( function(response) {
         console.log(response);
+        $scope.waiting = false;
         for(var i=0; i<response.Result.Topics.length; i++) {
             if(response.Result.Topics[i].Id==aa) {
                 $scope.responseIndividual = response.Result.Topics[i];
