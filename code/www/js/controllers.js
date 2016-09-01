@@ -163,6 +163,11 @@ Controller for the discover page
         MediaSrv.loadMedia('sound/song.mp3').then(function(media){
             $rootScope.adishVar = media;
             $rootScope.adishVar.play();
+            var intervalValue = setInterval(function() {
+                document.getElementById("range-val").value = parseInt(document.getElementById("range-val").value)+1;
+                var currentValue= document.getElementById("range-val").value;
+                document.getElementById("runningTime").innerHTML = Math.floor(parseInt(currentValue)/60) + ":" + parseInt(currentValue)%60;
+            },1000)
         });
     };
 })
