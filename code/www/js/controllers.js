@@ -110,6 +110,9 @@ Controller for the discover page
             var original_time = $(this).val();
             var new_time = formatSeconds(original_time);
             $("#time p").text(new_time);
+            if($rootScope.adishVar) {
+                $rootScope.adishVar.seekTo(parseInt(document.getElementById("range-val").value));
+            }
         });
         /*
         ANOTHER GREAT WORK BY SOMEONE...
