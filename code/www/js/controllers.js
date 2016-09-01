@@ -4,7 +4,7 @@ angular.module('songhop.controllers', ['ionic', 'songhop.services'])
 /*
 Controller for the discover page
 */
-.controller('AppCtrl', function($scope, $location, $ionicPopup, $cordovaSocialSharing) {
+.controller('AppCtrl', function($scope, $location, $ionicPopup, $cordovaSocialSharing, IonicClosePopupService) {
     $scope.nextDiabetes = function(event) {
         event.preventDefault();
         $location.path('app/favorites');
@@ -32,11 +32,9 @@ Controller for the discover page
             scope: $scope,
             template: '<h4 ng-click="privacyFunction()">Privacy Policy</h4><hr /><h4 ng-click="tcFunction()" style="padding-top:10px;">Terms of Service</h4>',
             buttons: [
-                { text: 'CANCEL',
-                type: 'button-positive',
-            }
         ]
     });
+    IonicClosePopupService.register(alertPopup);
 }
 $scope.tcFunction = function() {
     alertPopup.close();
