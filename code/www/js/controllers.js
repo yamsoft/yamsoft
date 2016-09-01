@@ -162,6 +162,24 @@ $scope.sendFeedback = function () {
             }
         }, null);
     });
+    $scope.clearFunction = function(val) {
+        if(val==0) {
+            db.transaction(function (tx) {
+                tx.executeSql('DELETE FROM BMI_HISTORY', [], function (tx, results) {
+                        $scope.bmiHistory = [];
+                        document.getElementById("bmiHistoryDiv").style.display= "none";
+                    });
+                }, null);
+            }
+            else {
+                db.transaction(function (tx) {
+                    tx.executeSql('DELETE FROM DIABETES_HISTORY', [], function (tx, results) {
+                            $scope.diabetesHistory = [];
+                            document.getElementById("diabHistoryDiv").style.display= "none";
+                        });
+                    }, null);
+            }
+        }
 })
 .controller('termsCtrl', function($scope, $location) {
     $scope.goBack = function(event) {

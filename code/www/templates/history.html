@@ -2,7 +2,10 @@
     <ion-content has-tabs="true">
         <div class="card animated flipInY">
   <div class="item item-divider applyBold">
-    Latest BMI Results
+    <span>Latest BMI Results</span>
+    <button class="button button-assertive clearButton" ng-click="clearFunction(0)">
+        Clear
+    </button>
   </div>
   <div class="item item-text-wrap">
       <div class="row">
@@ -10,7 +13,7 @@
     <div class="col col-33 darkBorder">DATE</div>
     <div class="col col-33 darkBorder">RESULT</div>
   </div>
-  <div class="row" ng-repeat="historyBMI in bmiHistory">
+  <div class="row" id="bmiHistoryDiv" ng-repeat="historyBMI in bmiHistory">
 <div class="col col-33 applyBorder">{{historyBMI.uName}}</div>
 <div class="col col-33 applyBorder">{{historyBMI.time}}</div>
 <div class="col col-33 applyBorder">{{historyBMI.bmi}}</div>
@@ -22,7 +25,10 @@
 </div>
 <div class="card animated flipInX">
 <div class="item item-divider applyBold">
-Latest Diabetes Results
+    <span>Latest Diabetes Results</span>
+    <button class="button button-assertive clearButton" ng-click="clearFunction(1)">
+        Clear
+    </button>
 </div>
 <div class="item item-text-wrap">
 <div class="row">
@@ -30,7 +36,7 @@ Latest Diabetes Results
 <div class="col col-33 darkBorder">DATE</div>
 <div class="col col-33 darkBorder">RESULT</div>
 </div>
-<div class="row" ng-repeat="historyDiabetes in diabetesHistory">
+<div class="row" id="diabHistoryDiv" ng-repeat="historyDiabetes in diabetesHistory">
     <div class="col col-33 applyBorder">{{historyDiabetes.uName}}</div>
 <div class="col col-33 applyBorder">{{historyDiabetes.time}}</div>
 <div class="col col-33 applyBorder">{{historyDiabetes.bmi}}</div>
