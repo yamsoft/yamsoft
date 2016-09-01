@@ -18,6 +18,8 @@ angular.module('songhop', ['ionic', 'ionic.closePopup', 'songhop.controllers', '
     function(a){
         if($rootScope.adishVar) {
             $rootScope.adishVar.pause();
+            $rootScope.adishVar = undefined;
+            clearInterval($rootScope.intervalValue);
         }
     });
         db = window.openDatabase("my.db", '1', 'my', 1024 * 1024 * 100); // browser

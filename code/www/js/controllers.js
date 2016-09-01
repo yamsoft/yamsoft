@@ -160,15 +160,34 @@ Controller for the discover page
         });
     }
     $scope.play = function() {
+        if(document.getElementById("gnButton").innerHTML == "►") {
+            if(!$rootScope.adishVar) {
         MediaSrv.loadMedia('sound/song.mp3').then(function(media){
             $rootScope.adishVar = media;
             $rootScope.adishVar.play();
-            var intervalValue = setInterval(function() {
+            document.getElementById("gnButton").innerHTML = "&#9612;&#9612;"
+            $rootScope.intervalValue = setInterval(function() {
                 document.getElementById("range-val").value = parseInt(document.getElementById("range-val").value)+1;
                 var currentValue= document.getElementById("range-val").value;
                 document.getElementById("runningTime").innerHTML = Math.floor(parseInt(currentValue)/60) + ":" + parseInt(currentValue)%60;
             },1000)
         });
+    }
+    else {
+        $rootScope.adishVar.play();
+        document.getElementById("gnButton").innerHTML = "&#9612;&#9612;"
+        $rootScope.intervalValue = setInterval(function() {
+            document.getElementById("range-val").value = parseInt(document.getElementById("range-val").value)+1;
+            var currentValue= document.getElementById("range-val").value;
+            document.getElementById("runningTime").innerHTML = Math.floor(parseInt(currentValue)/60) + ":" + parseInt(currentValue)%60;
+        },1000);
+    }
+    }
+    else {
+        $rootScope.adishVar.pause();
+        document.getElementById("gnButton").innerHTML = "►";
+        clearInterval($rootScope.intervalValue);
+    }
     };
 })
 .controller('HistoryCtrl', function($scope) {
