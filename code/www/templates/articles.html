@@ -3,8 +3,8 @@
         <div class="gifClass" ng-show="waiting" id="gifDiv">
         </div>
         <div class="card" id="{{singleResponse.Id}}" ng-click="viewArticle(singleResponse.Id)" ng-repeat="singleResponse in responseComplete">
-            <div class="item item-avatar">
-                <h2>{{singleResponse.Title}}</h2>
+            <div class="item item-avatar headingDiv">
+                <div class="articleHeading">{{singleResponse.Title}}</div>
             </div>
 
             <div class="item item-body">

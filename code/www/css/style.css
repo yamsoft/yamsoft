@@ -105,7 +105,7 @@ a.button{
 
     color:#db001f;;
     brackground-color:white;
-    border:1px solid #db001f;;
+    border:1px solid #db001f;
     border-radius:100px;
 
     padding: .3em 1.2em;
@@ -527,3 +527,13 @@ footer #random {
     font-size: xx-large;
 }
 /*MUSIC PLAYER STYLING ENDS*/
+
+/*ARTICLE STYLING*/
+.headingDiv {
+    background-color: #db001f;
+}
+.articleHeading {
+    color: white !important;
+    font-weight: 600 !important;
+    font-size: large !important;
+}
