@@ -127,7 +127,7 @@ angular.module('songhop', ['ionic', 'ionic.closePopup', 'songhop.controllers', '
         }
       }
   });
-  $urlRouterProvider.otherwise('/app/discover');
+  $urlRouterProvider.otherwise('/app/articles');
 })
 
 .constant('SERVER', {
