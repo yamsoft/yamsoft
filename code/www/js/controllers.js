@@ -67,7 +67,9 @@ Controller for the discover page
         var url = "https://healthfinder.gov/developer/MyHFSearch.json?api_key=dlsuoidgstljdgmb&who=someone&age=35&gender=female&pregnant=0";
         $http.get(url).success( function(response) {
             $scope.responseComplete = response.Result.Topics;
-            document.getElementById("gifDiv").style.display = "none";
+            if(document.getElementById("gifDiv")) {
+                document.getElementById("gifDiv").style.display = "none";
+            };
         });
     }
     $scope.fetchArticles();
