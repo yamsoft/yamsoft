@@ -62,12 +62,12 @@ Controller for the discover page
         }
     }
     $scope.fetchArticles = function() {
-        $scope.waiting = true;
         setTimeout(function(){ document.getElementById("gifDiv").style.display = "none"; },11000);
+        document.getElementById("gifDiv").style.display = "block";
         var url = "https://healthfinder.gov/developer/MyHFSearch.json?api_key=dlsuoidgstljdgmb&who=someone&age=35&gender=female&pregnant=0";
         $http.get(url).success( function(response) {
-            $scope.waiting = false;
             $scope.responseComplete = response.Result.Topics;
+            document.getElementById("gifDiv").style.display = "none";
         });
     }
     $scope.fetchArticles();
@@ -76,14 +76,14 @@ Controller for the discover page
     }
 })
 .controller('articlesIndividualCtrl', function($scope, $http, $location) {
-    $scope.waiting = true;
     var aa = $location.$$url.split(":")[1];
     setTimeout(function(){ document.getElementById("gifDiv").style.display = "none"; },11000);
+    document.getElementById("gifDiv").style.display = "block";
     var url = "https://healthfinder.gov/developer/MyHFSearch.json?api_key=dlsuoidgstljdgmb&who=someone&age=35&gender=female&pregnant=0";
     $http.get(url).success( function(response) {
-        $scope.waiting = false;
         for(var i=0; i<response.Result.Topics.length; i++) {
             if(response.Result.Topics[i].Id==aa) {
+                document.getElementById("gifDiv").style.display = "none";
                 $scope.responseIndividual = response.Result.Topics[i];
                 break;
             }
