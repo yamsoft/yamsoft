@@ -3,17 +3,17 @@
         <div class="gifClass" ng-show="waiting" id="gifDiv">
         </div>
         <div class="card">
-            <div class="item item-avatar">
-                <h2>{{responseIndividual.Title}}</h2>
+            <div class="item item-avatar headingDiv">
+                <h2 class="articleHeading">{{responseIndividual.Title}}</h2>
             </div>
 
             <div class="item item-body" id="individualArticle">
                 <img class="full-image" ng-src="{{responseIndividual.ImageUrl}}">
             </div>
-        </div>
-        <div ng-repeat="individualSections in responseIndividual.Sections">
-            <h1>{{individualSections.Title}}</h1>
-            <div id="yes{{$index}}"></div>
+            <div class="individualArticleSetMargin" ng-repeat="individualSections in responseIndividual.Sections">
+                <h2>{{individualSections.Title}}</h2>
+                <div id="yes{{$index}}"></div>
+            </div>
         </div>
     </ion-content>
 </ion-view>
