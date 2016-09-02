@@ -162,13 +162,6 @@ Controller for the discover page
         date.setSeconds(seconds);
         return date.toTimeString().replace(/.*(\d{2}:\d{2}).*/, "$1");
     }
-    if($rootScope.alertOnce==0) {
-        $rootScope.alertOnce = 1;
-        $scope.alertPopup1 = $ionicPopup.alert({
-            title: 'Tip',
-            template: '<span  style="font-weight:500;">Sleep Well provides a scientifically proven soothing music to help you sleep better. Press "Good Night" button to use this feature. Please make sure that there is no noise in the background to get the best out of this feature. You may use earphones. Also have some patience while listening to the music.</span>'
-        });
-    }
     $scope.play = function() {
         if(document.getElementById("gnButton").innerHTML == "►") {
             if(!$rootScope.adishVar) {

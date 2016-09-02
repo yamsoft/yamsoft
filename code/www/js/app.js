@@ -11,7 +11,6 @@ angular.module('songhop', ['ionic', 'ionic.closePopup', 'songhop.controllers', '
     });
 })
 .run( function($rootScope, $location, $ionicPlatform, $cordovaSQLite) {
-    $rootScope.alertOnce = 0;
     $rootScope.$watch(function() {
         return $location.path();
     },
