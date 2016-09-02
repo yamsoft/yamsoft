@@ -15,6 +15,20 @@ angular.module('songhop', ['ionic', 'ionic.closePopup', 'songhop.controllers', '
         return $location.path();
     },
     function(a){
+        if(a=="/app/sleepWell"){
+            setTimeout(function() {
+            var currentArray3= document.getElementById("gnButton").className.split(" ");
+            var resultClassString3 = "";
+            for(var i=0; i<currentArray3.length; i++) {
+                if(currentArray3[i]=="ion-ios-pause") {
+                    currentArray3[i]= "ion-ios-play";
+                }
+                resultClassString3 = resultClassString3 + " " + currentArray3[i];
+            }
+            document.getElementById("gnButton").className = resultClassString3;
+            document.getElementById("range-val").value = 0;
+        },500);
+        }
         if($rootScope.adishVar) {
             $rootScope.adishVar.pause();
             $rootScope.adishVar = undefined;

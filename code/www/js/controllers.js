@@ -121,7 +121,8 @@ Controller for the discover page
         networkInfo();
     };
 })
-.controller('sleepWellCtrl', function($scope, $q, MediaSrv, $rootScope, $ionicPopup) {
+.controller('sleepWellCtrl', function($scope, $q, MediaSrv, $rootScope, $ionicPopup, $location) {
+
     $(document).ready(function() {
         $('#range-val').on("change mousemove", function() {
             //Lets change it in time mode
@@ -165,7 +166,8 @@ Controller for the discover page
         $("body").mouseup(function(e) {
             isDragging = false;
             r.removeEventListener('mousemove', moveTip);
-            document.getElementById('tip').style.display = 'none';
+            if($location.path() == "/app/sleepWell")
+                document.getElementById('tip').style.display = 'none';
         });
     });
     function formatSeconds(seconds) {
@@ -174,12 +176,20 @@ Controller for the discover page
         return date.toTimeString().replace(/.*(\d{2}:\d{2}).*/, "$1");
     }
     $scope.play = function() {
-        if(document.getElementById("gnButton").innerHTML == "►") {
+        if(document.getElementById("gnButton").className.indexOf("ion-ios-play")!=-1) {
             if(!$rootScope.adishVar) {
                 MediaSrv.loadMedia('sound/song.mp3').then(function(media){
                     $rootScope.adishVar = media;
                     $rootScope.adishVar.play();
-                    document.getElementById("gnButton").innerHTML = "&#9612;&#9612;"
+                    var currentArray= document.getElementById("gnButton").className.split(" ");
+                    var resultClassString = "";
+                    for(var i=0; i<currentArray.length; i++) {
+                        if(currentArray[i]=="ion-ios-play") {
+                            currentArray[i]= "ion-ios-pause";
+                        }
+                        resultClassString = resultClassString + " " + currentArray[i];
+                    }
+                    document.getElementById("gnButton").className = resultClassString;
                     $rootScope.intervalValue = setInterval(function() {
                         document.getElementById("range-val").value = parseInt(document.getElementById("range-val").value)+1;
                         var currentValue= document.getElementById("range-val").value;
@@ -189,7 +199,15 @@ Controller for the discover page
             }
             else {
                 $rootScope.adishVar.play();
-                document.getElementById("gnButton").innerHTML = "&#9612;&#9612;"
+                var currentArray1= document.getElementById("gnButton").className.split(" ");
+                var resultClassString1 = "";
+                for(var i=0; i<currentArray1.length; i++) {
+                    if(currentArray1[i]=="ion-ios-play") {
+                        currentArray1[i]= "ion-ios-pause";
+                    }
+                    resultClassString1 = resultClassString1+ " " + currentArray1[i];
+                }
+                document.getElementById("gnButton").className = resultClassString1;
                 $rootScope.intervalValue = setInterval(function() {
                     document.getElementById("range-val").value = parseInt(document.getElementById("range-val").value)+1;
                     var currentValue= document.getElementById("range-val").value;
@@ -199,7 +217,15 @@ Controller for the discover page
         }
         else {
             $rootScope.adishVar.pause();
-            document.getElementById("gnButton").innerHTML = "►";
+            var currentArray2= document.getElementById("gnButton").className.split(" ");
+            var resultClassString2 = "";
+            for(var i=0; i<currentArray2.length; i++) {
+                if(currentArray2[i]=="ion-ios-pause") {
+                    currentArray2[i]= "ion-ios-play";
+                }
+                resultClassString2 = resultClassString2 + " " + currentArray2[i];
+            }
+            document.getElementById("gnButton").className = resultClassString2;
             clearInterval($rootScope.intervalValue);
         }
     };
