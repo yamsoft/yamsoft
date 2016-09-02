@@ -50,15 +50,18 @@ Controller for the discover page
     };
 })
 .controller('articlesCtrl', function($scope, $http, $location) {
-    $scope.draggedStyle = function(event) {
-        document.getElementById("divForDrag").style.transform = "translate(" + 0 + "px, " + parseInt(event.gesture.center.pageY)/4 + "px)";
+    $scope.draggedStyle = function(event, indexValue) {
+        if(indexValue == 0) {
+            document.getElementById("outerDragDiv").style.transform = "translate(" + 0 + "px, " + parseInt(event.gesture.center.pageY)/4 + "px)";
+        }
     }
-    $scope.releaseFunction = function(event) {
-        document.getElementById("divForDrag").style.transform = "translate(" + 0 + "px, " + 0 + "px)";
-        $scope.fetchArticles();
+    $scope.releaseFunction = function(event, indexValue) {
+        if(indexValue==0) {
+            document.getElementById("outerDragDiv").style.transform = "translate(" + 0 + "px, " + 0 + "px)";
+            $scope.fetchArticles();
+        }
     }
     $scope.fetchArticles = function() {
-        console.log("called");
         $scope.waiting = true;
         setTimeout(function(){ document.getElementById("gifDiv").style.display = "none"; },11000);
         var url = "https://healthfinder.gov/developer/MyHFSearch.json?api_key=dlsuoidgstljdgmb&who=someone&age=35&gender=female&pregnant=0";
