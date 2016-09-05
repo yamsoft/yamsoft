@@ -222,17 +222,35 @@ a.button:hover{
 .gifClass {
     background: url("../img/loading-dribbble.gif") no-repeat;
     width: 100%;
-    height: 100px;
+    height: 100%;
     display: block;
     background-position: center;
+    /*position: absolute;*/
+    /*z-index: 1000;*/
+    /*position: absolute;*/
+    /*top: 50%;*/
+    /*left: 50%;*/
+    /*margin-top: -50px;*/
+    /*margin-left: -50px;*/
+    /*width: 100px;*/
+    /*height: 100px;*/
     position: absolute;
-    z-index: 1000;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding-top: 100%;
+    overflow: hidden;
+    margin-top: -1px;
+    /*padding-top: 1px;*/
+    width: auto;
+    height: auto;
 }
 .reloadClass {
     background: url("../img/reload.png") no-repeat;
     width: 100%;
-    padding-top: 50%;
-    height: 100px;
+    padding-top: 100%;
+    height: 100%;
     display: block;
     background-position: center;
     z-index: 500;

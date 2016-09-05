@@ -50,6 +50,15 @@ Controller for the discover page
     };
 })
 .controller('articlesCtrl', function($scope, $http, $location) {
+    document.addEventListener("offline", onOffline, false);
+    document.addEventListener("online", onOnline, false);
+    function onOffline() {
+        document.getElementById("gifDiv").style.display = "none";
+        document.getElementById("reloadDiv").style.display = "block";
+    }
+    function onOnline() {
+        $scope.fetchArticles();
+    }
     $scope.draggedStyle = function(event, indexValue) {
         if(indexValue == 0) {
             document.getElementById("outerDragDiv").style.transform = "translate(" + 0 + "px, " + parseInt(event.gesture.center.pageY)/4 + "px)";
@@ -62,21 +71,24 @@ Controller for the discover page
         }
     }
     $scope.fetchArticles = function() {
+        $scope.gayab = false;
         setTimeout(function(){
             document.getElementById("gifDiv").style.display = "none";
-            document.getElementById("reloadDiv").style.display = "block";
+            if(!$scope.gayab)
+                document.getElementById("reloadDiv").style.display = "block";
 
         },11000);
         document.getElementById("gifDiv").style.display = "block";
         document.getElementById("reloadDiv").style.display = "none";
         var url = "https://healthfinder.gov/developer/MyHFSearch.json?api_key=dlsuoidgstljdgmb&who=someone&age=35&gender=female&pregnant=0";
         $http.get(url).success( function(response) {
+            $scope.gayab = true;
             $scope.responseComplete = response.Result.Topics;
             if(document.getElementById("gifDiv")) {
                 document.getElementById("gifDiv").style.display = "none";
             };
             if(document.getElementById("reloadDiv")) {
-                document.getElementById("reloadDiv").style.display = "block";
+                document.getElementById("reloadDiv").style.display = "none";
             };
         });
     }
@@ -177,7 +189,7 @@ Controller for the discover page
             isDragging = false;
             r.removeEventListener('mousemove', moveTip);
             if($location.path() == "/app/sleepWell")
-                document.getElementById('tip').style.display = 'none';
+            document.getElementById('tip').style.display = 'none';
         });
     });
     function formatSeconds(seconds) {
