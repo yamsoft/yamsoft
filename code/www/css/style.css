@@ -222,7 +222,7 @@ a.button:hover{
 .gifClass {
     background: url("../img/loading-dribbble.gif") no-repeat;
     width: 100%;
-    height: 60px;
+    height: 100px;
     display: block;
     background-position: center;
     position: absolute;
