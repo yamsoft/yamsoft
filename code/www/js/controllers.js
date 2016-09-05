@@ -99,6 +99,7 @@ Controller for the discover page
 })
 .controller('articlesIndividualCtrl', function($scope, $http, $location) {
     $scope.fetchArticle = function() {
+        document.getElementById("individualArticleDiv").style.display = "none";
     $scope.gayab = false;
     var aa = $location.$$url.split(":")[1];
     document.getElementById("gifDiv").style.display = "block";
@@ -122,6 +123,7 @@ Controller for the discover page
                     document.getElementById("reloadDiv").style.display = "none";
                 };
                 $scope.responseIndividual = response.Result.Topics[i];
+                document.getElementById("individualArticleDiv").style.display = "block";
                 break;
             }
         }
