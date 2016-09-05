@@ -228,6 +228,15 @@ a.button:hover{
     position: absolute;
     z-index: 1000;
 }
+.reloadClass {
+    background: url("../img/reload.png") no-repeat;
+    width: 100%;
+    padding-top: 50%;
+    height: 100px;
+    display: block;
+    background-position: center;
+    z-index: 500;
+}
 .clearButton {
     float: right;
     height: 80%;
