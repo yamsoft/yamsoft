@@ -98,29 +98,38 @@ Controller for the discover page
     }
 })
 .controller('articlesIndividualCtrl', function($scope, $http, $location) {
+    document.addEventListener("offline", onOffline, false);
+    document.addEventListener("online", onOnline, false);
+    function onOffline() {
+        document.getElementById("gifDiv1").style.display = "none";
+        document.getElementById("reloadDiv1").style.display = "block";
+    }
+    function onOnline() {
+        $scope.fetchArticles();
+    }
     $scope.fetchArticle = function() {
         document.getElementById("individualArticleDiv").style.display = "none";
     $scope.gayab = false;
     var aa = $location.$$url.split(":")[1];
-    document.getElementById("gifDiv").style.display = "block";
-    document.getElementById("reloadDiv").style.display = "none";
+    document.getElementById("gifDiv1").style.display = "block";
+    document.getElementById("reloadDiv1").style.display = "none";
     setTimeout(function(){
-        document.getElementById("gifDiv").style.display = "none";
+        document.getElementById("gifDiv1").style.display = "none";
         if(!$scope.gayab) {
-            document.getElementById("reloadDiv").style.display = "block";
+            document.getElementById("reloadDiv1").style.display = "block";
         }
     },11000);
-    document.getElementById("gifDiv").style.display = "block";
+    document.getElementById("gifDiv1").style.display = "block";
     var url = "https://healthfinder.gov/developer/MyHFSearch.json?api_key=dlsuoidgstljdgmb&who=someone&age=35&gender=female&pregnant=0";
     $http.get(url).success( function(response) {
         for(var i=0; i<response.Result.Topics.length; i++) {
             if(response.Result.Topics[i].Id==aa) {
                 $scope.gayab = true;
-                if(document.getElementById("gifDiv")) {
-                    document.getElementById("gifDiv").style.display = "none";
+                if(document.getElementById("gifDiv1")) {
+                    document.getElementById("gifDiv1").style.display = "none";
                 };
-                if(document.getElementById("reloadDiv")) {
-                    document.getElementById("reloadDiv").style.display = "none";
+                if(document.getElementById("reloadDiv1")) {
+                    document.getElementById("reloadDiv1").style.display = "none";
                 };
                 $scope.responseIndividual = response.Result.Topics[i];
                 document.getElementById("individualArticleDiv").style.display = "block";
