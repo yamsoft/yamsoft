@@ -50,10 +50,12 @@ Controller for the discover page
     };
 })
 .controller('articlesCtrl', function($scope, $http, $location) {
+    document.getElementById("gola").style.paddingTop = "0";
     document.addEventListener("offline", onOffline, false);
     document.addEventListener("online", onOnline, false);
     function onOffline() {
         document.getElementById("gifDiv").style.display = "none";
+        document.getElementById("gola").style.display="none";
         document.getElementById("reloadDiv").style.display = "block";
     }
     function onOnline() {
@@ -61,12 +63,14 @@ Controller for the discover page
     }
     $scope.draggedStyle = function(event, indexValue) {
         if(indexValue == 0) {
-            document.getElementById("outerDragDiv").style.transform = "translate(" + 0 + "px, " + parseInt(event.gesture.center.pageY)/4 + "px)";
+            // document.getElementById("outerDragDiv").style.transform = "translate(" + 0 + "px, " + parseInt(event.gesture.center.pageY)/4 + "px)";
+            document.getElementById("gola").style.display="block";
         }
+        document.getElementById("gola").style.paddingTop = (parseInt(document.getElementById("gola").style.paddingTop) +1).toString()+"px";
     }
     $scope.releaseFunction = function(event, indexValue) {
         if(indexValue==0) {
-            document.getElementById("outerDragDiv").style.transform = "translate(" + 0 + "px, " + 0 + "px)";
+            // document.getElementById("outerDragDiv").style.transform = "translate(" + 0 + "px, " + 0 + "px)";
             $scope.fetchArticles();
         }
     }
@@ -75,7 +79,11 @@ Controller for the discover page
         setTimeout(function(){
             document.getElementById("gifDiv").style.display = "none";
             if(!$scope.gayab)
+            {
                 document.getElementById("reloadDiv").style.display = "block";
+            }
+            document.getElementById("gola").style.display="none";
+            document.getElementById("gola").style.paddingTop = "0";
 
         },11000);
         document.getElementById("gifDiv").style.display = "block";
@@ -84,6 +92,7 @@ Controller for the discover page
         $http.get(url).success( function(response) {
             $scope.gayab = true;
             $scope.responseComplete = response.Result.Topics;
+            document.getElementById("gola").style.display="none";
             if(document.getElementById("gifDiv")) {
                 document.getElementById("gifDiv").style.display = "none";
             };

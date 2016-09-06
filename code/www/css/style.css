@@ -576,3 +576,25 @@ footer #random {
     left: 10px;
     top: 125px
 }
+
+.loader {
+    position: absolute;
+    display: none;
+    margin: 0 0 2em;
+    height: 227px;
+    width: 100%;
+    text-align: center;
+    padding-top: 8%;
+    margin: 0 auto 1em;
+    /* display: inline-block; */
+    /* vertical-align: top; */
+    z-index: 999;
+    /* top: 168%; */
+}
+/*
+  Set the color of the icon
+*/
+svg path,
+svg rect {
+  fill: white;
+}
