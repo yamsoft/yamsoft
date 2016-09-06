@@ -20,8 +20,8 @@
         <div id="gifDiv" class="gifClass">
         </div>
         <div id="outerDragDiv">
-            <div class="card" id="{{singleResponse.Id}}" ng-click="viewArticle(singleResponse.Id)">
-                <div id="divForDrag"  on-drag-down="draggedStyle($event, 0)" on-release = "releaseFunction($event, $index)">
+            <div class="card" id="{{singleResponse.Id}}" ng-click="viewArticle(singleResponse.Id)" ng-repeat="singleResponse in responseComplete">
+                <div id="divForDrag"  on-drag-down="draggedStyle($event, $index)" on-release = "releaseFunction($event, $index)">
                 <div class="item item-avatar headingDiv">
                     <div class="articleHeading">{{singleResponse.Title}}</div>
                 </div>
