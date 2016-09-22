@@ -102,6 +102,7 @@ Controller for the discover page
         });
     }
     // $scope.fetchArticles();
+    //Comment to make new app
     $scope.viewArticle = function(event) {
         $location.path('app/articles:' + event);
     }
