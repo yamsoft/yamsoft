@@ -8,6 +8,12 @@ angular.module('songhop', ['ionic', 'ionic.closePopup', 'songhop.controllers', '
         if(window.StatusBar) {
             StatusBar.styleDefault();
         }
+        if (typeof analytics !== "undefined") {
+                alert("got analytics.....");
+                analytics.startTrackerWithId("UA-85625559-1");
+            } else {
+                alert("Google Analytics Unavailable");
+            }
     });
 })
 .run( function($rootScope, $location, $ionicPlatform, $cordovaSQLite) {

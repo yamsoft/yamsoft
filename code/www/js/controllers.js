@@ -182,6 +182,14 @@ $scope.fetchArticle();
     };
 })
 .controller('sleepWellCtrl', function($scope, $q, MediaSrv, $rootScope, $ionicPopup, $location) {
+    if (typeof analytics !== "undefined") {
+        alert("in ctrls");
+        alert(analytics.toString());
+        alert(analytics.trackView.toString());
+        analytics.startTrackerWithId("UA-85625559-1");
+        analytics.trackView("Ionic Login");
+            // analytics.trackEvent("Chat Message", "Comment");
+        }
 
     $(document).ready(function() {
         $('#range-val').on("change mousemove", function() {
