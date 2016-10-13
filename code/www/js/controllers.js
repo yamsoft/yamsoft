@@ -50,6 +50,11 @@ Controller for the discover page
     };
 })
 .controller('articlesCtrl', function($scope, $http, $location) {
+    if (typeof analytics !== "undefined") {
+        analytics.startTrackerWithId("UA-85625559-1");
+        analytics.trackView("Articles");
+            // analytics.trackEvent("Chat Message", "Comment");
+        }
     document.getElementById("gola").style.paddingTop = "0";
     document.addEventListener("offline", onOffline, false);
     document.addEventListener("online", onOnline, false);
@@ -104,10 +109,20 @@ Controller for the discover page
     // $scope.fetchArticles();
     //Comment to make new app
     $scope.viewArticle = function(event) {
+        if (typeof analytics !== "undefined") {
+            analytics.startTrackerWithId("UA-85625559-1");
+            analytics.trackEvent("View Article", event);
+                // analytics.trackEvent("Chat Message", "Comment");
+            }
         $location.path('app/articles:' + event);
     }
 })
 .controller('articlesIndividualCtrl', function($scope, $http, $location) {
+    if (typeof analytics !== "undefined") {
+        analytics.startTrackerWithId("UA-85625559-1");
+        analytics.trackView("Individual Articles");
+            // analytics.trackEvent("Chat Message", "Comment");
+        }
     document.addEventListener("offline", onOffline, false);
     document.addEventListener("online", onOnline, false);
     function onOffline() {
@@ -183,11 +198,8 @@ $scope.fetchArticle();
 })
 .controller('sleepWellCtrl', function($scope, $q, MediaSrv, $rootScope, $ionicPopup, $location) {
     if (typeof analytics !== "undefined") {
-        alert("in ctrls");
-        alert(analytics.toString());
-        alert(analytics.trackView.toString());
         analytics.startTrackerWithId("UA-85625559-1");
-        analytics.trackView("Ionic Login");
+        analytics.trackView("Sleep Well");
             // analytics.trackEvent("Chat Message", "Comment");
         }
 
@@ -244,6 +256,11 @@ $scope.fetchArticle();
         return date.toTimeString().replace(/.*(\d{2}:\d{2}).*/, "$1");
     }
     $scope.play = function() {
+        if (typeof analytics !== "undefined") {
+            analytics.startTrackerWithId("UA-85625559-1");
+            analytics.trackEvent("Sleep Well", "Play");
+                // analytics.trackEvent("Chat Message", "Comment");
+            }
         if(document.getElementById("gnButton").className.indexOf("ion-ios-play")!=-1) {
             if(!$rootScope.adishVar) {
                 MediaSrv.loadMedia('sound/song.mp3').then(function(media){
@@ -299,6 +316,11 @@ $scope.fetchArticle();
     };
 })
 .controller('HistoryCtrl', function($scope) {
+    if (typeof analytics !== "undefined") {
+        analytics.startTrackerWithId("UA-85625559-1");
+        analytics.trackView("History");
+            // analytics.trackEvent("Chat Message", "Comment");
+        }
     $scope.bmiHistory = [];
     $scope.diabetesHistory = [];
     db.transaction(function (tx) {
@@ -332,6 +354,11 @@ $scope.fetchArticle();
         }, null);
     });
     $scope.clearFunction = function(val) {
+        if (typeof analytics !== "undefined") {
+            analytics.startTrackerWithId("UA-85625559-1");
+            analytics.trackEvent("History", "Clear");
+                // analytics.trackEvent("Chat Message", "Comment");
+            }
         if(val==0) {
             db.transaction(function (tx) {
                 tx.executeSql('DELETE FROM BMI_HISTORY', [], function (tx, results) {
@@ -351,12 +378,22 @@ $scope.fetchArticle();
     }
 })
 .controller('termsCtrl', function($scope, $location) {
+    if (typeof analytics !== "undefined") {
+        analytics.startTrackerWithId("UA-85625559-1");
+        analytics.trackView("Terms");
+            // analytics.trackEvent("Chat Message", "Comment");
+        }
     $scope.goBack = function(event) {
         event.preventDefault();
         $location.path('discover');
     }
 })
 .controller('privacyCtrl', function($scope, $location) {
+    if (typeof analytics !== "undefined") {
+        analytics.startTrackerWithId("UA-85625559-1");
+        analytics.trackView("Privacy");
+            // analytics.trackEvent("Chat Message", "Comment");
+        }
     $scope.goBack = function(event) {
         event.preventDefault();
         $location.path('terms');
@@ -367,6 +404,11 @@ $scope.fetchArticle();
     }
 })
 .controller('BmiCtrl', function($scope, $ionicPopup, $location, $cordovaSocialSharing) {
+    if (typeof analytics !== "undefined") {
+        analytics.startTrackerWithId("UA-85625559-1");
+        analytics.trackView("BMI");
+            // analytics.trackEvent("Chat Message", "Comment");
+        }
     $scope.wtArr = [];
     $scope.uName = {
         val:''
@@ -382,6 +424,11 @@ $scope.fetchArticle();
         $scope.wtArr.push(i);
     };
     $scope.shareAnywhere = function() {
+        if (typeof analytics !== "undefined") {
+            analytics.startTrackerWithId("UA-85625559-1");
+            analytics.trackEvent("BMI", "Share");
+                // analytics.trackEvent("Chat Message", "Comment");
+            }
         var myBMI = "Just calculated my BMI using this super awesome app!! My BMI is " + bmiValue +  "Try it now!!";
         var myMsg = msg;
         $cordovaSocialSharing.share(myBMI, myMsg, "www/img/icon.png", "http://play.google.com/store/apps/details?id=com.ionicframework.sugart07");
@@ -390,6 +437,11 @@ $scope.fetchArticle();
         $location.path('app/favorites');
     }
     $scope.calculateBMI = function(height, weight) {
+        if (typeof analytics !== "undefined") {
+            analytics.startTrackerWithId("UA-85625559-1");
+            analytics.trackEvent("Calculate BMI", "Calculate");
+                // analytics.trackEvent("Chat Message", "Comment");
+            }
         if($scope.uName.val == '' || $scope.uName.val==undefined) {
             var alertPopup23 = $ionicPopup.alert({
                 title: 'ERROR',
@@ -614,6 +666,11 @@ $scope.bmiCal = {
 Controller for the favorites page
 */
 .controller('FavoritesCtrl', function($scope, $ionicPopup, $cordovaSocialSharing) {
+    if (typeof analytics !== "undefined") {
+        analytics.startTrackerWithId("UA-85625559-1");
+        analytics.trackView("Diabetes");
+            // analytics.trackEvent("Chat Message", "Comment");
+        }
     var titleDisplay = "";
     $scope.ageArr = [];
     $scope.uName = {
@@ -637,12 +694,22 @@ Controller for the favorites page
     }
 
     $scope.shareAnywhere = function() {
+        if (typeof analytics !== "undefined") {
+            analytics.startTrackerWithId("UA-85625559-1");
+            analytics.trackEvent("Diabetes", "Share");
+                // analytics.trackEvent("Chat Message", "Comment");
+            }
         var myBMI = "Just calculated my Diabetic risk score using this super awesome app!! Try it now!!"
         var myMsg = "Diabetes risk test.";
         $cordovaSocialSharing.share(myBMI, myMsg, "www/img/icon.png", "http://play.google.com/store/apps/details?id=com.ionicframework.sugart07");
     }
 
     $scope.calculateDiabities = function(age, gender, ges, fam, bp, fit, ht, weight, ev) {
+        if (typeof analytics !== "undefined") {
+            analytics.startTrackerWithId("UA-85625559-1");
+            analytics.trackEvent("Diabetes", "Calculate");
+                // analytics.trackEvent("Chat Message", "Comment");
+            }
         if($scope.uName.val=='' || $scope.uName.val == undefined) {
             var alertPopup = $ionicPopup.alert({
                 title: 'ERROR',
