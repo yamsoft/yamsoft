@@ -27,7 +27,7 @@ angular.module('songhop.services', [])
         // Releases the underlying operating system's audio resources. Should be called on a ressource when it's no longer needed !
         release: function(){},
         // Moves the position within the audio file.
-        seekTo: function(milliseconds){}, // TODO
+        seekTo: function(milliseconds){ sound.currentTime = milliseconds }, // TODO
         // Set the volume for audio playback (between 0.0 and 1.0).
         setVolume: function(volume){ sound.volume = volume; },
         // Start recording an audio file.

@@ -4669,7 +4669,8 @@ a.item-content {
     line-height: 32px; }
 
 .item-avatar, .item-avatar .item-content, .item-avatar-left, .item-avatar-left .item-content {
-  padding-left: 72px;
+  /*padding-left: 72px;*/
+  text-align: center;
   min-height: 72px; }
   .item-avatar > img:first-child, .item-avatar .item-image, .item-avatar .item-content > img:first-child, .item-avatar .item-content .item-image, .item-avatar-left > img:first-child, .item-avatar-left .item-image, .item-avatar-left .item-content > img:first-child, .item-avatar-left .item-content .item-image {
     position: absolute;
@@ -7006,7 +7007,7 @@ a.button {
 [nav-bar-transition="android"] [nav-bar="active"], [nav-bar-transition="android"] [nav-bar="entering"] {
   z-index: 10; }
   [nav-bar-transition="android"] [nav-bar="active"] .bar, [nav-bar-transition="android"] [nav-bar="entering"] .bar {
-    background: #db001f; }
+    background: #db001f; height: 50px;}
 [nav-bar-transition="android"] [nav-bar="cached"] {
   display: block; }
   [nav-bar-transition="android"] [nav-bar="cached"] .header-item {

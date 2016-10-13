@@ -1,17 +1,22 @@
 <ion-view title="SLEEP WELL">
     <ion-content has-tabs="true">
-        <div  class="centerMe">
-            <h4 class="md-title">Wanna Try our new Sleep Well feature?</h4>
-                <div>
-                    <button id="gnButton" class="button button-assertive" ng-click="play()">
-                        Good Night!
-                    </button>
-             </div><br />
-             <div>
-                 <button class="button button-assertive" ng-click="pause()">
-                     Pause
-                 </button>
-          </div>
-         </div>
+        <p class="pawanStyle" style="font-weight:600;">Sleep Well provides a scientifically proven soothing music to help you sleep better. Press Play button to use this feature. Please make sure that there is no noise in the background to get the best out of this feature. You may use earphones.</p>
+        <div id="overlay"></div>
+        <div id="content">
+            <div id="range">
+                <input type="range" id="range-val" value="0" min="0" max="496">
+                <div id='tip'>Some tip</div>
+            </div>
+            <div id="time">
+                <p id="runningTime">0:00</p>
+            </div>
+            <div id="buttons">
+                <i id="gnButton" class="buttonClass ion-ios-play" ng-click="play()"></i>
+            </div>
+            <div id="total-time">
+                <p>8:16</p>
+            </div>
+        </div>
+
     </ion-content>
 </ion-view>

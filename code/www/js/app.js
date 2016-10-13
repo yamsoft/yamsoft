@@ -1,4 +1,4 @@
-angular.module('songhop', ['ionic', 'songhop.controllers', 'ngCordova'])
+angular.module('songhop', ['ionic', 'ionic.closePopup', 'songhop.controllers', 'ngCordova'])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -8,10 +8,39 @@ angular.module('songhop', ['ionic', 'songhop.controllers', 'ngCordova'])
         if(window.StatusBar) {
             StatusBar.styleDefault();
         }
+        if (typeof analytics !== "undefined") {
+                alert("got analytics.....");
+                analytics.startTrackerWithId("UA-85625559-1");
+            } else {
+                alert("Google Analytics Unavailable");
+            }
     });
 })
 .run( function($rootScope, $location, $ionicPlatform, $cordovaSQLite) {
-    $rootScope.alertOnce = 0;
+    $rootScope.$watch(function() {
+        return $location.path();
+    },
+    function(a){
+        if(a=="/app/sleepWell"){
+            setTimeout(function() {
+            var currentArray3= document.getElementById("gnButton").className.split(" ");
+            var resultClassString3 = "";
+            for(var i=0; i<currentArray3.length; i++) {
+                if(currentArray3[i]=="ion-ios-pause") {
+                    currentArray3[i]= "ion-ios-play";
+                }
+                resultClassString3 = resultClassString3 + " " + currentArray3[i];
+            }
+            document.getElementById("gnButton").className = resultClassString3;
+            document.getElementById("range-val").value = 0;
+        },500);
+        }
+        if($rootScope.adishVar) {
+            $rootScope.adishVar.pause();
+            $rootScope.adishVar = undefined;
+            clearInterval($rootScope.intervalValue);
+        }
+    });
         db = window.openDatabase("my.db", '1', 'my', 1024 * 1024 * 100); // browser
         db.transaction(function (tx) {
             tx.executeSql('CREATE TABLE IF NOT EXISTS BMI_HISTORY (id unique, dateValue, uName, result)');
@@ -89,6 +118,25 @@ angular.module('songhop', ['ionic', 'songhop.controllers', 'ngCordova'])
       }
     })
 
+    .state('app.articles', {
+      url: "/articles",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/articles.html",
+          controller: 'articlesCtrl'
+        }
+      }
+    })
+    .state('app.articles:id', {
+      url: "/articles:id",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/articlesIndividual.html",
+          controller: 'articlesIndividualCtrl'
+        }
+      }
+    })
+
     .state('app.favorites', {
       url: "/favorites",
       views: {
@@ -98,7 +146,7 @@ angular.module('songhop', ['ionic', 'songhop.controllers', 'ngCordova'])
         }
       }
   });
-  $urlRouterProvider.otherwise('/app/discover');
+  $urlRouterProvider.otherwise('/app/articles');
 })
 
 .constant('SERVER', {

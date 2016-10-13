@@ -5,7 +5,7 @@
             <span class="input-label setMarginLess">Name</span>
             <input type="text" ng-model="uName.val" placeholder="Enter your name" class="nameClass" style="color: #db001f; font-weight: 400; font-size: 100%;">
         </label>
-        <div class="list">
+        <div class="list animated fadeInUp">
             <label class="item item-input item-select">
                 <div class="input-label setMarginLess">
                     Age
@@ -15,7 +15,7 @@
                 </select>
             </label>
         </div>
-        <div class="genderDiv">
+        <div class="genderDiv animated fadeInDown">
             <label class="item item-input item-radio">
                 <div class="input-label">
                     Gender
@@ -26,7 +26,7 @@
                 <ion-radio ng-model="diabCheck.gender" ng-value="'false'" name="diabCheck.gender">Female</ion-radio>
             </ion-list>
         </div>
-        <div ng-show="diabCheck.gender=='false'">
+        <div ng-if="diabCheck.gender=='false'" class="animated fadeInUp">
             <label class="item item-input item-radio"  ng-click="gesMeaning()">
                 <div class="input-label">
                     Have you ever had gestational diabetes   <span class="ion-help-circled"></span>
@@ -37,7 +37,7 @@
                 <ion-radio ng-model="diabCheck.ges" ng-value="'false'" name="diabCheck.ges">NO</ion-radio>
             </ion-list>
         </div>
-        <div>
+        <div class=" animated fadeInUp">
             <label class="item item-input item-radio">
                 <div class="input-label">
                     Is there a family history of diabetes?
@@ -50,7 +50,7 @@
                     </ion-list>
             </div>
         </div>
-        <div>
+        <div class=" animated fadeInDown">
             <label class="item item-input item-radio">
                 <div class="input-label">
                     Are you suffering from high blood Pressure?
@@ -63,7 +63,7 @@
                     </ion-list>
             </div>
         </div>
-        <div>
+        <div class=" animated fadeInUp">
             <label class="item item-input item-radio">
                 <div class="input-label">
                     Are you Physically fit?
@@ -76,7 +76,7 @@
                     </ion-list>
             </div>
         </div>
-        <div class="list">
+        <div class="list animated fadeInDown">
             <label class="item item-input item-select">
                 <div class="input-label">
                     Height
@@ -86,7 +86,7 @@
                 </select>
             </label>
         </div>
-        <div class="list">
+        <div class="list animated fadeInUp">
             <label class="item item-input item-select">
                 <div class="input-label">
                     Weight

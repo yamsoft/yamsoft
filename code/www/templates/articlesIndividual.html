@@ -1,0 +1,21 @@
+<ion-view title="ARTICLES">
+    <ion-content has-tabs="true">
+        <div class="gifClass" id="gifDiv1">
+        </div>
+        <div class="card" id="individualArticleDiv">
+            <div class="item item-avatar headingDiv">
+                <h2 class="articleHeading">{{responseIndividual.Title}}</h2>
+            </div>
+
+            <div class="item item-body" id="individualArticle">
+                <img class="full-image" ng-src="{{responseIndividual.ImageUrl}}">
+            </div>
+            <div class="individualArticleSetMargin" ng-repeat="individualSections in responseIndividual.Sections">
+                <h2>{{individualSections.Title}}</h2>
+                <div id="yes{{$index}}"></div>
+            </div>
+        </div>
+        <div class="reloadClass" id="reloadDiv1" ng-click="fetchArticle()">
+        </div>
+    </ion-content>
+</ion-view>

@@ -5,7 +5,7 @@
                 <span class="input-label setMarginLess">Name</span>
                 <input type="text" ng-model="uName.val" placeholder="Enter your name" class="nameClass" style="color: #db001f; font-weight: 400; font-size: 100%;">
             </label>
-            <div class="genderDiv">
+            <div class="genderDiv animated fadeInUp">
                 <label class="item item-input item-radio">
                     <div class="input-label">
                         Gender
@@ -17,7 +17,7 @@
                 </ion-list>
             </div>
             <br />
-            <div class="list">
+            <div class="list animated fadeInUp">
                 <label class="item item-input item-select">
                     <div class="input-label setMarginLess">
                         Height
@@ -27,7 +27,7 @@
                     </select>
                 </label>
             </div>
-            <div class="list">
+            <div class="list animated fadeInUp">
                 <label class="item item-input item-select">
                     <div class="input-label setMarginLess">
                         Weight
@@ -37,14 +37,14 @@
                     </select>
                 </label>
             </div>
-            <div class="centerMe">
+            <div class="centerMe animated rollIn">
                     <div>
                         <button class="button button-assertive" ng-click="calculateBMI(bmiCal.ht, bmiCal.weight)">
                             Calculate BMI
                         </button>
                  </div>
              </div>
-             <div ng-if="bmiCalDone"  class="centerMe">
+             <div ng-if="bmiCalDone"  class="centerMe animated zoomIn">
                  <h4 class="md-title">Wanna Try our new Diabetes Risk Calculator?</h4>
                      <div>
                          <button class="button button-assertive" ng-click="diabRedirect()">
