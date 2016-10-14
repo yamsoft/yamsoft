@@ -16,3 +16,12 @@ key: yamsoft
 ionic plugin add phonegap-plugin-push --variable SENDER_ID="662469019636"
 
 ionic config set gcm_key 662469019636
+
+
+curl -X POST -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI4YjI2YmM1NS01N2FiLTRmN2UtYmEyNi1kMDYwNTQ4OGIxZTgifQ.KjqyYrL2-xnHKF-GeDC-u747VrjB_zXpod-awohq5fs" -H "Content-Type: application/json" -d '{
+    "tokens": ["f6xX4rz41MU:APA91bGluCK5hbA5CXK3vB_F5VLeS8ewoIHtPgBuavUZMPHFLiMUNXBwTPx0Ny8inemttWF41quBjqugkJlWJfUT1TCah7OjwW3MJ7pLaVawb8EfKY_rcNb5j5rFUD8g31oeR9WC0TC_"],
+    "profile": "test",
+    "notification": {
+        "message": "This is my demo push!"
+    }
+}' "https://api.ionic.io/push/notifications"
