@@ -1,19 +1,20 @@
-angular.module('songhop', ['ionic', 'ionic.closePopup', 'songhop.controllers', 'ngCordova'])
+angular.module('songhop', ['ionic','ionic.service.core', 'ionic.closePopup', 'songhop.controllers', 'ngCordova'])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
-        if(window.cordova && window.cordova.plugins.Keyboard) {
-            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-        }
-        if(window.StatusBar) {
-            StatusBar.styleDefault();
-        }
         if (typeof analytics !== "undefined") {
-                alert("got analytics.....");
-                analytics.startTrackerWithId("UA-85625559-1");
-            } else {
-                alert("Google Analytics Unavailable");
-            }
+            analytics.startTrackerWithId("UA-85625559-1");
+        } else {
+        }
+        var push = new Ionic.Push({
+            "debug": true
+        });
+
+        push.register(function(token) {
+            console.log(token);
+            alert(token._token);
+            push.saveToken(token);  // persist the token in the Ionic Platform
+        });
     });
 })
 .run( function($rootScope, $location, $ionicPlatform, $cordovaSQLite) {

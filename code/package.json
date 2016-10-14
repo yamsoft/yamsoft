@@ -17,8 +17,16 @@
   "cordovaPlugins": [
     {
       "locator": "https://github.com/apache/cordova-plugin-whitelist.git",
-      "id": "cordova-plugin-whitelist",
-      "https://github.com/danwilson/google-analytics-plugin.git"
+      "id": "cordova-plugin-whitelist"
+    },
+    "https://github.com/danwilson/google-analytics-plugin.git",
+    "https://github.com/phonegap-build/PushPlugin.git",
+    {
+      "variables": {
+        "SENDER_ID": "662469019636"
+      },
+      "locator": "phonegap-plugin-push",
+      "id": "phonegap-plugin-push"
     }
   ],
   "cordovaPlatforms": []
