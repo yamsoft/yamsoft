@@ -6,9 +6,7 @@ angular.module('songhop', ['ionic', 'firebase' ,'ionic.service.core', 'ionic.clo
             analytics.startTrackerWithId("UA-85625559-1");
         } else {
         }
-        var push = new Ionic.Push({
-            "debug": true
-        });
+        var push = new Ionic.Push();
 
         push.register(function(token) {
             $rootScope.aa = token._token;
