@@ -12,7 +12,19 @@
 
     <script src="lib/ionic/js/ionic.bundle.min.js"></script>
     <script src="lib/ionic-close-popup/ionic-close-popup.js"></script>
+    <!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
 
+<!-- AngularFire -->
+<script src="https://cdn.firebase.com/libs/angularfire/2.0.1/angularfire.min.js"></script>
+  <script>
+  // Initialize the Firebase SDK
+  var config = {
+      apiKey: "AIzaSyBZkf3CNiP0iBVbWyG9nWWdUxRbAdcmm_w",
+      databaseURL: "https://pushnotsample-ed832.firebaseio.com"
+  };
+  firebase.initializeApp(config);
+</script>
     <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
     <script src="lib/jquery.js"></script>
     <!-- Cordova is bootstrapped by ionic-platform-web-client, uncomment this if you remove ionic-platform-web-client... -->
@@ -22,6 +34,7 @@
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
     <script src="js/utils.js"></script>
+    <!-- firebase & angularfire libraries -->
 
 <script src="lib/ionic-platform-web-client/dist/ionic.io.bundle.js"></script></head>
 <body ng-app="songhop">

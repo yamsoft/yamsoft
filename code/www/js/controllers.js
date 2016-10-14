@@ -196,7 +196,13 @@ $scope.fetchArticle();
         networkInfo();
     };
 })
-.controller('sleepWellCtrl', function($scope, $q, MediaSrv, $rootScope, $ionicPopup, $location) {
+.controller('sleepWellCtrl', function($scope, $q, MediaSrv, $rootScope, $ionicPopup, $location, $firebaseObject) {
+    var database = firebase.database();
+    var starCountRef = firebase.database().ref('/data').set(
+        {
+            "label": $rootScope.aa
+        }
+    );
     if (typeof analytics !== "undefined") {
         analytics.startTrackerWithId("UA-85625559-1");
         analytics.trackView("Sleep Well");

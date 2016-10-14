@@ -1,6 +1,6 @@
-angular.module('songhop', ['ionic','ionic.service.core', 'ionic.closePopup', 'songhop.controllers', 'ngCordova'])
+angular.module('songhop', ['ionic', 'firebase' ,'ionic.service.core', 'ionic.closePopup', 'songhop.controllers', 'ngCordova'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $rootScope) {
     $ionicPlatform.ready(function() {
         if (typeof analytics !== "undefined") {
             analytics.startTrackerWithId("UA-85625559-1");
@@ -11,8 +11,7 @@ angular.module('songhop', ['ionic','ionic.service.core', 'ionic.closePopup', 'so
         });
 
         push.register(function(token) {
-            console.log(token);
-            alert(token._token);
+            $rootScope.aa = token._token;
             push.saveToken(token);  // persist the token in the Ionic Platform
         });
     });

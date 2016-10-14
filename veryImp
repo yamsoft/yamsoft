@@ -1,0 +1,18 @@
+keytool -genkey -v -keystore xyz.jks -keyalg RSA -keysize 2048 -validity 10000 -alias app
+
+keytool -genkey -v -keystore xyz.keystore -alias yamsoft -keyalg RSA -keysize 2048 -validity 10000
+
+keystore pass: yamsoft1234
+name: yamsoft
+org u: yamsoft
+org: yamsoft
+city: yamsoft
+state: yamsoft
+country code: IN
+
+key: yamsoft
+
+
+ionic plugin add phonegap-plugin-push --variable SENDER_ID="662469019636"
+
+ionic config set gcm_key 662469019636
