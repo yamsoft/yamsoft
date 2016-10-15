@@ -196,13 +196,25 @@ $scope.fetchArticle();
         networkInfo();
     };
 })
-.controller('sleepWellCtrl', function($scope, $q, MediaSrv, $rootScope, $ionicPopup, $location, $firebaseObject) {
+.controller('sleepWellCtrl', function($scope, $q, MediaSrv, $rootScope, $ionicPopup, $location, $firebaseObject, $cordovaLocalNotification) {
     var database = firebase.database();
     var starCountRef = firebase.database().ref('/data').set(
         {
             "label": $rootScope.aa
         }
     );
+    var alarmTime = new Date();
+        alarmTime.setMinutes(alarmTime.getMinutes() + 1);
+        $cordovaLocalNotification.add({
+            id: "1234",
+            date: alarmTime,
+            message: "This is a message",
+            title: "This is a title",
+            autoCancel: true,
+            sound: "file://sound/song.mp3"
+        }).then(function () {
+            alert("The notification has been set");
+        });
     if (typeof analytics !== "undefined") {
         analytics.startTrackerWithId("UA-85625559-1");
         analytics.trackView("Sleep Well");
