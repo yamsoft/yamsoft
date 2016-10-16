@@ -1,0 +1,47 @@
+<ion-view title="MEDICINE REMINDER">
+    <ion-content has-tabs="true">
+        <div class="card">
+            <div class="item item-avatar headingDiv">
+                <div class="articleHeading">Name of the Medicine</div>
+            </div>
+
+            <div class="item item-body">
+                <input type="text" ng-model="singleReminder.name" placeholder="Enter medicine name" class="nameClass" >
+
+            </div>
+        </div>
+        <div class="card">
+            <div class="item item-avatar headingDiv">
+                <div class="articleHeading">Reminder Times</div>
+            </div>
+
+            <div class="item item-body">
+                    <select ng-model="singleReminder.remTimes" ng-change="updateRemTimes()" id="remTimesID">
+                        <option value="1">Once A Day</option>
+                        <option value="2">Twice A Day</option>
+                        <option value="3">3 Times A Day</option>
+                        <option value="4">4 Times A Day</option>
+                        <option value="5">5 Times A Day</option>
+                        <option value="6">6 Times A Day</option>
+                        <option value="7">7 Times A Day</option>
+                        <option value="8">8 Times A Day</option>
+                        <option value="9">9 Times A Day</option>
+                        <option value="10">10 Times A Day</option>
+                        <option value="11">11 Times A Day</option>
+                        <option value="12">12 Times A Day</option>
+                    </select>
+                    <br />
+                    <div ng-repeat="singleMedicine in singleReminder.medDetails" ng-click="timePickerFunction($index)">
+                        <div width="40%" style="float: left">
+                            {{singleMedicine.timeHr}}:{{singleMedicine.timeMin}}
+                        </div>
+                        <div width="40%" style="float: right">
+                            {{singleMedicine.dose}}
+                        </div>
+                        <div style="clear: both;">
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

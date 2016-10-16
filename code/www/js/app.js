@@ -1,17 +1,17 @@
-angular.module('songhop', ['ionic', 'firebase' ,'ionic.service.core', 'ionic.closePopup', 'songhop.controllers', 'ngCordova'])
+angular.module('songhop', ['ionic', 'firebase' ,'ionic.service.core', 'ionic.closePopup', 'songhop.controllers', 'ngCordova', 'ionic-timepicker'])
 
 .run(function($ionicPlatform, $rootScope) {
     $ionicPlatform.ready(function() {
-        if (typeof analytics !== "undefined") {
-            analytics.startTrackerWithId("UA-85625559-1");
-        } else {
-        }
-        var push = new Ionic.Push();
-
-        push.register(function(token) {
-            $rootScope.aa = token._token;
-            push.saveToken(token);  // persist the token in the Ionic Platform
-        });
+        // if (typeof analytics !== "undefined") {
+        //     analytics.startTrackerWithId("UA-85625559-1");
+        // } else {
+        // }
+        // var push = new Ionic.Push();
+        //
+        // push.register(function(token) {
+        //     $rootScope.aa = token._token;
+        //     push.saveToken(token);  // persist the token in the Ionic Platform
+        // });
     });
 })
 .run( function($rootScope, $location, $ionicPlatform, $cordovaSQLite) {
@@ -44,6 +44,16 @@ angular.module('songhop', ['ionic', 'firebase' ,'ionic.service.core', 'ionic.clo
             tx.executeSql('CREATE TABLE IF NOT EXISTS BMI_HISTORY (id unique, dateValue, uName, result)');
             tx.executeSql('CREATE TABLE IF NOT EXISTS DIABETES_HISTORY (id unique, dateValue, uName, result)');
         });
+})
+.config(function (ionicTimePickerProvider) {
+var timePickerObj = {
+  inputTime: (((new Date()).getHours() * 60 * 60) + ((new Date()).getMinutes() * 60)),
+  format: 24,
+  step: 5,
+  setLabel: 'Set',
+  closeLabel: 'Close'
+};
+ionicTimePickerProvider.configTimePicker(timePickerObj);
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -102,6 +112,16 @@ angular.module('songhop', ['ionic', 'firebase' ,'ionic.service.core', 'ionic.clo
         'menuContent' :{
           templateUrl: "templates/terms.html",
           controller: 'termsCtrl'
+        }
+      }
+    })
+
+    .state('app.reminder', {
+      url: "/reminder",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/reminder.html",
+          controller: 'reminderCtrl'
         }
       }
     })

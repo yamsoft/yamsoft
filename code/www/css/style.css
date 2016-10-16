@@ -566,6 +566,7 @@ footer #random {
     font-weight: 600 !important;
     font-size: large !important;
     white-space: normal !important;
+    text-align: left !important;
 }
 .individualArticleSetMargin {
     padding-left: 1%;

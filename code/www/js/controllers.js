@@ -9,6 +9,10 @@ Controller for the discover page
         event.preventDefault();
         $location.path('app/favorites');
     };
+    $scope.nextReminder = function(event) {
+        event.preventDefault();
+        $location.path('app/reminder');
+    };
     $scope.nextBMI = function(event) {
         event.preventDefault();
         $location.path('app/bmi');
@@ -182,6 +186,10 @@ $scope.fetchArticle();
     $scope.nextPage = function(event) {
         event.preventDefault();
         $location.path('app/favorites');
+    };
+    $scope.nextPageReminder = function(event) {
+        event.preventDefault();
+        $location.path('app/reminder');
     };
     $scope.nextPageBmi = function(event) {
         event.preventDefault();
@@ -1156,7 +1164,97 @@ $scope.diabCheck = {
     weight: 40
 }
 })
+.controller('reminderCtrl', function($scope, $location, ionicTimePicker) {
+    $scope.singleReminder = {
+        name: "",
+        remTimes: 1,
+        medDetails: [
+            {
+                timeHr: 9,
+                timeMin: 0,
+                dose: 1
+            }
+        ]
+    };
+    $scope.updateRemTimes = function() {
+        var newTimes = document.getElementById("remTimesID").value;
+        var firstMed = $scope.singleReminder.medDetails[0];
+        $scope.singleReminder.medDetails = [];
+        $scope.singleReminder.medDetails.push(firstMed);
+        if(parseInt(newTimes) >=2) {
+            $scope.singleReminder.medDetails.push(
+                {
+                    timeHr: 23,
+                    timeMin: 0,
+                    dose: 1
+                }
+            );
+        }
+        var startTime = $scope.singleReminder.medDetails[0].timeHr;
+        var endTime = 23;
+        var carryForward = 0;
+        for(var i=1; i<parseInt(newTimes)-1; i++) {
+            var incrementor = (endTime - startTime)/(parseInt(newTimes)-1);
+            var newObject = {
+                timeHr: 0,
+                timeMin: 0,
+                dose:1
+            }
+            newObject.timeHr = startTime + Math.floor(i*incrementor);
+            minutes = 0;
+            if((incrementor % 1)!=0 ) {
+                var dec = (incrementor %1)*0.6;
+                var minutes = parseInt(dec.toString().substring(2,4));
+            }
+            if(Math.round(minutes).toString().length ==1) {
+                minutes = minutes*10;
+            }
+            carryForward = carryForward + Math.round(minutes);
+            if (carryForward >=60) {
 
+                newObject.timeMin = carryForward %60;
+
+            }
+
+            else {
+                newObject.timeMin = carryForward;
+            }
+            var roundingOff = newObject.timeMin % 5;
+            if(roundingOff<=2) {
+                newObject.timeMin = newObject.timeMin - roundingOff;
+            }
+            else {
+                newObject.timeMin = newObject.timeMin + (5 - roundingOff);
+            }
+            $scope.singleReminder.medDetails.splice(i,0,newObject);
+        }
+    };
+
+  $scope.timePickerFunction = function(index) {
+      var myTime = $scope.singleReminder.medDetails[index].timeHr*60*60 + $scope.singleReminder.medDetails[index].timeMin*60;
+        var ipObj1 = {
+        callback: function (val) {      //Mandatory
+          if (typeof (val) === 'undefined') {
+          } else {
+            var selectedTime = new Date(val * 1000);
+
+            $scope.singleReminder.medDetails[index].timeHr = selectedTime.getUTCHours();
+            $scope.singleReminder.medDetails[index].timeMin = selectedTime.getUTCMinutes();
+
+          }
+        },
+        inputTime: myTime,   //Optional
+        format: 24,         //Optional
+        step: 5,           //Optional
+        setLabel: 'Set'    //Optional
+      };
+
+
+      ionicTimePicker.openTimePicker(ipObj1);
+  }
+
+
+})
 
 /*
 Controller for our tab bar
