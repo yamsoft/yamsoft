@@ -204,7 +204,7 @@ Controller for the discover page
         networkInfo();
     };
 })
-.controller('sleepWellCtrl', function($scope, $q, MediaSrv, $rootScope, $ionicPopup, $location, $firebaseObject, $cordovaLocalNotification) {
+.controller('sleepWellCtrl', function($scope, $q, MediaSrv, $rootScope, $ionicPopup, $location, $firebaseObject) {
     var database = firebase.database();
     var starCountRef = firebase.database().ref('/data').set(
         {
@@ -213,16 +213,6 @@ Controller for the discover page
     );
     var alarmTime = new Date();
     alarmTime.setMinutes(alarmTime.getMinutes() + 1);
-    $cordovaLocalNotification.add({
-        id: "1234",
-        date: alarmTime,
-        message: "This is a message",
-        title: "This is a title",
-        autoCancel: true,
-        sound: "file://sound/song.mp3"
-    }).then(function () {
-        alert("The notification has been set");
-    });
     if (typeof analytics !== "undefined") {
         analytics.startTrackerWithId("UA-85625559-1");
         analytics.trackView("Sleep Well");
@@ -1164,7 +1154,7 @@ $scope.diabCheck = {
     weight: 40
 }
 })
-.controller('reminderCtrl', function($scope, $location, ionicTimePicker, ionicDatePicker, $ionicPopup) {
+.controller('reminderCtrl', function($scope, $location, ionicTimePicker, ionicDatePicker, $ionicPopup, $cordovaLocalNotification) {
     $scope.singleReminder = {
         name: "",
         remTimes: 1,
@@ -1185,7 +1175,9 @@ $scope.diabCheck = {
             { text: "Thursday", checked: false },
             { text: "Friday", checked: false },
             { text: "Saturday", checked: false }
-        ]
+        ],
+        instructions: 0,
+        specificInstruction: ""
     };
     $scope.updateRemTimes = function() {
         var newTimes = document.getElementById("remTimesID").value;
@@ -1256,7 +1248,7 @@ $scope.diabCheck = {
             },
             inputTime: myTime,   //Optional
             format: 24,         //Optional
-            step: 5,           //Optional
+            step: 1,           //Optional
             setLabel: 'Set'    //Optional
         };
 
@@ -1296,7 +1288,51 @@ $scope.diabCheck = {
                 }
             ]
         });
-    }
+    };
+    $scope.setReminder = function() {
+        var myMessage = ""
+        if($scope.singleReminder.specificInstruction) {
+            myMessage = $scope.singleReminder.specificInstruction;
+        }
+        else {
+            if($scope.singleReminder.instructions == 0) {
+                myMessage = "Before Food";
+            }
+            if($scope.singleReminder.instructions == 1) {
+                myMessage = "After Food";
+            }
+            if($scope.singleReminder.instructions == 2) {
+                myMessage = "With Food";
+            }
+            if($scope.singleReminder.instructions == 3) {
+                myMessage = "No Instruction";
+            }
+        }
+        for(var i=0; i<$scope.singleReminder.medDetails.length; i++) {
+            alert("ran for");
+            var currentOffset = new Date().getTimezoneOffset();
+            //-120
+            if(currentOffset <0) {
+                var hoursAdd = ~(Math.ceil(currentOffset/60))+1;
+                var minsAdd = ~(Math.ceil(currentOffset%60))+1;
+            }
+            else {
+                var hoursAdd = ~(Math.floor(currentOffset/60))+1;
+                var minsAdd = ~(Math.floor(currentOffset%60)) +1;
+            }
+            var dateValue = new Date($scope.singleReminder.startDate.getFullYear(), $scope.singleReminder.startDate.getMonth(), $scope.singleReminder.startDate.getDate(), $scope.singleReminder.medDetails[i].timeHr+hoursAdd-5, $scope.singleReminder.medDetails[i].timeMin+minsAdd-30);
+            $cordovaLocalNotification.add({
+                id: "123123",
+                date: dateValue,
+                message: myMessage,
+                title: $scope.singleReminder.name,
+                autoCancel: true,
+                sound: "file://sound/song.mp3"
+            }).then(function () {
+                alert(dateValue);
+            });
+        }
+    };
 
 })
 

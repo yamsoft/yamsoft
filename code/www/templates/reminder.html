@@ -62,12 +62,35 @@
                 </div>
                 <div class="genderDiv animated fadeInUp">
                     <ion-list>
-                        <ion-radio ng-model="singleReminder.days" ng-value="0" name="bmi.gender">Every Day</ion-radio>
-                        <ion-radio ng-click="updateDays()" ng-model="singleReminder.days" ng-value="1" name="bmi.gender">Specific Days</ion-radio>
+                        <ion-radio ng-model="singleReminder.days" ng-value="0" name="singleReminder.days">Every Day</ion-radio>
+                        <ion-radio ng-click="updateDays()" ng-model="singleReminder.days" ng-value="1" name="singleReminder.days" >Specific Days</ion-radio>
                     </ion-list>
                 </div>
 
             </div>
         </div>
+        <div class="card">
+            <div class="item item-avatar headingDiv">
+                <div class="articleHeading">Instructions</div>
+            </div>
+
+            <div class="item item-body">
+                <ion-list>
+                    <ion-radio ng-model="singleReminder.instructions" ng-value="0" name="singleReminder.instructions">Before Food</ion-radio>
+                    <ion-radio  ng-model="singleReminder.instructions" ng-value="1" name="singleReminder.instructions" >After Food</ion-radio>
+                    <ion-radio  ng-model="singleReminder.instructions" ng-value="2" name="singleReminder.instructions" >With Food</ion-radio>
+                    <ion-radio  ng-model="singleReminder.instructions" ng-value="3" name="singleReminder.instructions" >No Instruction</ion-radio>
+                </ion-list>
+                <input type="text" ng-model="singleReminder.specificInstruction" placeholder="Specific Instruction" class="nameClass" >
+
+            </div>
+        </div>
+        <div class="centerMe animated rollIn">
+                <div>
+                    <button class="button button-assertive" ng-click="setReminder()">
+                        SET REMINDER NOW
+                    </button>
+             </div>
+         </div>
     </ion-content>
 </ion-view>
