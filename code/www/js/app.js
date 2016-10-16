@@ -1,4 +1,4 @@
-angular.module('songhop', ['ionic', 'firebase' ,'ionic.service.core', 'ionic.closePopup', 'songhop.controllers', 'ngCordova', 'ionic-timepicker'])
+angular.module('songhop', ['ionic', 'firebase' ,'ionic.service.core', 'ionic.closePopup', 'songhop.controllers', 'ngCordova', 'ionic-timepicker', 'ionic-datepicker'])
 
 .run(function($ionicPlatform, $rootScope) {
     $ionicPlatform.ready(function() {
@@ -55,6 +55,27 @@ var timePickerObj = {
 };
 ionicTimePickerProvider.configTimePicker(timePickerObj);
 })
+
+.config(function (ionicDatePickerProvider) {
+    var datePickerObj = {
+      inputDate: new Date(),
+      titleLabel: 'Select a Date',
+      setLabel: 'Set',
+      todayLabel: 'Today',
+      closeLabel: 'Close',
+      mondayFirst: false,
+      weeksList: ["S", "M", "T", "W", "T", "F", "S"],
+      monthsList: ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"],
+      templateType: 'popup',
+      from: new Date(),
+      to: new Date(2018, 8, 1),
+      showTodayButton: true,
+      dateFormat: 'dd MMMM yyyy',
+      closeOnSelect: false,
+      disableWeekdays: []
+    };
+    ionicDatePickerProvider.configDatePicker(datePickerObj);
+  })
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider

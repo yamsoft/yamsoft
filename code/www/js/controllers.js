@@ -57,8 +57,8 @@ Controller for the discover page
     if (typeof analytics !== "undefined") {
         analytics.startTrackerWithId("UA-85625559-1");
         analytics.trackView("Articles");
-            // analytics.trackEvent("Chat Message", "Comment");
-        }
+        // analytics.trackEvent("Chat Message", "Comment");
+    }
     document.getElementById("gola").style.paddingTop = "0";
     document.addEventListener("offline", onOffline, false);
     document.addEventListener("online", onOnline, false);
@@ -116,8 +116,8 @@ Controller for the discover page
         if (typeof analytics !== "undefined") {
             analytics.startTrackerWithId("UA-85625559-1");
             analytics.trackEvent("View Article", event);
-                // analytics.trackEvent("Chat Message", "Comment");
-            }
+            // analytics.trackEvent("Chat Message", "Comment");
+        }
         $location.path('app/articles:' + event);
     }
 })
@@ -125,8 +125,8 @@ Controller for the discover page
     if (typeof analytics !== "undefined") {
         analytics.startTrackerWithId("UA-85625559-1");
         analytics.trackView("Individual Articles");
-            // analytics.trackEvent("Chat Message", "Comment");
-        }
+        // analytics.trackEvent("Chat Message", "Comment");
+    }
     document.addEventListener("offline", onOffline, false);
     document.addEventListener("online", onOnline, false);
     function onOffline() {
@@ -138,45 +138,45 @@ Controller for the discover page
     }
     $scope.fetchArticle = function() {
         document.getElementById("individualArticleDiv").style.display = "none";
-    $scope.gayab = false;
-    var aa = $location.$$url.split(":")[1];
-    document.getElementById("gifDiv1").style.display = "block";
-    document.getElementById("reloadDiv1").style.display = "none";
-    setTimeout(function(){
-        document.getElementById("gifDiv1").style.display = "none";
-        if(!$scope.gayab) {
-            document.getElementById("reloadDiv1").style.display = "block";
-        }
-    },11000);
-    document.getElementById("gifDiv1").style.display = "block";
-    var url = "https://healthfinder.gov/developer/MyHFSearch.json?api_key=dlsuoidgstljdgmb&who=someone&age=35&gender=female&pregnant=0";
-    $http.get(url).success( function(response) {
-        for(var i=0; i<response.Result.Topics.length; i++) {
-            if(response.Result.Topics[i].Id==aa) {
-                $scope.gayab = true;
-                if(document.getElementById("gifDiv1")) {
-                    document.getElementById("gifDiv1").style.display = "none";
-                };
-                if(document.getElementById("reloadDiv1")) {
-                    document.getElementById("reloadDiv1").style.display = "none";
-                };
-                $scope.responseIndividual = response.Result.Topics[i];
-                document.getElementById("individualArticleDiv").style.display = "block";
-                break;
+        $scope.gayab = false;
+        var aa = $location.$$url.split(":")[1];
+        document.getElementById("gifDiv1").style.display = "block";
+        document.getElementById("reloadDiv1").style.display = "none";
+        setTimeout(function(){
+            document.getElementById("gifDiv1").style.display = "none";
+            if(!$scope.gayab) {
+                document.getElementById("reloadDiv1").style.display = "block";
             }
-        }
-        setTimeout(function() {
-            for(var j=0; j< $scope.responseIndividual.Sections.length; j++) {
-                var div = document.createElement('div');
-                div.className = 'ainveyi';
-                div.innerHTML = $scope.responseIndividual.Sections[j].Content;
-                var idValue = 'yes'+j;
-                document.getElementById(idValue).appendChild(div);
+        },11000);
+        document.getElementById("gifDiv1").style.display = "block";
+        var url = "https://healthfinder.gov/developer/MyHFSearch.json?api_key=dlsuoidgstljdgmb&who=someone&age=35&gender=female&pregnant=0";
+        $http.get(url).success( function(response) {
+            for(var i=0; i<response.Result.Topics.length; i++) {
+                if(response.Result.Topics[i].Id==aa) {
+                    $scope.gayab = true;
+                    if(document.getElementById("gifDiv1")) {
+                        document.getElementById("gifDiv1").style.display = "none";
+                    };
+                    if(document.getElementById("reloadDiv1")) {
+                        document.getElementById("reloadDiv1").style.display = "none";
+                    };
+                    $scope.responseIndividual = response.Result.Topics[i];
+                    document.getElementById("individualArticleDiv").style.display = "block";
+                    break;
+                }
             }
-        },500);
-    });
-};
-$scope.fetchArticle();
+            setTimeout(function() {
+                for(var j=0; j< $scope.responseIndividual.Sections.length; j++) {
+                    var div = document.createElement('div');
+                    div.className = 'ainveyi';
+                    div.innerHTML = $scope.responseIndividual.Sections[j].Content;
+                    var idValue = 'yes'+j;
+                    document.getElementById(idValue).appendChild(div);
+                }
+            },500);
+        });
+    };
+    $scope.fetchArticle();
 })
 .controller('DiscoverCtrl', function($scope, $location) {
     var alertPopup;
@@ -212,22 +212,22 @@ $scope.fetchArticle();
         }
     );
     var alarmTime = new Date();
-        alarmTime.setMinutes(alarmTime.getMinutes() + 1);
-        $cordovaLocalNotification.add({
-            id: "1234",
-            date: alarmTime,
-            message: "This is a message",
-            title: "This is a title",
-            autoCancel: true,
-            sound: "file://sound/song.mp3"
-        }).then(function () {
-            alert("The notification has been set");
-        });
+    alarmTime.setMinutes(alarmTime.getMinutes() + 1);
+    $cordovaLocalNotification.add({
+        id: "1234",
+        date: alarmTime,
+        message: "This is a message",
+        title: "This is a title",
+        autoCancel: true,
+        sound: "file://sound/song.mp3"
+    }).then(function () {
+        alert("The notification has been set");
+    });
     if (typeof analytics !== "undefined") {
         analytics.startTrackerWithId("UA-85625559-1");
         analytics.trackView("Sleep Well");
-            // analytics.trackEvent("Chat Message", "Comment");
-        }
+        // analytics.trackEvent("Chat Message", "Comment");
+    }
 
     $(document).ready(function() {
         $('#range-val').on("change mousemove", function() {
@@ -285,8 +285,8 @@ $scope.fetchArticle();
         if (typeof analytics !== "undefined") {
             analytics.startTrackerWithId("UA-85625559-1");
             analytics.trackEvent("Sleep Well", "Play");
-                // analytics.trackEvent("Chat Message", "Comment");
-            }
+            // analytics.trackEvent("Chat Message", "Comment");
+        }
         if(document.getElementById("gnButton").className.indexOf("ion-ios-play")!=-1) {
             if(!$rootScope.adishVar) {
                 MediaSrv.loadMedia('sound/song.mp3').then(function(media){
@@ -345,8 +345,8 @@ $scope.fetchArticle();
     if (typeof analytics !== "undefined") {
         analytics.startTrackerWithId("UA-85625559-1");
         analytics.trackView("History");
-            // analytics.trackEvent("Chat Message", "Comment");
-        }
+        // analytics.trackEvent("Chat Message", "Comment");
+    }
     $scope.bmiHistory = [];
     $scope.diabetesHistory = [];
     db.transaction(function (tx) {
@@ -383,8 +383,8 @@ $scope.fetchArticle();
         if (typeof analytics !== "undefined") {
             analytics.startTrackerWithId("UA-85625559-1");
             analytics.trackEvent("History", "Clear");
-                // analytics.trackEvent("Chat Message", "Comment");
-            }
+            // analytics.trackEvent("Chat Message", "Comment");
+        }
         if(val==0) {
             db.transaction(function (tx) {
                 tx.executeSql('DELETE FROM BMI_HISTORY', [], function (tx, results) {
@@ -407,8 +407,8 @@ $scope.fetchArticle();
     if (typeof analytics !== "undefined") {
         analytics.startTrackerWithId("UA-85625559-1");
         analytics.trackView("Terms");
-            // analytics.trackEvent("Chat Message", "Comment");
-        }
+        // analytics.trackEvent("Chat Message", "Comment");
+    }
     $scope.goBack = function(event) {
         event.preventDefault();
         $location.path('discover');
@@ -418,8 +418,8 @@ $scope.fetchArticle();
     if (typeof analytics !== "undefined") {
         analytics.startTrackerWithId("UA-85625559-1");
         analytics.trackView("Privacy");
-            // analytics.trackEvent("Chat Message", "Comment");
-        }
+        // analytics.trackEvent("Chat Message", "Comment");
+    }
     $scope.goBack = function(event) {
         event.preventDefault();
         $location.path('terms');
@@ -433,8 +433,8 @@ $scope.fetchArticle();
     if (typeof analytics !== "undefined") {
         analytics.startTrackerWithId("UA-85625559-1");
         analytics.trackView("BMI");
-            // analytics.trackEvent("Chat Message", "Comment");
-        }
+        // analytics.trackEvent("Chat Message", "Comment");
+    }
     $scope.wtArr = [];
     $scope.uName = {
         val:''
@@ -453,8 +453,8 @@ $scope.fetchArticle();
         if (typeof analytics !== "undefined") {
             analytics.startTrackerWithId("UA-85625559-1");
             analytics.trackEvent("BMI", "Share");
-                // analytics.trackEvent("Chat Message", "Comment");
-            }
+            // analytics.trackEvent("Chat Message", "Comment");
+        }
         var myBMI = "Just calculated my BMI using this super awesome app!! My BMI is " + bmiValue +  "Try it now!!";
         var myMsg = msg;
         $cordovaSocialSharing.share(myBMI, myMsg, "www/img/icon.png", "http://play.google.com/store/apps/details?id=com.ionicframework.sugart07");
@@ -466,8 +466,8 @@ $scope.fetchArticle();
         if (typeof analytics !== "undefined") {
             analytics.startTrackerWithId("UA-85625559-1");
             analytics.trackEvent("Calculate BMI", "Calculate");
-                // analytics.trackEvent("Chat Message", "Comment");
-            }
+            // analytics.trackEvent("Chat Message", "Comment");
+        }
         if($scope.uName.val == '' || $scope.uName.val==undefined) {
             var alertPopup23 = $ionicPopup.alert({
                 title: 'ERROR',
@@ -695,8 +695,8 @@ Controller for the favorites page
     if (typeof analytics !== "undefined") {
         analytics.startTrackerWithId("UA-85625559-1");
         analytics.trackView("Diabetes");
-            // analytics.trackEvent("Chat Message", "Comment");
-        }
+        // analytics.trackEvent("Chat Message", "Comment");
+    }
     var titleDisplay = "";
     $scope.ageArr = [];
     $scope.uName = {
@@ -723,8 +723,8 @@ Controller for the favorites page
         if (typeof analytics !== "undefined") {
             analytics.startTrackerWithId("UA-85625559-1");
             analytics.trackEvent("Diabetes", "Share");
-                // analytics.trackEvent("Chat Message", "Comment");
-            }
+            // analytics.trackEvent("Chat Message", "Comment");
+        }
         var myBMI = "Just calculated my Diabetic risk score using this super awesome app!! Try it now!!"
         var myMsg = "Diabetes risk test.";
         $cordovaSocialSharing.share(myBMI, myMsg, "www/img/icon.png", "http://play.google.com/store/apps/details?id=com.ionicframework.sugart07");
@@ -734,8 +734,8 @@ Controller for the favorites page
         if (typeof analytics !== "undefined") {
             analytics.startTrackerWithId("UA-85625559-1");
             analytics.trackEvent("Diabetes", "Calculate");
-                // analytics.trackEvent("Chat Message", "Comment");
-            }
+            // analytics.trackEvent("Chat Message", "Comment");
+        }
         if($scope.uName.val=='' || $scope.uName.val == undefined) {
             var alertPopup = $ionicPopup.alert({
                 title: 'ERROR',
@@ -1164,7 +1164,7 @@ $scope.diabCheck = {
     weight: 40
 }
 })
-.controller('reminderCtrl', function($scope, $location, ionicTimePicker) {
+.controller('reminderCtrl', function($scope, $location, ionicTimePicker, ionicDatePicker, $ionicPopup) {
     $scope.singleReminder = {
         name: "",
         remTimes: 1,
@@ -1174,6 +1174,17 @@ $scope.diabCheck = {
                 timeMin: 0,
                 dose: 1
             }
+        ],
+        startDate: new Date(),
+        days: 0,
+        specificDays: [
+            { text: "Sunday", checked: false },
+            { text: "Monday", checked: false },
+            { text: "Tuesday", checked: false },
+            { text: "Wednesday", checked: false },
+            { text: "Thursday", checked: false },
+            { text: "Friday", checked: false },
+            { text: "Saturday", checked: false }
         ]
     };
     $scope.updateRemTimes = function() {
@@ -1230,29 +1241,62 @@ $scope.diabCheck = {
         }
     };
 
-  $scope.timePickerFunction = function(index) {
-      var myTime = $scope.singleReminder.medDetails[index].timeHr*60*60 + $scope.singleReminder.medDetails[index].timeMin*60;
+    $scope.timePickerFunction = function(index) {
+        var myTime = $scope.singleReminder.medDetails[index].timeHr*60*60 + $scope.singleReminder.medDetails[index].timeMin*60;
         var ipObj1 = {
-        callback: function (val) {      //Mandatory
-          if (typeof (val) === 'undefined') {
-          } else {
-            var selectedTime = new Date(val * 1000);
+            callback: function (val) {      //Mandatory
+                if (typeof (val) === 'undefined') {
+                } else {
+                    var selectedTime = new Date(val * 1000);
 
-            $scope.singleReminder.medDetails[index].timeHr = selectedTime.getUTCHours();
-            $scope.singleReminder.medDetails[index].timeMin = selectedTime.getUTCMinutes();
+                    $scope.singleReminder.medDetails[index].timeHr = selectedTime.getUTCHours();
+                    $scope.singleReminder.medDetails[index].timeMin = selectedTime.getUTCMinutes();
 
-          }
+                }
+            },
+            inputTime: myTime,   //Optional
+            format: 24,         //Optional
+            step: 5,           //Optional
+            setLabel: 'Set'    //Optional
+        };
+
+
+        ionicTimePicker.openTimePicker(ipObj1);
+    }
+
+    var ipObj1 = {
+        callback: function (val) {  //Mandatory
+            $scope.singleReminder.startDate = new Date(val);
         },
-        inputTime: myTime,   //Optional
-        format: 24,         //Optional
-        step: 5,           //Optional
-        setLabel: 'Set'    //Optional
-      };
+        from: new Date(), //Optional
+        to: new Date(2020, 10, 30), //Optional
+        inputDate: new Date(),      //Optional
+        mondayFirst: true,          //Optional
+        //   disableWeekdays: [],       //Optional
+        closeOnSelect: false,       //Optional
+        templateType: 'popup'       //Optional
+    };
 
-
-      ionicTimePicker.openTimePicker(ipObj1);
-  }
-
+    $scope.openDatePicker = function(){
+        ionicDatePicker.openDatePicker(ipObj1);
+    };
+    $scope.updateDays = function() {
+        var alertPopup = $ionicPopup.alert({
+            title: 'Pick Days',
+            template: `<ion-checkbox ng-repeat="item in singleReminder.specificDays"
+            ng-model="item.checked"
+            ng-checked="item.checked">
+            {{ item.text }}
+            </ion-checkbox>`,
+            scope: $scope,
+            buttons: [
+                {
+                    text: 'OK',
+                    type: 'button-positive',
+                }
+            ]
+        });
+    }
 
 })
 

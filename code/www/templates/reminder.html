@@ -43,5 +43,31 @@
                     </div>
             </div>
         </div>
+        <div class="card">
+            <div class="item item-avatar headingDiv">
+                <div class="articleHeading">Schedule</div>
+            </div>
+
+            <div class="item item-body">
+                <div ng-click="openDatePicker()">
+                    <div>
+                        Start Date
+                    </div>
+                    <div>
+                        {{singleReminder.startDate.toDateString()}}
+                    </div>
+                </div>
+                <div>
+                    Days
+                </div>
+                <div class="genderDiv animated fadeInUp">
+                    <ion-list>
+                        <ion-radio ng-model="singleReminder.days" ng-value="0" name="bmi.gender">Every Day</ion-radio>
+                        <ion-radio ng-click="updateDays()" ng-model="singleReminder.days" ng-value="1" name="bmi.gender">Specific Days</ion-radio>
+                    </ion-list>
+                </div>
+
+            </div>
+        </div>
     </ion-content>
 </ion-view>
