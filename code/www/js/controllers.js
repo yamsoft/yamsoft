@@ -1290,6 +1290,11 @@ $scope.diabCheck = {
         });
     };
     $scope.setReminder = function() {
+
+        $scope.individualReminderFunction(0);
+
+    };
+    $scope.individualReminderFunction = function(i) {
         var myMessage = ""
         if($scope.singleReminder.specificInstruction) {
             myMessage = $scope.singleReminder.specificInstruction;
@@ -1308,8 +1313,6 @@ $scope.diabCheck = {
                 myMessage = "No Instruction";
             }
         }
-        for(var i=0; i<$scope.singleReminder.medDetails.length; i++) {
-            alert("ran for");
             var currentOffset = new Date().getTimezoneOffset();
             //-120
             if(currentOffset <0) {
@@ -1322,7 +1325,7 @@ $scope.diabCheck = {
             }
             var dateValue = new Date($scope.singleReminder.startDate.getFullYear(), $scope.singleReminder.startDate.getMonth(), $scope.singleReminder.startDate.getDate(), $scope.singleReminder.medDetails[i].timeHr+hoursAdd-5, $scope.singleReminder.medDetails[i].timeMin+minsAdd-30);
             $cordovaLocalNotification.add({
-                id: "123123",
+                id: "123123"+i,
                 date: dateValue,
                 message: myMessage,
                 title: $scope.singleReminder.name,
@@ -1330,9 +1333,13 @@ $scope.diabCheck = {
                 sound: "file://sound/song.mp3"
             }).then(function () {
                 alert(dateValue);
+                alert(i);
+                if(i!=$scope.singleReminder.medDetails.length) {
+                    i = i+1;
+                    $scope.individualReminderFunction(i);
+                }
             });
-        }
-    };
+    }
 
 })
 
