@@ -1340,6 +1340,19 @@ $scope.diabCheck = {
                 }
             });
     }
+    $scope.cancelReminder = function() {
+        $cordovaLocalNotification.isPresent(1231230).then(function (present) {
+        if (present) {
+            alert("present");
+            $cordovaLocalNotification.cancel(1231230).then(function (result) {
+                console.log('Notification EveryMinute Cancelled');
+                alert('Cancelled Every Minute');
+            });
+        } else {
+            alert("Must Schedule Every Minute First");
+        }
+    });
+    }
 
 })
 
