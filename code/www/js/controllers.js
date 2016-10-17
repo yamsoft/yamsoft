@@ -1332,8 +1332,6 @@ $scope.diabCheck = {
                 autoCancel: true,
                 sound: "file://sound/song.mp3"
             }).then(function () {
-                alert(dateValue);
-                alert(i);
                 if(i!=$scope.singleReminder.medDetails.length) {
                     i = i+1;
                     $scope.individualReminderFunction(i);
