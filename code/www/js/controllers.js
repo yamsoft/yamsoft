@@ -1295,7 +1295,8 @@ $scope.diabCheck = {
 
     };
     $scope.individualReminderFunction = function(i) {
-        var myMessage = ""
+        var myMessage = "";
+        var sound = "sound/ping.mp3";
         if($scope.singleReminder.specificInstruction) {
             myMessage = $scope.singleReminder.specificInstruction;
         }
@@ -1330,8 +1331,9 @@ $scope.diabCheck = {
                 message: myMessage,
                 title: $scope.singleReminder.name,
                 autoCancel: true,
-                sound: "file://sound/song.mp3"
+                sound: "file://sound/ping.mp3"
             }).then(function () {
+                alert("set");
                 if(i!=$scope.singleReminder.medDetails.length) {
                     i = i+1;
                     $scope.individualReminderFunction(i);
