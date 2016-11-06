@@ -1353,15 +1353,16 @@ $scope.diabCheck = {
                         });
                     }
                     alert(myI);
-                    $cordovaLocalNotification.add({
+                    $cordovaLocalNotification.schedule({
                         id: myI,
-                        date: dateValue,
-                        message: myMessage,
                         title: $scope.singleReminder.name,
-                        autoCancel: true,
+                        text: myMessage,
+                        firstAt: dateValue,
+                        every: "minute",
                         sound: "file://sound/ping.mp3"
                     }).then(function () {
                         alert(dateValue);
+                        alert($scope.singleReminder.medDetails.length);
                         if(i!=$scope.singleReminder.medDetails.length) {
                             i = i+1;
                             $scope.individualReminderFunction(i);
