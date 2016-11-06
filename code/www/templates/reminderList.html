@@ -1,0 +1,29 @@
+<ion-view title="HISTORY">
+    <ion-content has-tabs="true">
+        <div class="card animated flipInY">
+  <div class="item item-divider applyBold">
+    <span>Reminder List</span>
+    <button class="button button-assertive clearButton" ng-click="clearFunction(0)">
+        Clear
+    </button>
+  </div>
+  <div class="item item-text-wrap">
+      <div class="row">
+          <div class="col col-33 darkBorder">ID</div>
+    <div class="col col-33 darkBorder">Title</div>
+    <div class="col col-33 darkBorder">Message</div>
+  </div>
+  <div id="bmiHistoryDiv">
+  <div class="row" ng-repeat="historyBMI in reminderHistory">
+<div class="col col-33 applyBorder">{{historyBMI.id}}</div>
+<div class="col col-33 applyBorder">{{historyBMI.title}}</div>
+<div class="col col-33 applyBorder">{{historyBMI.message}}</div>
+</div>
+</div>
+<div class="row" ng-show="reminderHistory.length==0">
+<div class="col col-100">Nothing to message</div>
+</div>
+  </div>
+</div>
+    </ion-content>
+</ion-view>

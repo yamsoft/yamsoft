@@ -13,6 +13,10 @@ Controller for the discover page
         event.preventDefault();
         $location.path('app/reminder');
     };
+    $scope.nextReminderList = function(event) {
+        event.preventDefault();
+        $location.path('app/reminderList');
+    };
     $scope.nextBMI = function(event) {
         event.preventDefault();
         $location.path('app/bmi');
@@ -190,6 +194,10 @@ Controller for the discover page
     $scope.nextPageReminder = function(event) {
         event.preventDefault();
         $location.path('app/reminder');
+    };
+    $scope.nextPageReminderList = function(event) {
+        event.preventDefault();
+        $location.path('app/reminderList');
     };
     $scope.nextPageBmi = function(event) {
         event.preventDefault();
@@ -1325,20 +1333,44 @@ $scope.diabCheck = {
                 var minsAdd = ~(Math.floor(currentOffset%60)) +1;
             }
             var dateValue = new Date($scope.singleReminder.startDate.getFullYear(), $scope.singleReminder.startDate.getMonth(), $scope.singleReminder.startDate.getDate(), $scope.singleReminder.medDetails[i].timeHr+hoursAdd-5, $scope.singleReminder.medDetails[i].timeMin+minsAdd-30);
-            $cordovaLocalNotification.add({
-                id: "123123"+i,
-                date: dateValue,
-                message: myMessage,
-                title: $scope.singleReminder.name,
-                autoCancel: true,
-                sound: "file://sound/ping.mp3"
-            }).then(function () {
-                alert("set");
-                if(i!=$scope.singleReminder.medDetails.length) {
-                    i = i+1;
-                    $scope.individualReminderFunction(i);
-                }
+
+
+
+            db = window.openDatabase("my.db", '1', 'my', 1024 * 1024 * 100); // browser
+            db.transaction(function (tx) {
+                tx.executeSql('SELECT max(id) FROM REMINDER', [], function (tx, results) {
+                    var len = results.rows.length, i;
+                    console.log(parseInt(results.rows[0]['max(id)'])+1);
+                    var myI = parseInt(results.rows[0]['max(id)'])+1;
+                    if(myI == myI) {
+                        db.transaction(function (tx) {
+                                tx.executeSql('INSERT INTO REMINDER (id, dateValue, title, message) VALUES (?, ?, ?, ?)', [myI, dateValue, $scope.singleReminder.name, myMessage]);
+                        });
+                    }
+                    else {
+                        db.transaction(function (tx) {
+                                tx.executeSql('INSERT INTO REMINDER (id, dateValue, title, message) VALUES (?, ?, ?, ?)', [1231230, dateValue, $scope.singleReminder.name, myMessage]);
+                        });
+                    }
+                    alert(myI);
+                    $cordovaLocalNotification.add({
+                        id: myI,
+                        date: dateValue,
+                        message: myMessage,
+                        title: $scope.singleReminder.name,
+                        autoCancel: true,
+                        sound: "file://sound/ping.mp3"
+                    }).then(function () {
+                        alert(dateValue);
+                        if(i!=$scope.singleReminder.medDetails.length) {
+                            i = i+1;
+                            $scope.individualReminderFunction(i);
+                        }
+                    });
+
+                }, null);
             });
+
     }
     $scope.cancelReminder = function() {
         $cordovaLocalNotification.isPresent(1231230).then(function (present) {
@@ -1355,7 +1387,36 @@ $scope.diabCheck = {
     }
 
 })
-
+.controller('reminderListCtrl', function($scope) {
+    console.log("IN");
+    $scope.reminderHistory = [];
+    db.transaction(function (tx) {
+        tx.executeSql('SELECT * FROM REMINDER', [], function (tx, results) {
+            var len = results.rows.length, i;
+            for(var i=0; i< len; i++) {
+                var a = {
+                    "id": undefined,
+                    "dateValue": undefined,
+                    "title": undefined,
+                    "message": undefined
+                }
+                $scope.reminderHistory.push(a);
+                $scope.reminderHistory[i].id = results.rows[i].id;
+                $scope.reminderHistory[i].dateValue = results.rows[i].dateValue;
+                $scope.reminderHistory[i].title = results.rows[i].title;
+                $scope.reminderHistory[i].message = results.rows[i].message;
+            }
+        }, null);
+    });
+    $scope.clearFunction = function(val) {
+            // db.transaction(function (tx) {
+            //     tx.executeSql('DELETE FROM BMI_HISTORY', [], function (tx, results) {
+            //         $scope.reminderHistory = [];
+            //         document.getElementById("bmiHistoryDiv").style.display= "none";
+            //     });
+            // }, null);
+    }
+})
 /*
 Controller for our tab bar
 */

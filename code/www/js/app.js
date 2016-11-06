@@ -43,6 +43,7 @@ angular.module('songhop', ['ionic', 'firebase' ,'ionic.service.core', 'ionic.clo
         db.transaction(function (tx) {
             tx.executeSql('CREATE TABLE IF NOT EXISTS BMI_HISTORY (id unique, dateValue, uName, result)');
             tx.executeSql('CREATE TABLE IF NOT EXISTS DIABETES_HISTORY (id unique, dateValue, uName, result)');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS REMINDER (id unique, dateValue, title, message)');
         });
 })
 .config(function (ionicTimePickerProvider) {
@@ -143,6 +144,16 @@ ionicTimePickerProvider.configTimePicker(timePickerObj);
         'menuContent' :{
           templateUrl: "templates/reminder.html",
           controller: 'reminderCtrl'
+        }
+      }
+    })
+
+    .state('app.reminderList', {
+      url: "/reminderList",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/reminderList.html",
+          controller: 'reminderListCtrl'
         }
       }
     })
